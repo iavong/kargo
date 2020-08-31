@@ -65,3 +65,9 @@ $route['penjualan'] = 'PenjualanController';
 
 // Pembelian
 $route['pembelian'] = 'PembelianController';
+
+// Pengirim
+$route['pengirim'] = 'PengirimController';
+
+// Penerima
+$route['penerima'] = 'PenerimaController';

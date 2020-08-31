@@ -36,6 +36,18 @@
                     </a>
                 </li>
 
+                <!-- Pelanggan -->
+                <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle">
+                        <span class="micon dw dw-user"></span><span class="mtext">Pelanggan</span>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="<?= base_url('pengirim'); ?>" class="<?= ($this->router->fetch_class() == 'PengirimController') ? 'active' : ''; ?>">Pengirim</a></li>
+                        <li><a href="<?= base_url('penerima'); ?>" class="<?= ($this->router->fetch_class() == 'PenerimaController') ? 'active' : ''; ?>">Penerima</a></li>
+                    </ul>
+                </li>
+
+
                 <!-- Laporan -->
                 <li class="dropdown">
                     <a href="javascript:;" class="dropdown-toggle">
@@ -47,6 +59,7 @@
                         <li><a href="index2.html">Laporan Keuangan</a></li>
                     </ul>
                 </li>
+
 
             </ul>
         </div>
