@@ -23,8 +23,8 @@
 <script src="<?= base_url('assets/vendors/scripts/dashboard.js'); ?>"></script>
 
 <script>
-    $('#dataTable').dataTable({
-        // paging: false
+    $(document).ready(function() {
+        $('#dataTable').DataTable();
     });
 </script>
 </body>
