@@ -18,10 +18,10 @@
 <script src="<?= base_url(); ?>assets/plugins/datatables/js/pdfmake.min.js"></script>
 <script src="<?= base_url(); ?>assets/plugins/datatables/js/vfs_fonts.js"></script>
 
-<script src="<?= base_url('assets/vendors/scripts/datatable-setting.js'); ?>"></script>
+<!-- <script src="<?= base_url('assets/vendors/scripts/datatable-setting.js'); ?>"></script> -->
 
 <script src="<?= base_url('assets/vendors/scripts/dashboard.js'); ?>"></script>
-
+<!-- test -->
 <script>
     $(document).ready(function() {
         $('#dataTable').DataTable();
