@@ -1,9 +1,9 @@
 <div class="left-side-bar">
     <div class="brand-logo">
         <a href="index.html">
-            <!-- <img src="<?= base_url(); ?>assets/vendors/images/deskapp-logo.svg" alt="" class="dark-logo">
-            <img src="<?= base_url(); ?>assets/vendors/images/deskapp-logo-white.svg" alt="" class="light-logo"> -->
-            <h1 class="text-secondary">CV. KKM</h1>
+            <img src="<?= base_url('assets/images/logo/logo2.PNG'); ?>" width="150" class="dark-logo">
+            <img src="<?= base_url('assets/images/logo/logo5.PNG'); ?>" width="150" class="light-logo">
+            <!-- <h1 class="text-secondary">CV. KKM</h1> -->
         </a>
         <div class="close-sidebar" data-toggle="left-sidebar-close">
             <i class="ion-close-round"></i>
@@ -36,6 +36,14 @@
                     </a>
                 </li>
 
+
+                <!-- Harga -->
+                <li>
+                    <a href="<?= base_url('harga'); ?>" class="dropdown-toggle no-arrow <?= ($this->router->fetch_class() == 'HargaController') ? 'active' : '' ?>">
+                        <span class="micon dw dw-money"></span><span class="mtext">Harga</span>
+                    </a>
+                </li>
+
                 <!-- Pelanggan -->
                 <li class="dropdown">
                     <a href="javascript:;" class="dropdown-toggle">
@@ -59,6 +67,15 @@
                         <li><a href="index2.html">Laporan Keuangan</a></li>
                     </ul>
                 </li>
+
+                <!-- Users -->
+                <?php if ($this->session->userdata('role') == 1) : ?>
+                    <li>
+                        <a href="<?= base_url('user'); ?>" class="dropdown-toggle no-arrow <?= ($this->router->fetch_class() == 'UserController') ? 'active' : '' ?>">
+                            <span class="micon dw dw-user"></span><span class="mtext">User</span>
+                        </a>
+                    </li>
+                <?php endif; ?>
 
 
             </ul>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 31 Agu 2020 pada 17.18
+-- Waktu pembuatan: 02 Sep 2020 pada 00.18
 -- Versi server: 10.4.14-MariaDB
 -- Versi PHP: 7.4.9
 
@@ -30,8 +30,18 @@ SET time_zone = "+00:00";
 CREATE TABLE `harga` (
   `id` int(11) NOT NULL,
   `berat` decimal(10,0) DEFAULT NULL,
+  `kota_tujuan` varchar(100) DEFAULT NULL,
   `biaya` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `harga`
+--
+
+INSERT INTO `harga` (`id`, `berat`, `kota_tujuan`, `biaya`) VALUES
+(4, '1', 'jakarta', '25000'),
+(5, '1', 'sambas', '15000'),
+(9, '1', 'zimbabwe', '1000000');
 
 -- --------------------------------------------------------
 
@@ -118,6 +128,15 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Dumping data untuk tabel `users`
+--
+
+INSERT INTO `users` (`id`, `nama`, `username`, `password`, `role`) VALUES
+(1, 'Administrator', 'master', '$2y$10$3jMp1Pw2jmVNxLjbeMSGuulsu5G2.h2ny.UkGgJnLvDz5E59Yc1OS', 1),
+(3, 'didi', 'didie', '$2y$10$3/M7SWQGBSlI1jYb/J7kEOBXJYMgqxIY2riloKx0EqRqFDnr/7Er.', 3),
+(4, 'master dua', 'master2', '$2y$10$wSeSgBzHIT2sbfM5uAITz.ZXNhSgzt52C6JyT1ip.MgdgGH8.Gs1.', 1);
+
+--
 -- Indexes for dumped tables
 --
 
@@ -165,7 +184,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `harga`
 --
 ALTER TABLE `harga`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT untuk tabel `pembelian`
@@ -195,7 +214,7 @@ ALTER TABLE `penjualan`
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

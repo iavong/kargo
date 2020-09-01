@@ -58,6 +58,7 @@ $route['beranda'] = 'BerandaController';
 
 // Login
 $route['login'] = 'auth/AuthController';
+$route['logout'] = 'auth/AuthController/logout';
 
 // Penjualan
 $route['penjualan'] = 'PenjualanController';
@@ -66,8 +67,23 @@ $route['penjualan'] = 'PenjualanController';
 // Pembelian
 $route['pembelian'] = 'PembelianController';
 
+// Harga
+$route['harga'] = 'HargaController';
+$route['harga/tambah'] = 'HargaController/tambah';
+$route['harga/edit/(:num)'] = 'HargaController/edit/$1';
+$route['harga/delete'] = 'HargaController/delete';
+
 // Pengirim
 $route['pengirim'] = 'PengirimController';
 
 // Penerima
 $route['penerima'] = 'PenerimaController';
+
+// user
+$route['user'] = 'UserController';
+$route['user/tambah'] = 'UserController/tambah';
+$route['user/edit/(:num)'] = 'UserController/edit/$1';
+$route['user/delete'] = 'UserController/delete';
+
+// profile
+$route['profile'] = 'ProfileController';
