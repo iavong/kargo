@@ -3,8 +3,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class PembelianController extends CI_Controller
 {
-    
-    public function __construct()  
+
+    public function __construct()
     {
         parent::__construct();
         if (empty($this->session->userdata('username'))) {
@@ -30,10 +30,12 @@ class PembelianController extends CI_Controller
     #####################################################################
     public function tambah()
     {
+        $this->form_validation->set_rules('keterangan', 'Keterangan', 'required');
+        $this->form_validation->set_rules('harga', 'Harga', 'required');
+
         // cek validasi form
         if ($this->form_validation->run() == FALSE) {
             $data = [
-                'pembelian' => $this->Pembelian->getPembelian(),
                 'title' => 'Tambah Pembelian',
                 'content' => 'pembelian/v_tambah_pembelian'
             ];
@@ -71,7 +73,6 @@ class PembelianController extends CI_Controller
             redirect('pembelian');
         }
     }
-
 }
 
 /* End of file PembelianController.php */

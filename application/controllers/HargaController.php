@@ -94,7 +94,7 @@ class HargaController extends CI_Controller
                 )
             );
         } else {
-            $this->form_validation->set_rules('kota', 'Kota', 'required');
+            $this->form_validation->set_rules('kota', 'kota', 'required');
         }
 
         $this->form_validation->set_rules('biaya', 'Biaya', 'required|numeric');
