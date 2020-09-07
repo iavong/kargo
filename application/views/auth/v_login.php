@@ -39,7 +39,7 @@
     <div class="login-header box-shadow">
         <div class="container-fluid d-flex justify-content-between align-items-center">
             <div class="brand-logo">
-                <a href="login.html">
+                <a href="<?= base_url('login'); ?>">
                     <img src="<?= base_url('assets/images/logo/logo2.PNG'); ?>" width="150">
                 </a>
             </div>
@@ -88,7 +88,7 @@
                                 </div>
                             </div>
                             <div class="col-6">
-                                <div class="forgot-password"><a href="forgot-password.html">Forgot Password</a></div>
+                                <!-- <div class="forgot-password"><a href="forgot-password.html">Forgot Password</a></div> -->
                             </div>
                         </div>
                         <div class="row">

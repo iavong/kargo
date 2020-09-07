@@ -1,6 +1,6 @@
 <div class="left-side-bar">
     <div class="brand-logo">
-        <a href="index.html">
+        <a href="<?= base_url(); ?>">
             <img src="<?= base_url('assets/images/logo/logo2.PNG'); ?>" width="150" class="dark-logo">
             <img src="<?= base_url('assets/images/logo/logo5.PNG'); ?>" width="150" class="light-logo">
             <!-- <h1 class="text-secondary">CV. KKM</h1> -->
