@@ -46,7 +46,7 @@ class HargaController extends CI_Controller
         // cek validasi form
         if ($this->form_validation->run() == FALSE) {
             $data = [
-                'harga' => $this->Harga->getHarga(),
+                // 'harga' => $this->Harga->getHarga(),
                 'title' => 'Tambah Harga',
                 'content' => 'harga/v_tambah_harga'
             ];

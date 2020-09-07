@@ -66,6 +66,9 @@ $route['penjualan'] = 'PenjualanController';
 
 // Pembelian
 $route['pembelian'] = 'PembelianController';
+$route['pembelian/tambah'] = 'PembelianController/tambah';
+$route['pembelian/edit/(:num)'] = 'PembelianController/edit/$1';
+$route['pembelian/delete'] = 'PembelianController/delete';
 
 // Harga
 $route['harga'] = 'HargaController';
