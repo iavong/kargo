@@ -31,6 +31,7 @@ class Pembelian extends CI_Model
         return $query;
     }
 
+
     public function insertPembelian($keterangan, $harga)
     {
         $data = [
@@ -42,6 +43,19 @@ class Pembelian extends CI_Model
         }
     }
 
+
+    public function updatePembelian($id, $keterangan, $harga)
+    {
+        $data = [
+            'keterangan' => $keterangan,
+            'harga' => $harga
+        ];
+        $this->db->where('id', $id);
+        if ($this->db->update($this->_table, $data)) {
+            return true;
+        }
+    }
+
     public function deletePembelian($id)
     {
         $this->db->where('id', $id);
@@ -49,7 +63,6 @@ class Pembelian extends CI_Model
             return true;
         }
     }
-
 }
 
 /* End of file Harga.php */

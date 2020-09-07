@@ -2,7 +2,7 @@
     <div class="pd-ltr-20 xs-pd-20-10">
         <div class="min-height-200px">
 
-        <?php $this->load->view('partials/_flash'); ?>
+            <?php $this->load->view('partials/_flash'); ?>
 
             <div class="pd-20 bg-white border-radius-4 box-shadow mb-20">
                 <div class="clearfix mb-20">
@@ -11,7 +11,7 @@
                         <!-- <p>Add class <code>.table</code></p> -->
                     </div>
                     <div class="pull-right">
-                    <a href="<?= base_url('pembelian/tambah'); ?>" class="btn btn-primary btn-sm scroll-click" rel="content-y"><i class="fa fa-plus"></i> Tambah</a>
+                        <a href="<?= base_url('pembelian/tambah'); ?>" class="btn btn-primary btn-sm scroll-click" rel="content-y"><i class="fa fa-plus"></i> Tambah</a>
                     </div>
                 </div>
                 <hr>
@@ -23,7 +23,7 @@
                             <tr>
                                 <th class="table-plus datatable-nosort">Keterangan</th>
                                 <th>Harga</th>
-                                <th>Tanggal</th> 
+                                <th>Tanggal</th>
                                 <th class="datatable-nosort">Action</th>
                             </tr>
                         </thead>
@@ -32,25 +32,25 @@
                                 <tr>
                                     <td class="table-plus"><?= $row->keterangan; ?></td>
                                     <td><?= rupiah($row->harga); ?></td>
-                                    <td><?= $row->created_at; ?></td>
+                                    <td><?= date('H:i - d M Y', strtotime($row->created_at)); ?></td>
                                     <td>
                                         <div class="dropdown">
                                             <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
                                                 <i class="dw dw-more"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                                <a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>
+                                                <a class="dropdown-item" href="<?= base_url('pembelian/edit/' . $row->id); ?>"><i class="dw dw-edit2"></i> Edit</a>
                                                 <form action="<?= base_url('pembelian/delete'); ?>" method="post" class="d-inline">
                                                     <input type="hidden" name="id" value="<?= $row->id; ?>" hidden>
                                                     <button onclick="return confirm('Apa anda yakin ?');" class="dropdown-item" title="Delete"><i class="dw dw-delete-3"></i> Delete</button>
                                                 </form>
                                             </div>
                                         </div>
-                                     </td>
-                                 </tr>
-                             <?php endforeach; ?>
-                         </tbody>
-                     </table>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
 

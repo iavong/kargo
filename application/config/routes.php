@@ -78,6 +78,11 @@ $route['harga/delete'] = 'HargaController/delete';
 
 // Pengirim
 $route['pengirim'] = 'PengirimController';
+$route['pengirim/tambah'] = 'PengirimController/tambah';
+$route['pengirim/edit/(:num)'] = 'PengirimController/edit/$1';
+$route['pengirim/delete'] = 'PengirimController/delete';
+$route['pengirim/deposit/(:num)'] = 'PengirimController/deposit/$1';
+
 
 // Penerima
 $route['penerima'] = 'PenerimaController';

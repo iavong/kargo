@@ -15,18 +15,19 @@
                 <div class="pb-20">
 
                     <!-- Form -->
-                    <?php echo form_open('pembelian/tambah'); ?>
+                    <?php echo form_open(); ?>
+                    <input type="hidden" name="id" value="<?= $pembelian->id; ?>" hidden>
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Keterangan</label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control <?= (form_error('keterangan') ? 'form-control-danger' : null) ?>" name="keterangan" type="text" placeholder="Keterangannya apa .." value="<?= set_value('keterangan') ?>">
+                            <input class="form-control <?= (form_error('keterangan') ? 'form-control-danger' : null) ?>" name="keterangan" type="text" placeholder="Keterangannya apa .." value="<?= $pembelian->keterangan; ?>">
                             <?php echo form_error('keterangan', '<small class="text-danger">', '</small>'); ?>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-12 col-md-2 col-form-label">Harga</label>
+                        <label class="col-sm-12 col-md-2 col-form-label">Harga (Rp)</label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control <?= (form_error('harga') ? 'form-control-danger' : null) ?>" name="harga" placeholder="harga ..." type="text" value="<?= set_value('harga') ?>">
+                            <input class="form-control <?= (form_error('harga') ? 'form-control-danger' : null) ?>" name="harga" placeholder="harga ..." type="text" value="<?= $pembelian->harga; ?>">
                             <?php echo form_error('harga', '<small class="text-danger">', '</small>'); ?>
                         </div>
                     </div>

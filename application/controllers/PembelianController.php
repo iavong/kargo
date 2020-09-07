@@ -31,7 +31,7 @@ class PembelianController extends CI_Controller
     public function tambah()
     {
         $this->form_validation->set_rules('keterangan', 'Keterangan', 'required');
-        $this->form_validation->set_rules('harga', 'Harga', 'required');
+        $this->form_validation->set_rules('harga', 'Harga', 'required|numeric');
 
         // cek validasi form
         if ($this->form_validation->run() == FALSE) {
@@ -58,6 +58,45 @@ class PembelianController extends CI_Controller
             redirect('pembelian');
         }
     }
+
+
+
+    #####################################################################
+    # Edit Harga
+    #####################################################################
+    public function edit($id)
+    {
+        $this->form_validation->set_rules('keterangan', 'Keterangan', 'required');
+        $this->form_validation->set_rules('harga', 'Harga', 'required|numeric');
+
+        // cek validasi form
+        if ($this->form_validation->run() == FALSE) {
+            $data = [
+                'pembelian' => $this->Pembelian->getPembelianById($id)->row(),
+                'title' => 'Edit Pembelian',
+                'content' => 'pembelian/v_edit_pembelian'
+            ];
+            $this->load->view('layout/wrapper', $data);
+        } else {
+            $this->_update();
+        }
+    }
+
+    private function _update()
+    {
+        $id = htmlspecialchars($this->input->post('id'));
+        $keterangan = htmlspecialchars($this->input->post('keterangan'));
+        $harga = htmlspecialchars($this->input->post('harga'));
+
+        if ($this->Pembelian->updatePembelian($id, $keterangan, $harga) == true) {
+            $this->session->set_flashdata('success', 'Pembelian berhasil diedit.');
+            redirect('pembelian');
+        } else {
+            $this->session->set_flashdata('error', 'Pembelian gagal diedit.');
+            redirect('pembelian');
+        }
+    }
+
 
     #####################################################################
     # Delete Harga
