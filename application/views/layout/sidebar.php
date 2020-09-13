@@ -37,10 +37,10 @@
                 </li>
 
 
-                <!-- Harga -->
+                <!-- Tujuan -->
                 <li>
-                    <a href="<?= base_url('harga'); ?>" class="dropdown-toggle no-arrow <?= ($this->router->fetch_class() == 'HargaController') ? 'active' : '' ?>">
-                        <span class="micon dw dw-money"></span><span class="mtext">Harga</span>
+                    <a href="<?= base_url('tujuan'); ?>" class="dropdown-toggle no-arrow <?= ($this->router->fetch_class() == 'TujuanController') ? 'active' : '' ?>">
+                        <span class="micon dw dw-money"></span><span class="mtext">Tujuan</span>
                     </a>
                 </li>
 

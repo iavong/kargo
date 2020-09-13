@@ -1,19 +1,20 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Harga extends CI_Model
+class Tujuan extends CI_Model
 {
-    private $_table = 'harga';
+    private $_table = 'tujuan';
 
-    public function getHarga() //ambilsemua harga
+    public function getTujuan() //ambilsemua harga
     {
         $query = $this->db->select('*')
             ->from($this->_table)
+            ->order_by('id', 'DESC')
             ->get();
         return $query;
     }
 
-    public function getHargaById($id) // ambil berdasar id
+    public function getTujuanById($id) // ambil berdasar id
     {
         $query = $this->db->select('*')
             ->from($this->_table)
@@ -22,7 +23,7 @@ class Harga extends CI_Model
         return $query;
     }
 
-    public function getHargaByKota($kota)
+    public function getTujuanByKota($kota)
     {
         $query = $this->db->select('*')
             ->from($this->_table)
@@ -31,11 +32,11 @@ class Harga extends CI_Model
         return $query;
     }
 
-    public function insertHarga($berat, $kota, $biaya)
+    public function insertTujuan($berat, $kota, $biaya)
     {
         $data = [
             'berat' => $berat,
-            'kota_tujuan' => $kota,
+            'kota_tujuan' => ucwords(strtolower($kota)),
             'biaya' => $biaya
         ];
         if ($this->db->insert($this->_table, $data)) {
@@ -43,11 +44,11 @@ class Harga extends CI_Model
         }
     }
 
-    public function updateHarga($id, $berat, $kota, $biaya)
+    public function updateTujuan($id, $berat, $kota, $biaya)
     {
         $data = [
             'berat' => $berat,
-            'kota_tujuan' => $kota,
+            'kota_tujuan' => ucwords(strtolower($kota)),
             'biaya' => $biaya
         ];
         $this->db->where('id', $id);
@@ -56,7 +57,7 @@ class Harga extends CI_Model
         }
     }
 
-    public function deleteHarga($id)
+    public function deleteTujuan($id)
     {
         $this->db->where('id', $id);
         if ($this->db->delete($this->_table)) {
@@ -65,4 +66,4 @@ class Harga extends CI_Model
     }
 }
 
-/* End of file Harga.php */
+/* End of file Tujuan.php */

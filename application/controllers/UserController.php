@@ -72,13 +72,20 @@ class UserController extends CI_Controller
     ##########################################################
     public function edit($id)
     {
-        // set rule
-        $this->form_validation->set_rules('nama', 'Nama', 'required');
-        $this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[5]|max_length[15]');
-        $this->form_validation->set_rules('role', 'Role', 'required');
-        $this->form_validation->set_rules('password', 'Password', 'required|trim|min_length[6]|matches[passconf]');
-        $this->form_validation->set_rules('passconf', 'Password konfirmasi', 'required|trim|matches[password]');
+        $nama = htmlspecialchars($this->input->post('nama'));
+        $username = htmlspecialchars($this->input->post('username'));
+        $role = htmlspecialchars($this->input->post('role'));
+        $password = htmlspecialchars($this->input->post('password'));
 
+        // set rule
+        if (empty($password)) { // ketika tidak merubah password user
+            $this->form_validation->set_rules('nama', 'Nama', 'required');
+            $this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[5]|max_length[15]');
+            $this->form_validation->set_rules('role', 'Role', 'required');
+        } else {
+            $this->form_validation->set_rules('password', 'Password', 'required|trim|min_length[6]|matches[passconf]');
+            $this->form_validation->set_rules('passconf', 'Password konfirmasi', 'required|trim|matches[password]');
+        }
         // cek validasi form
         if ($this->form_validation->run() == FALSE) {
             $data = [
@@ -88,25 +95,21 @@ class UserController extends CI_Controller
             ];
             $this->load->view('layout/wrapper', $data);
         } else {
-            $this->_update();
+            $this->_update($nama, $username, $role, $password);
         }
     }
 
-    private function _update()
+    private function _update($nama, $username, $role, $password)
     {
         $id = htmlspecialchars($this->input->post('id'));
-        $nama = htmlspecialchars($this->input->post('nama'));
-        $username = htmlspecialchars($this->input->post('username'));
-        $role = htmlspecialchars($this->input->post('role'));
-        $password = htmlspecialchars($this->input->post('password'));
 
-        if ($this->User->updateUser($id, $nama, $username, $role, $password) == true) {
-            $this->session->set_flashdata('success', 'User berhasil diedit.');
-            redirect('user');
+        if (empty($password)) {
+            $this->User->updateUserNoPass($id, $nama, $username, $role);
         } else {
-            $this->session->set_flashdata('error', 'User gagal diedit.');
-            redirect('user');
+            $this->User->updateUser($id, $nama, $username, $role, $password);
         }
+        $this->session->set_flashdata('success', 'User berhasil diedit.');
+        redirect('user');
     }
 
 

@@ -10,6 +10,7 @@ class Pengirim extends CI_Model
     {
         $query = $this->db->select('*')
             ->from($this->_table)
+            ->order_by('id', 'DESC')
             ->get();
         return $query;
     }
@@ -58,6 +59,16 @@ class Pengirim extends CI_Model
     {
         $this->db->set('deposit', 'deposit+' . $deposit, FALSE);
         $this->db->where('id', $id);
+        if ($this->db->update($this->_table)) {
+            return true;
+        }
+    }
+
+    // kurangi deposit ketika menghapus history
+    public function updateDeposit($idPengirim, $deposit)
+    {
+        $this->db->set('deposit', 'deposit-' . $deposit, FALSE);
+        $this->db->where('id', $idPengirim);
         if ($this->db->update($this->_table)) {
             return true;
         }

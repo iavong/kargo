@@ -2,6 +2,8 @@
     <div class="pd-ltr-20 xs-pd-20-10">
         <div class="min-height-200px">
 
+            <?php $this->load->view('partials/_flash'); ?>
+
             <div class="row">
                 <!-- form deposit -->
                 <div class="col-md-6">
@@ -63,6 +65,8 @@
                         </div>
                         <hr>
 
+                        <p class="font-weight-bold">Deposit Sekarang : <?= rupiah($pengirim->deposit); ?></p>
+
 
                         <div class="pb-20">
                             <table class="table stripe hover nowrap">
@@ -80,8 +84,10 @@
                                             <td><?= date('H:i - d M Y', strtotime($row->created_at)); ?></td>
                                             <td>
                                                 <!-- delete -->
-                                                <form action="<?= base_url('pengirim/delete'); ?>" method="post" class="d-inline">
+                                                <form action="<?= base_url('pengirim/deposit/delete'); ?>" method="post" class="d-inline">
                                                     <input type="hidden" name="id" value="<?= $row->id; ?>" hidden>
+                                                    <input type="hidden" name="id_pengirim" value="<?= $row->id_pengirim; ?>" hidden>
+                                                    <input type="hidden" name="deposit" value="<?= $row->deposit; ?>" hidden>
                                                     <button onclick="return confirm('Apa anda yakin ?');" class="btn btn-sm btn-danger" title="Delete"><i class="dw dw-delete-3"></i></button>
                                                 </form>
                                             </td>

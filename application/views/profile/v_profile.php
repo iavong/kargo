@@ -2,6 +2,8 @@
     <div class="pd-ltr-20 xs-pd-20-10">
         <div class="min-height-200px">
 
+            <?php $this->load->view('partials/_flash'); ?>
+
             <div class="pd-20 bg-white border-radius-4 box-shadow mb-20">
                 <div class="clearfix mb-20">
                     <div class="pull-left">
@@ -32,22 +34,6 @@
                         </div>
                     </div>
 
-                    <?php if ($this->session->userdata('role') == 1) : ?>
-                        <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">Role</label>
-                            <div class="col-sm-12 col-md-10">
-                                <select name="role" class="form-control <?= (form_error('role') ? 'form-control-danger' : null) ?>">
-                                    <option value="">Pilih role..</option>
-                                    <option value="1" <?= ($user->role == 1 ? 'selected' : ''); ?>>Master</option>
-                                    <option value="2" <?= ($user->role == 2 ? 'selected' : ''); ?>>Staff Kantor</option>
-                                    <option value="3" <?= ($user->role == 3 ? 'selected' : ''); ?>>Staff Lapangan</option>
-                                </select>
-                                <?php echo form_error('role', '<small class="text-danger">', '</small>'); ?>
-                            </div>
-                        </div>
-                    <?php elseif ($this->session->userdata('role') != 1) : ?>
-                        <input type="hidden" name="role" value="<?= $user->role; ?>" hidden>
-                    <?php endif; ?>
 
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Password</label>

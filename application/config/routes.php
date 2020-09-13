@@ -50,7 +50,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'BerandaController';
-$route['404_override'] = '';
+$route['404_override'] = 'ErrorController';
 $route['translate_uri_dashes'] = FALSE;
 
 // Beranda
@@ -62,6 +62,8 @@ $route['logout'] = 'auth/AuthController/logout';
 
 // Penjualan
 $route['penjualan'] = 'PenjualanController';
+$route['penjualan/tambah'] = 'PenjualanController/tambah';
+$route['penjualan/delete'] = 'PenjualanController/delete';
 
 
 // Pembelian
@@ -70,11 +72,11 @@ $route['pembelian/tambah'] = 'PembelianController/tambah';
 $route['pembelian/edit/(:num)'] = 'PembelianController/edit/$1';
 $route['pembelian/delete'] = 'PembelianController/delete';
 
-// Harga
-$route['harga'] = 'HargaController';
-$route['harga/tambah'] = 'HargaController/tambah';
-$route['harga/edit/(:num)'] = 'HargaController/edit/$1';
-$route['harga/delete'] = 'HargaController/delete';
+// Tujuan
+$route['tujuan'] = 'TujuanController';
+$route['tujuan/tambah'] = 'TujuanController/tambah';
+$route['tujuan/edit/(:num)'] = 'TujuanController/edit/$1';
+$route['tujuan/delete'] = 'TujuanController/delete';
 
 // Pengirim
 $route['pengirim'] = 'PengirimController';
@@ -82,6 +84,7 @@ $route['pengirim/tambah'] = 'PengirimController/tambah';
 $route['pengirim/edit/(:num)'] = 'PengirimController/edit/$1';
 $route['pengirim/delete'] = 'PengirimController/delete';
 $route['pengirim/deposit/(:num)'] = 'PengirimController/deposit/$1';
+$route['pengirim/deposit/delete'] = 'PengirimController/deleteDeposit';
 
 
 // Penerima

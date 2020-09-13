@@ -36,6 +36,33 @@ class User extends CI_Model
         }
     }
 
+    // update profile user yang login
+    public function updateProfile($id, $nama, $username, $password)
+    {
+        $data = [
+            'nama' => $nama,
+            'username' => $username,
+            'password' => password_hash($password, PASSWORD_DEFAULT) //encrypsi password
+        ];
+        $this->db->where('id', $id);
+        if ($this->db->update($this->_table, $data)) {
+            return true;
+        }
+    }
+    public function updateProfileNoPass($id, $nama, $username)
+    {
+        $data = [
+            'nama' => $nama,
+            'username' => $username,
+        ];
+        $this->db->where('id', $id);
+        if ($this->db->update($this->_table, $data)) {
+            return true;
+        }
+    }
+    // 
+
+    // update user pada menu user
     public function updateUser($id, $nama, $username, $role, $password)
     {
         $data = [
@@ -49,6 +76,19 @@ class User extends CI_Model
             return true;
         }
     }
+    public function updateUserNoPass($id, $nama, $username, $role) // update user tanpa password
+    {
+        $data = [
+            'nama' => $nama,
+            'username' => $username,
+            'role' => $role,
+        ];
+        $this->db->where('id', $id);
+        if ($this->db->update($this->_table, $data)) {
+            return true;
+        }
+    }
+
 
     public function deleteUser($id)
     {

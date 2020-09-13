@@ -126,26 +126,41 @@ class PengirimController extends CI_Controller
     }
     private function _tambahDeposit()
     {
-        $id = htmlspecialchars($this->input->post('id'));
+        $id = htmlspecialchars($this->input->post('id')); // id pengirim
         $deposit = htmlspecialchars($this->input->post('deposit'));
 
         if ($this->Pengirim->tambahDeposit($id, $deposit) == true) {
             $this->Deposit->insertDeposit($id, $deposit);
 
             $this->session->set_flashdata('success', 'Deposit berhasil ditambahkan.');
-            redirect('pengirim');
+            redirect('pengirim/deposit/' . $id);
         } else {
             $this->session->set_flashdata('error', 'Deposit gagal ditambahkan.');
-            redirect('pengirim');
+            redirect('pengirim/deposit/' . $id);
+        }
+    }
+
+    // hapus deposit
+    public function deleteDeposit()
+    {
+        $id = htmlspecialchars($this->input->post('id')); // id deposit
+        $idPengirim = htmlspecialchars($this->input->post('id_pengirim'));
+        $deposit = htmlspecialchars($this->input->post('deposit'));
+
+        if ($this->Deposit->deleteDeposit($id) == true) {
+            $this->Pengirim->updateDeposit($idPengirim, $deposit);
+            $this->session->set_flashdata('success', 'Deposit berhasil dihapus.');
+            redirect('pengirim/deposit/' . $idPengirim);
         }
     }
 
 
-    // hapus
+    // hapus pengirim
     public function delete()
     {
         $id = htmlspecialchars($this->input->post('id'));
         if ($this->Pengirim->deletePengirim($id) == true) {
+            $this->Deposit->deleteDepositByPengirim($id); //hapus deposit berdasar id pengirim
             $this->session->set_flashdata('success', 'Pengirim berhasil dihapus.');
             redirect('pengirim');
         } else {

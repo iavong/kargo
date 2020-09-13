@@ -24,7 +24,9 @@
 <!-- test -->
 <script>
     $(document).ready(function() {
-        $('#dataTable').DataTable();
+        $('#dataTable').DataTable({
+            "ordering": false
+        });
     });
 </script>
 </body>

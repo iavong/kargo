@@ -9,6 +9,7 @@ class Pembelian extends CI_Model
     {
         $query = $this->db->select('*')
             ->from($this->_table)
+            ->order_by('id', 'DESC')
             ->get();
         return $query;
     }

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class HargaController extends CI_Controller
+class TujuanController extends CI_Controller
 {
 
     public function __construct()
@@ -10,17 +10,17 @@ class HargaController extends CI_Controller
         if (empty($this->session->userdata('username'))) {
             redirect('login');
         }
-        // panggil model harga
-        $this->load->model('Harga');
+        // panggil model tujuan
+        $this->load->model('Tujuan');
     }
 
 
     public function index()
     {
         $data = [
-            'harga' => $this->Harga->getHarga(),
-            'title' => 'Harga',
-            'content' => 'harga/v_harga'
+            'tujuan' => $this->Tujuan->getTujuan(),
+            'title' => 'Tujuan',
+            'content' => 'tujuan/v_tujuan'
         ];
         $this->load->view('layout/wrapper', $data);
     }
@@ -36,7 +36,7 @@ class HargaController extends CI_Controller
         $this->form_validation->set_rules(
             'kota',
             'Kota',
-            'required|is_unique[harga.kota_tujuan]',
+            'required|is_unique[tujuan.kota_tujuan]',
             array(
                 'is_unique'     => '%s sudah ada.'
             )
@@ -46,9 +46,8 @@ class HargaController extends CI_Controller
         // cek validasi form
         if ($this->form_validation->run() == FALSE) {
             $data = [
-                // 'harga' => $this->Harga->getHarga(),
-                'title' => 'Tambah Harga',
-                'content' => 'harga/v_tambah_harga'
+                'title' => 'Tambah Tujuan',
+                'content' => 'tujuan/v_tambah_tujuan'
             ];
             $this->load->view('layout/wrapper', $data);
         } else {
@@ -62,12 +61,12 @@ class HargaController extends CI_Controller
         $kota = htmlspecialchars($this->input->post('kota'));
         $biaya = htmlspecialchars($this->input->post('biaya'));
 
-        if ($this->Harga->insertHarga($berat, $kota, $biaya) == true) {
-            $this->session->set_flashdata('success', 'Harga berhasil ditambahkan.');
-            redirect('harga');
+        if ($this->Tujuan->insertTujuan($berat, $kota, $biaya) == true) {
+            $this->session->set_flashdata('success', 'Tujuan berhasil ditambahkan.');
+            redirect('tujuan');
         } else {
-            $this->session->set_flashdata('error', 'Harga gagal ditambahkan.');
-            redirect('harga');
+            $this->session->set_flashdata('error', 'Tujuan gagal ditambahkan.');
+            redirect('tujuan');
         }
     }
 
@@ -79,7 +78,7 @@ class HargaController extends CI_Controller
     {
         // set rules
         $this->form_validation->set_rules('berat', 'Berat', 'required');
-        $cariKota = $this->Harga->getHargaById($id)->row();
+        $cariKota = $this->Tujuan->getTujuanById($id)->row();
         $cekKota = $cariKota->kota_tujuan;
 
         $kota = htmlspecialchars($this->input->post('kota'));
@@ -88,7 +87,7 @@ class HargaController extends CI_Controller
             $this->form_validation->set_rules(
                 'kota',
                 'Kota',
-                'required|is_unique[harga.kota_tujuan]',
+                'required|is_unique[tujuan.kota_tujuan]',
                 array(
                     'is_unique'     => '%s sudah ada.'
                 )
@@ -102,9 +101,9 @@ class HargaController extends CI_Controller
         // cek validasi form
         if ($this->form_validation->run() == FALSE) {
             $data = [
-                'harga' => $this->Harga->getHargaById($id)->row(),
-                'title' => 'Edit Harga',
-                'content' => 'harga/v_edit_harga'
+                'tujuan' => $this->Tujuan->getTujuanById($id)->row(),
+                'title' => 'Edit Tujuan',
+                'content' => 'tujuan/v_edit_tujuan'
             ];
             $this->load->view('layout/wrapper', $data);
         } else {
@@ -118,12 +117,12 @@ class HargaController extends CI_Controller
         $kota = htmlspecialchars($this->input->post('kota'));
         $biaya = htmlspecialchars($this->input->post('biaya'));
 
-        if ($this->Harga->updateHarga($id, $berat, $kota, $biaya) == true) {
-            $this->session->set_flashdata('success', 'Harga berhasil diedit.');
-            redirect('harga');
+        if ($this->Tujuan->updateTujuan($id, $berat, $kota, $biaya) == true) {
+            $this->session->set_flashdata('success', 'Tujuan berhasil diedit.');
+            redirect('tujuan');
         } else {
-            $this->session->set_flashdata('error', 'Harga gagal diedit.');
-            redirect('harga');
+            $this->session->set_flashdata('error', 'Tujuan gagal diedit.');
+            redirect('tujuan');
         }
     }
 
@@ -134,14 +133,14 @@ class HargaController extends CI_Controller
     public function delete()
     {
         $id = htmlspecialchars($this->input->post('id'));
-        if ($this->Harga->deleteHarga($id) == true) {
-            $this->session->set_flashdata('success', 'Harga berhasil dihapus.');
-            redirect('harga');
+        if ($this->Tujuan->deleteTujuan($id) == true) {
+            $this->session->set_flashdata('success', 'Tujuan berhasil dihapus.');
+            redirect('tujuan');
         } else {
-            $this->session->set_flashdata('error', 'Harga gagal dihapus.');
-            redirect('harga');
+            $this->session->set_flashdata('error', 'Tujuan gagal dihapus.');
+            redirect('tujuan');
         }
     }
 }
 
-/* End of file HargaController.php */
+/* End of file TujuanController.php */

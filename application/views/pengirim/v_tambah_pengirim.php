@@ -40,7 +40,7 @@
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Deposit</label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control <?= (form_error('deposit') ? 'form-control-danger' : null) ?>" name="deposit" placeholder="Deposit.." type="text" value="<?= set_value('deposit') ?>">
+                            <input class="form-control <?= (form_error('deposit') ? 'form-control-danger' : null) ?>" name="deposit" placeholder="Deposit.." type="text" value="0" readonly>
                             <?php echo form_error('deposit', '<small class="text-danger">', '</small>'); ?>
                         </div>
                     </div>
