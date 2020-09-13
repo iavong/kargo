@@ -54,7 +54,7 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6 col-lg-7">
-                    <img src="<?= base_url(); ?>assets/vendors/images/login-page-img.png" alt="">
+                    <img src="<?= base_url(); ?>assets/images/logo/logo2.PNG" alt="">
                 </div>
                 <div class="col-md-6 col-lg-5">
                     <div class="login-box bg-white box-shadow border-radius-10">

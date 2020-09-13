@@ -45,14 +45,10 @@
                 </li>
 
                 <!-- Pelanggan -->
-                <li class="dropdown">
-                    <a href="javascript:;" class="dropdown-toggle">
-                        <span class="micon dw dw-user"></span><span class="mtext">Pelanggan</span>
+                <li>
+                    <a href="<?= base_url('pengirim'); ?>" class="dropdown-toggle no-arrow <?= ($this->router->fetch_class() == 'PengirimController') ? 'active' : '' ?>">
+                        <span class="micon dw dw-library"></span><span class="mtext">Pengirim</span>
                     </a>
-                    <ul class="submenu">
-                        <li><a href="<?= base_url('pengirim'); ?>" class="<?= ($this->router->fetch_class() == 'PengirimController') ? 'active' : ''; ?>">Pengirim</a></li>
-                        <li><a href="<?= base_url('penerima'); ?>" class="<?= ($this->router->fetch_class() == 'PenerimaController') ? 'active' : ''; ?>">Penerima</a></li>
-                    </ul>
                 </li>
 
 
