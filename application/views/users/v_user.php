@@ -42,23 +42,22 @@
                                         <?php endif ?>
                                     </td>
                                     <td>
-                                        <?php if ($user->role != 1) : ?>
-                                            <div class="dropdown">
-                                                <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                                                    <i class="dw dw-more"></i>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                                    <a class="dropdown-item" href="<?= base_url('user/edit/' . $user->id); ?>"><i class="dw dw-edit2"></i> Edit</a>
-                                                    <!-- <a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a> -->
+                                        <div class="dropdown">
+                                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                                <i class="dw dw-more"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                                <a class="dropdown-item" href="<?= base_url('user/edit/' . $user->id); ?>"><i class="dw dw-edit2"></i> Edit</a>
 
+                                                <?php if ($user->role != 1) : ?>
                                                     <!-- delete -->
                                                     <form action="<?= base_url('user/delete'); ?>" method="post" class="d-inline">
                                                         <input type="hidden" name="id" value="<?= $user->id; ?>" hidden>
                                                         <button onclick="return confirm('Apa anda yakin ?');" class="dropdown-item" title="Delete"><i class="dw dw-delete-3"></i> Delete</button>
                                                     </form>
-                                                </div>
+                                                <?php endif; ?>
                                             </div>
-                                        <?php endif; ?>
+                                        </div>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

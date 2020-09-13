@@ -56,18 +56,29 @@ class ProfileController extends CI_Controller
         } else {
             $this->User->updateProfile($id, $nama, $username, $password);
         }
-        $this->_logout();
+        $data = 'Profile berhasil diupdate. Silahkan login kembali';
+        $this->_logout($data);
     }
 
 
-    private function _logout()
+    public function delete()
+    {
+        $id = htmlspecialchars($this->input->post('id'));
+        if ($this->User->deleteUser($id) == true) {
+            $data = 'Profile berhasil dihapus.';
+        }
+        $this->_logout($data);
+    }
+
+
+    private function _logout($data)
     {
         $this->session->unset_userdata('id');
         $this->session->unset_userdata('nama');
         $this->session->unset_userdata('username');
         $this->session->unset_userdata('role');
 
-        $this->session->set_flashdata('success', 'Profile berhasil diupdate. Silahkan login kembali');
+        $this->session->set_flashdata('success', $data);
 
         redirect('login');
     }

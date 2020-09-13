@@ -98,3 +98,4 @@ $route['user/delete'] = 'UserController/delete';
 
 // profile
 $route['profile'] = 'ProfileController';
+$route['profile/delete'] = 'ProfileController/delete';

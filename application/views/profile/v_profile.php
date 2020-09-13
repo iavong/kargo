@@ -59,6 +59,15 @@
                     <?php echo form_close(); ?>
 
 
+                    <hr>
+
+                    <!-- delete -->
+                    <form action="<?= base_url('profile/delete'); ?>" method="post" class="d-inline">
+                        <input type="hidden" name="id" value="<?= $user->id; ?>" hidden>
+                        <button onclick="return confirm('Apa anda yakin ?');" class="btn btn-link text-danger" title="Delete"><i class="dw dw-delete-3"></i> Hapus akun ?</button>
+                    </form>
+
+
                 </div>
             </div>
 
