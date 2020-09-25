@@ -72,6 +72,7 @@
                             <table class="table stripe hover nowrap">
                                 <thead>
                                     <tr>
+                                        <th></th>
                                         <th class="table-plus datatable-nosort">Deposit</th>
                                         <th>Tanggal</th>
                                         <th class="datatable-nosort">Action</th>
@@ -80,16 +81,23 @@
                                 <tbody>
                                     <?php foreach ($deposit->result() as $row) : ?>
                                         <tr>
+                                            <?php if ($row->tipe == 1) : ?>
+                                                <td> <i class="icon-copy fa fa-plus text-success"></i> </td>
+                                            <?php elseif ($row->tipe == 0) : ?>
+                                                <td> <i class="icon-copy fa fa-minus text-danger"></i> </td>
+                                            <?php endif; ?>
                                             <td><?= rupiah($row->deposit); ?></td>
                                             <td><?= date('H:i - d M Y', strtotime($row->created_at)); ?></td>
                                             <td>
                                                 <!-- delete -->
-                                                <form action="<?= base_url('pengirim/deposit/delete'); ?>" method="post" class="d-inline">
-                                                    <input type="hidden" name="id" value="<?= $row->id; ?>" hidden>
-                                                    <input type="hidden" name="id_pengirim" value="<?= $row->id_pengirim; ?>" hidden>
-                                                    <input type="hidden" name="deposit" value="<?= $row->deposit; ?>" hidden>
-                                                    <button onclick="return confirm('Apa anda yakin ?');" class="btn btn-sm btn-danger" title="Delete"><i class="dw dw-delete-3"></i></button>
-                                                </form>
+                                                <?php if ($row->tipe == 1) : ?>
+                                                    <form action="<?= base_url('pengirim/deposit/delete'); ?>" method="post" class="d-inline">
+                                                        <input type="hidden" name="id" value="<?= $row->id; ?>" hidden>
+                                                        <input type="hidden" name="id_pengirim" value="<?= $row->id_pengirim; ?>" hidden>
+                                                        <input type="hidden" name="deposit" value="<?= $row->deposit; ?>" hidden>
+                                                        <button onclick="return confirm('Apa anda yakin ?');" class="btn btn-sm btn-danger" title="Delete"><i class="dw dw-delete-3"></i></button>
+                                                    </form>
+                                                <?php endif; ?>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>

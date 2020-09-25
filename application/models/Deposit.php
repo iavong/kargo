@@ -28,6 +28,19 @@ class Deposit extends CI_Model
         }
     }
 
+    // ketika menambahkan history pengeluaran
+    public function insertPengeluaran($id, $biayaTotal)
+    {
+        $data = [
+            'id_pengirim' => $id,
+            'deposit' => $biayaTotal,
+            'tipe' => 0
+        ];
+        if ($this->db->insert($this->_table, $data)) {
+            return true;
+        }
+    }
+
 
     public function deleteDeposit($id)
     {

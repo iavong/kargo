@@ -13,6 +13,8 @@ class PenjualanController extends CI_Controller
         // panggil model harga
         $this->load->model('Penjualan');
         $this->load->model('Tujuan');
+        $this->load->model('Pengirim');
+        $this->load->model('Deposit');
     }
 
     public function index()
@@ -44,6 +46,7 @@ class PenjualanController extends CI_Controller
         if ($this->form_validation->run() == false) {
             $data = [
                 'kotatujuan' => $this->Tujuan->getTujuan(),
+                'dataPengirim' => $this->Pengirim->getPengirim(),
                 'title' => 'Buat Data Penjualan',
                 'content' => 'penjualan/v_tambah_penjualan'
             ];
@@ -56,7 +59,7 @@ class PenjualanController extends CI_Controller
     private function _simpan()
     {
         $noKwitansi = htmlspecialchars($this->input->post('no_kwitansi'));
-        $pengirim = htmlspecialchars($this->input->post('pengirim'));
+        $praPengirim = htmlspecialchars($this->input->post('pengirim'));
         $penerima = htmlspecialchars($this->input->post('penerima'));
         $kotaTujuan = htmlspecialchars($this->input->post('tujuan'));
         $airlines = htmlspecialchars($this->input->post('airlines'));
@@ -75,8 +78,34 @@ class PenjualanController extends CI_Controller
         $cekHarga = $this->Tujuan->getTujuanById($id)->row();
         $biaya = $cekHarga->biaya;
 
+        // hitung biaya
+        $biayaSMU = $biaya * $berat;
+        $biayaTotal = $biayaSMU + $biayaGudang + $biayaTambahan;
 
-        if ($this->Penjualan->insertPenjualan($noKwitansi, $pengirim, $penerima, $kotaTujuan, $airlines, $noPenerbangan, $noSMU, $berat, $koli, $isi, $catatan, $biayaGudang, $biayaTambahan, $jenisPembayaran, $biaya)) {
+
+        // cek apakah pengirim baru atau langganan
+        if (isset($_POST['tambah-baru'])) {
+            $pengirim = $praPengirim;
+        } elseif (isset($_POST['tambah'])) {
+            $pecah = explode("-", $praPengirim); // pecah id pengirim dan nama pengirim
+
+            $id = $pecah[0]; // id pengirim
+            $pengirim = $pecah[1]; //nama pengirim
+
+            // cek jika jenis pembayaran deposit
+            if ($jenisPembayaran == 'deposit') {
+                // $cekPengirim = $this->Pengirim->getPengirimById($id)->row();
+                // $deposit = $cekPengirim->deposit;
+
+                // kurangi deposit dengan totalbiaya
+                $this->Pengirim->kurangiDeposit($id, $biayaTotal);
+                // tambah history pengurangan deposit
+                $this->Deposit->insertPengeluaran($id, $biayaTotal);
+            }
+        }
+
+
+        if ($this->Penjualan->insertPenjualan($noKwitansi, $pengirim, $penerima, $kotaTujuan, $airlines, $noPenerbangan, $noSMU, $berat, $koli, $biayaSMU, $isi, $catatan, $biayaGudang, $biayaTambahan, $biayaTotal, $jenisPembayaran)) {
             $this->session->set_flashdata('success', 'Data berhasil ditambahkan.');
             redirect('penjualan');
         }

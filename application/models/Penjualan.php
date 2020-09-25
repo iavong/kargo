@@ -19,11 +19,8 @@ class Penjualan extends CI_Model
 
 
     // simpan data penjualan
-    public function insertPenjualan($noKwitansi, $pengirim, $penerima, $kotaTujuan, $airlines, $noPenerbangan, $noSMU, $berat, $koli, $isi, $catatan, $biayaGudang, $biayaTambahan, $jenisPembayaran, $biaya)
+    public function insertPenjualan($noKwitansi, $pengirim, $penerima, $kotaTujuan, $airlines, $noPenerbangan, $noSMU, $berat, $koli, $biayaSMU, $isi, $catatan, $biayaGudang, $biayaTambahan, $biayaTotal, $jenisPembayaran)
     {
-        $biayaSMU = $biaya * $berat;
-        $biayaTotal = $biayaSMU + $biayaGudang + $biayaTambahan;
-
         $data = [
             'no_kwitansi' => $noKwitansi,
             'airlines' => $airlines,
@@ -31,10 +28,10 @@ class Penjualan extends CI_Model
             'no_smu' => $noSMU,
             'berat' => $berat,
             'koli' => $koli,
-            'biaya_smu' => $biayaSMU,
+            'biaya_smu' => $biayaSMU, // biaya * berat
             'biaya_gudang' => $biayaGudang,
             'biaya_tambahan' => $biayaTambahan,
-            'biaya_total' => $biayaTotal,
+            'biaya_total' => $biayaTotal, // biayaSMU+biayaGudang+biayaTambahan
             'isi' => $isi,
             'catatan' => $catatan,
             'pengirim' => $pengirim,

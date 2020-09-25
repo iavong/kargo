@@ -74,6 +74,16 @@ class Pengirim extends CI_Model
         }
     }
 
+    // kurangi deposit ketika melakukan order
+    public function kurangiDeposit($id, $biayaTotal)
+    {
+        $this->db->set('deposit', 'deposit-' . $biayaTotal, FALSE);
+        $this->db->where('id', $id);
+        if ($this->db->update($this->_table)) {
+            return true;
+        }
+    }
+
     // hapus
     public function deletePengirim($id)
     {

@@ -1,3 +1,8 @@
+<?php
+$baru = $this->uri->segment(2) == 'tambah-baru';
+$langganan = $this->uri->segment(2) == 'tambah';
+
+?>
 <div class="main-container">
     <div class="pd-ltr-20 xs-pd-20-10">
         <div class="min-height-200px">
@@ -24,13 +29,33 @@
                             <?php echo form_error('no_kwitansi', '<small class="text-danger">', '</small>'); ?>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-sm-12 col-md-2 col-form-label">Pengirim<span class="text-danger">*</span></label>
-                        <div class="col-sm-12 col-md-10">
-                            <input class="form-control <?= (form_error('pengirim') ? 'form-control-danger' : null) ?>" name="pengirim" type="text" placeholder="Nama pengirim .." value="<?= set_value('pengirim') ?>">
-                            <?php echo form_error('pengirim', '<small class="text-danger">', '</small>'); ?>
+
+                    <!-- jika langganan -->
+                    <?php if ($langganan) : ?>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Pengirim<span class="text-danger">*</span></label>
+                            <div class="col-sm-12 col-md-10">
+
+                                <select class="custom-select2 form-control <?= (form_error('pengirim') ? 'form-control-danger' : null) ?>" name="pengirim" style="width: 100%; height: 38px;">
+                                    <option value="">Pilih pengirim..</option>
+                                    <?php foreach ($dataPengirim->result() as $pengirim) : ?>
+                                        <option value="<?= $pengirim->id . '-' . $pengirim->nama; ?>"> <?= $pengirim->nama; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                                <?php echo form_error('pengirim', '<small class="text-danger">', '</small>'); ?>
+                            </div>
                         </div>
-                    </div>
+                        <!-- jika pengirim bukan langganan -->
+                    <?php elseif ($baru) : ?>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Pengirim<span class="text-danger">*</span></label>
+                            <div class="col-sm-12 col-md-10">
+                                <input class="form-control <?= (form_error('pengirim') ? 'form-control-danger' : null) ?>" name="pengirim" type="text" placeholder="Nama pengirim .." value="<?= set_value('pengirim') ?>">
+                                <?php echo form_error('pengirim', '<small class="text-danger">', '</small>'); ?>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Penerima<span class="text-danger">*</span></label>
                         <div class="col-sm-12 col-md-10">
@@ -38,14 +63,6 @@
                             <?php echo form_error('penerima', '<small class="text-danger">', '</small>'); ?>
                         </div>
                     </div>
-
-                    <!-- <div class="form-group row">
-                        <label class="col-sm-12 col-md-2 col-form-label">Kota Tujuan<span class="text-danger">*</span></label>
-                        <div class="col-sm-12 col-md-10">
-                            <input class="form-control <?= (form_error('tujuan') ? 'form-control-danger' : null) ?>" name="tujuan" type="text" placeholder="Kota tujuan .." value="<?= set_value('tujuan') ?>">
-                            <?php echo form_error('tujuan', '<small class="text-danger">', '</small>'); ?>
-                        </div>
-                    </div> -->
 
 
                     <div class="form-group row">
@@ -138,10 +155,14 @@
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Jenis Pembayaran<span class="text-danger">*</span></label>
                         <div class="col-sm-12 col-md-10">
-                            <div class="custom-control custom-radio mb-5">
-                                <input type="radio" id="customRadio1" name="jenis_pembayaran" value="deposit" class="custom-control-input">
-                                <label class="custom-control-label" for="customRadio1">Deposit</label>
-                            </div>
+
+                            <?php if ($langganan) : ?>
+                                <div class="custom-control custom-radio mb-5">
+                                    <input type="radio" id="customRadio1" name="jenis_pembayaran" value="deposit" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadio1">Deposit</label>
+                                </div>
+                            <?php endif; ?>
+
                             <div class="custom-control custom-radio mb-5">
                                 <input type="radio" id="customRadio2" name="jenis_pembayaran" value="cash" class="custom-control-input">
                                 <label class="custom-control-label" for="customRadio2">Cash</label>
@@ -156,7 +177,7 @@
 
                     <div class="form-group row">
                         <div class="col-sm-12 col-md-10 offset-md-2">
-                            <button type="submit" class="btn btn-primary">Simpan</button>
+                            <button type="submit" name="<?= ($baru ? 'tambah-baru' : 'tambah'); ?>" class="btn btn-primary">Simpan</button>
                             <a href="<?= base_url('penjualan'); ?>" class="btn btn-outline-secondary">Kembali</a>
                         </div>
                     </div>

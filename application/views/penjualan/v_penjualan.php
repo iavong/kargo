@@ -11,7 +11,17 @@
                         <!-- <p>Add class <code>.table</code></p> -->
                     </div>
                     <div class="pull-right">
-                        <a href="<?= base_url('penjualan/tambah'); ?>" class="btn btn-primary btn-sm scroll-click" rel="content-y"><i class="fa fa-plus"></i> Tambah</a>
+                        <!-- <a href="<?= base_url('penjualan/tambah'); ?>" class="btn btn-primary btn-sm scroll-click" rel="content-y"><i class="fa fa-plus"></i> Tambah</a> -->
+
+                        <div class="dropdown">
+                            <a class="btn btn-sm btn-primary dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-plus"></i>
+                                Tambah
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="<?= base_url('penjualan/tambah-baru'); ?>">Baru</a>
+                                <a class="dropdown-item" href="<?= base_url('penjualan/tambah'); ?>">Langganan</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <hr>
