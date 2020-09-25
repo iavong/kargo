@@ -112,6 +112,20 @@ class PenjualanController extends CI_Controller
     }
 
 
+
+    #### DETAIL
+    public function detail($id)
+    {
+        $data = [
+            'penjualan' => $this->Penjualan->getPenjualanById($id)->row(),
+            'title' => 'Detail Penjualan',
+            'content' => 'penjualan/v_detail_penjualan'
+        ];
+        $this->load->view('layout/wrapper', $data);
+    }
+
+
+
     // Hapus penjualan
     public function delete()
     {

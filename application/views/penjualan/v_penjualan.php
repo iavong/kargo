@@ -59,8 +59,7 @@
                                                 <i class="dw dw-more"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                                <a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
-                                                <a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>
+                                                <a class="dropdown-item" data-toggle="modal" data-target="#viewModal<?= $penjualan->id; ?>" type="button"><i class="dw dw-eye"></i> View</a>
 
                                                 <!-- delete -->
                                                 <form action="<?= base_url('penjualan/delete'); ?>" method="post" class="d-inline">
@@ -81,10 +80,126 @@
 
         </div>
 
-
-
         <?php $this->load->view('layout/partials/_footer'); ?>
 
 
     </div>
 </div>
+
+
+<!-- Large modal -->
+<?php foreach ($penjualans->result() as $penjualan) : ?>
+    <div class="modal fade bs-example-modal-lg" id="viewModal<?= $penjualan->id; ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myLargeModalLabel">Detail Penjualan</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label">No Kwitansi</label>
+                        <div class="col-sm-12 col-md-10">
+                            <input class="form-control" type="text" value="<?= $penjualan->no_kwitansi; ?>" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label">Pengirim</label>
+                        <div class="col-sm-12 col-md-10">
+                            <input class="form-control" type="text" value="<?= $penjualan->pengirim; ?>" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label">Penerima</label>
+                        <div class="col-sm-12 col-md-10">
+                            <input class="form-control" type="text" value="<?= $penjualan->penerima; ?>" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label">Kota Tujuan</label>
+                        <div class="col-sm-12 col-md-10">
+                            <input class="form-control" type="text" value="<?= $penjualan->kota_tujuan; ?>" readonly>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label">Airlines</label>
+                        <div class="col-sm-12 col-md-10">
+                            <input class="form-control" type="text" value="<?= $penjualan->airlines; ?>" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label">No. Penerbangan</label>
+                        <div class="col-sm-12 col-md-10">
+                            <input class="form-control" type="text" value="<?= $penjualan->no_penerbangan; ?>" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label">No. SMU</label>
+                        <div class="col-sm-12 col-md-10">
+                            <input class="form-control" type="text" value="<?= $penjualan->no_smu; ?>" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label">Berat</label>
+                        <div class="col-sm-12 col-md-10">
+                            <input class="form-control" type="text" value="<?= $penjualan->berat; ?>" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label">Jumlah Koli</label>
+                        <div class="col-sm-12 col-md-10">
+                            <input class="form-control" type="text" value="<?= $penjualan->koli; ?>" readonly>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label">Isi</label>
+                        <div class="col-sm-12 col-md-10">
+                            <textarea class="form-control" readonly><?= $penjualan->isi; ?></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label">Catatan</label>
+                        <div class="col-sm-12 col-md-10">
+                            <textarea class="form-control" readonly><?= $penjualan->catatan; ?></textarea>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label">Biaya SMU</label>
+                        <div class="col-sm-12 col-md-10">
+                            <input class="form-control" type="text" value="<?= rupiah($penjualan->biaya_smu); ?>" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label">Biaya Gudang</label>
+                        <div class="col-sm-12 col-md-10">
+                            <input class="form-control" type="text" value="<?= rupiah($penjualan->biaya_gudang); ?>" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label">Biaya Tambahan</label>
+                        <div class="col-sm-12 col-md-10">
+                            <input class="form-control" type="text" value="<?= (!empty($penjualan->biaya_tambahan) ? rupiah($penjualan->biaya_tambahan) : ''); ?>" readonly>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label">Biaya Total</label>
+                        <div class="col-sm-12 col-md-10">
+                            <input class="form-control" type="text" value="<?= rupiah($penjualan->biaya_total); ?>" readonly>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <button type="button" class="btn btn-primary"><i class="fa fa-print"></i> Cetak Nota</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>

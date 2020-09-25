@@ -18,6 +18,18 @@ class Penjualan extends CI_Model
     }
 
 
+    public function getPenjualanById($id)
+    {
+        $query = $this->db->select('p.*, t.kota_tujuan')
+            ->from($this->_table . ' p')
+            ->join($this->_join . ' t', 'p.tujuan_id=t.id', 'left')
+            ->where('p.id', $id)
+            ->order_by('p.id', 'DESC')
+            ->get();
+        return $query;
+    }
+
+
     // simpan data penjualan
     public function insertPenjualan($noKwitansi, $pengirim, $penerima, $kotaTujuan, $airlines, $noPenerbangan, $noSMU, $berat, $koli, $biayaSMU, $isi, $catatan, $biayaGudang, $biayaTambahan, $biayaTotal, $jenisPembayaran)
     {
