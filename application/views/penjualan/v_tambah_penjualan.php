@@ -63,13 +63,14 @@ $langganan = $this->uri->segment(2) == 'tambah';
                             <?php echo form_error('penerima', '<small class="text-danger">', '</small>'); ?>
                         </div>
                     </div>
+                    <hr>
 
 
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Kota Tujuan<span class="text-danger">*</span></label>
                         <div class="col-sm-12 col-md-10">
 
-                            <select class="custom-select2 form-control <?= (form_error('tujuan') ? 'form-control-danger' : null) ?>" name="tujuan" style="width: 100%; height: 38px;">
+                            <select class="custom-select2 form-control <?= (form_error('tujuan') ? 'form-control-danger' : null) ?>" name="tujuan" style="width: 100%; height: 38px;" id="kota">
                                 <option value="">Pilih kota..</option>
                                 <?php foreach ($kotatujuan->result() as $kota) : ?>
                                     <option value="<?= $kota->id; ?>"> <?= $kota->kota_tujuan; ?></option>
@@ -77,6 +78,19 @@ $langganan = $this->uri->segment(2) == 'tambah';
                             </select>
                             <?php echo form_error('tujuan', '<small class="text-danger">', '</small>'); ?>
                         </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label">Biaya Admin SMU<span class="text-danger">*</span></label>
+                        <div class="col-sm-12 col-md-10">
+                            <input class="form-control <?= (form_error('admin_smu') ? 'form-control-danger' : null) ?>" name="admin_smu" type="text" placeholder="Biaya Admin SMU .." value="<?= set_value('admin_smu') ?>">
+                            <?php echo form_error('admin_smu', '<small class="text-danger">', '</small>'); ?>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="tipe">
+                    </div>
+                    <div class="form-group" id="customHarga">
                     </div>
                     <hr>
 
@@ -136,11 +150,25 @@ $langganan = $this->uri->segment(2) == 'tambah';
                     </div>
                     <hr>
 
-                    <div class="form-group row">
-                        <label class="col-sm-12 col-md-2 col-form-label">Biaya Gudang<span class="text-danger">*</span></label>
-                        <div class="col-sm-12 col-md-10">
-                            <input class="form-control <?= (form_error('biaya_gudang') ? 'form-control-danger' : null) ?>" name="biaya_gudang" placeholder="Biaya gudang .." type="text" value="<?= set_value('biaya_gudang') ?>">
-                            <?php echo form_error('biaya_gudang', '<small class="text-danger">', '</small>'); ?>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-6 col-md-4 col-form-label">Biaya Gudang<span class="text-danger">*</span></label>
+                                <div class="col-sm-6 col-md-8">
+                                    <input class="form-control <?= (form_error('biaya_gudang') ? 'form-control-danger' : null) ?>" name="biaya_gudang" placeholder="Biaya gudang .." type="text" value="1045">
+                                    <?php echo form_error('biaya_gudang', '<small class="text-danger">', '</small>'); ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-6 col-md-4 col-form-label">Biaya Admin<span class="text-danger">*</span></label>
+                                <div class="col-sm-6 col-md-8">
+                                    <input class="form-control <?= (form_error('admin_gudang') ? 'form-control-danger' : null) ?>" name="admin_gudang" placeholder="Biaya gudang .." type="text" value="3500">
+                                    <?php echo form_error('admin_gudang', '<small class="text-danger">', '</small>'); ?>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -158,18 +186,18 @@ $langganan = $this->uri->segment(2) == 'tambah';
 
                             <?php if ($langganan) : ?>
                                 <div class="custom-control custom-radio mb-5">
-                                    <input type="radio" id="customRadio1" name="jenis_pembayaran" value="deposit" class="custom-control-input">
-                                    <label class="custom-control-label" for="customRadio1">Deposit</label>
+                                    <input type="radio" id="radio1" name="jenis_pembayaran" value="deposit" class="custom-control-input" required>
+                                    <label class="custom-control-label" for="radio1">Deposit</label>
                                 </div>
                             <?php endif; ?>
 
                             <div class="custom-control custom-radio mb-5">
-                                <input type="radio" id="customRadio2" name="jenis_pembayaran" value="cash" class="custom-control-input">
-                                <label class="custom-control-label" for="customRadio2">Cash</label>
+                                <input type="radio" id="radio2" name="jenis_pembayaran" value="cash" class="custom-control-input" required>
+                                <label class="custom-control-label" for="radio2">Cash</label>
                             </div>
                             <div class="custom-control custom-radio mb-5">
-                                <input type="radio" id="customRadio3" name="jenis_pembayaran" value="debit" class="custom-control-input">
-                                <label class="custom-control-label" for="customRadio3">Debit</label>
+                                <input type="radio" id="radio3" name="jenis_pembayaran" value="debit" class="custom-control-input" required>
+                                <label class="custom-control-label" for="radio3">Debit</label>
                             </div>
                             <?php echo form_error('jenis_pembayaran', '<small class="text-danger">', '</small>'); ?>
                         </div>

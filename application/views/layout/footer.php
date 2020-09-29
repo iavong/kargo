@@ -19,8 +19,11 @@
 <script src="<?= base_url(); ?>assets/plugins/datatables/js/vfs_fonts.js"></script>
 
 <!-- <script src="<?= base_url('assets/vendors/scripts/datatable-setting.js'); ?>"></script> -->
-
+<script>
+    var base_url = '<?php echo base_url() ?>';
+</script>
 <script src="<?= base_url('assets/vendors/scripts/dashboard.js'); ?>"></script>
+<script src="<?= base_url('assets/js/penjualan.js'); ?>"></script>
 <!-- test -->
 <script>
     $(document).ready(function() {

@@ -34,13 +34,14 @@ class PenjualanController extends CI_Controller
         $this->form_validation->set_rules('pengirim', 'Nama pengirim', 'required');
         $this->form_validation->set_rules('penerima', 'Nama penerima', 'required');
         $this->form_validation->set_rules('tujuan', 'Kota tujuan', 'required');
+        $this->form_validation->set_rules('admin_smu', 'Biaya Admin SMU', 'required');
         $this->form_validation->set_rules('airlines', 'Airlines', 'required');
         $this->form_validation->set_rules('no_penerbangan', 'No. penerbangan', 'required');
         $this->form_validation->set_rules('no_smu', 'No. SMU', 'required');
         $this->form_validation->set_rules('berat', 'Berat', 'required');
         $this->form_validation->set_rules('koli', 'Jumlah koli', 'required');
         $this->form_validation->set_rules('biaya_gudang', 'Biaya gudang', 'required');
-        $this->form_validation->set_rules('jenis_pembayaran', 'Jenis pembayaran', 'required');
+        $this->form_validation->set_rules('admin_gudang', 'Biaya admin gudang', 'required');
 
 
         if ($this->form_validation->run() == false) {
@@ -62,6 +63,7 @@ class PenjualanController extends CI_Controller
         $praPengirim = htmlspecialchars($this->input->post('pengirim'));
         $penerima = htmlspecialchars($this->input->post('penerima'));
         $kotaTujuan = htmlspecialchars($this->input->post('tujuan'));
+        $customHarga = htmlspecialchars($this->input->post('custom_harga'));
         $airlines = htmlspecialchars($this->input->post('airlines'));
         $noPenerbangan = htmlspecialchars($this->input->post('no_penerbangan'));
         $noSMU = htmlspecialchars($this->input->post('no_smu'));
@@ -69,17 +71,24 @@ class PenjualanController extends CI_Controller
         $koli = htmlspecialchars($this->input->post('koli'));
         $isi = htmlspecialchars($this->input->post('isi'));
         $catatan = htmlspecialchars($this->input->post('catatan'));
-        $biayaGudang = htmlspecialchars($this->input->post('biaya_gudang'));
+        $hargaGudang = htmlspecialchars($this->input->post('biaya_gudang'));
+        $adminSMU = htmlspecialchars($this->input->post('admin_smu'));
+        $adminGudang = htmlspecialchars($this->input->post('admin_gudang'));
         $biayaTambahan = htmlspecialchars($this->input->post('biaya_tambahan'));
         $jenisPembayaran = htmlspecialchars($this->input->post('jenis_pembayaran'));
 
         // cek harga
-        $id = $kotaTujuan;
-        $cekHarga = $this->Tujuan->getTujuanById($id)->row();
-        $biaya = $cekHarga->biaya;
+        if (empty($customHarga)) {
+            $id = $kotaTujuan;
+            $cekHarga = $this->Tujuan->getTujuanById($id)->row();
+            $biaya = $cekHarga->biaya; // biaya berdasarkan kota tujuan
+        } else {
+            $biaya = $customHarga;
+        }
 
         // hitung biaya
-        $biayaSMU = $biaya * $berat;
+        $biayaSMU = ($biaya * $berat) + $adminSMU;
+        $biayaGudang = ($hargaGudang * $berat) + $adminGudang;
         $biayaTotal = $biayaSMU + $biayaGudang + $biayaTambahan;
 
 
@@ -122,6 +131,14 @@ class PenjualanController extends CI_Controller
             'content' => 'penjualan/v_detail_penjualan'
         ];
         $this->load->view('layout/wrapper', $data);
+    }
+
+
+    public function getHarga()
+    {
+        $id = $this->input->post('id');
+        $items = $this->Tujuan->getTujuanById($id)->row();
+        echo json_encode($items);
     }
 
 

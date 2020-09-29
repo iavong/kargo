@@ -58,9 +58,9 @@
                         <span class="micon dw dw-calendar1"></span><span class="mtext">Laporan</span>
                     </a>
                     <ul class="submenu">
-                        <li><a href="index.html">Laporan Penjualan</a></li>
-                        <li><a href="index2.html">Laporan Pembelian</a></li>
-                        <li><a href="index2.html">Laporan Keuangan</a></li>
+                        <li><a href="<?= base_url('laporan-penjualan'); ?>" class="<?= ($this->router->fetch_class() == 'LaporanPenjualanController') ? 'active' : '' ?>">Laporan Penjualan</a></li>
+                        <li><a href="<?= base_url('laporan-pembelian'); ?>" class="<?= ($this->router->fetch_class() == 'LaporanPembelianController') ? 'active' : '' ?>">Laporan Pembelian</a></li>
+                        <li><a href="<?= base_url('laporan-keuangan'); ?>" class="<?= ($this->router->fetch_class() == 'LaporanKeuanganController') ? 'active' : '' ?>">Laporan Keuangan</a></li>
                     </ul>
                 </li>
 

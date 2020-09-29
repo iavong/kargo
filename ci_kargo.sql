@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 26 Sep 2020 pada 22.05
+-- Waktu pembuatan: 29 Sep 2020 pada 22.18
 -- Versi server: 10.4.14-MariaDB
 -- Versi PHP: 7.4.9
 
@@ -47,7 +47,8 @@ INSERT INTO `deposit` (`id`, `id_pengirim`, `deposit`, `tipe`, `created_at`) VAL
 (33, 8, '20000', 1, '2020-09-26 02:44:52'),
 (34, 8, '180000', 1, '2020-09-26 02:44:57'),
 (35, 8, '70000', 0, '2020-09-26 02:46:18'),
-(36, 8, '320000', 0, '2020-09-26 02:52:55');
+(36, 8, '320000', 0, '2020-09-26 02:52:55'),
+(37, 9, '228950', 0, '2020-09-30 00:35:38');
 
 -- --------------------------------------------------------
 
@@ -107,7 +108,7 @@ CREATE TABLE `pengirim` (
 
 INSERT INTO `pengirim` (`id`, `nama`, `no_hp`, `alamat`, `deposit`, `created_at`) VALUES
 (8, 'Ahmad', '089999999', 'pontianak', '-190000', '2020-09-13 23:30:38'),
-(9, 'Iavong', '0884787485784', 'pontianak', '1095000', '2020-09-13 23:41:45');
+(9, 'Iavong', '0884787485784', 'pontianak', '866050', '2020-09-13 23:41:45');
 
 -- --------------------------------------------------------
 
@@ -145,8 +146,11 @@ INSERT INTO `penjualan` (`id`, `no_kwitansi`, `airlines`, `no_penerbangan`, `no_
 (5, 0, 'JT', 'JT', 'lakjsdf', '5', 1, '100000', '50000', '', '150000', '', '', 'jinton', 'naruto', 15, 'deposit', '2020-09-14 04:12:54'),
 (6, 0, 'lion', 'lakjdf', 'akldjf', '10', 2, '100000', '15000', '10000', '125000', '', '', 'alksdjf', 'aksdjf', 15, 'deposit', '2020-09-14 04:45:11'),
 (7, 0, 'lion', 'sabeb', '23', '5', 3, '50000', '20000', '5000', '75000', '', '', 'Iavong', 'Sembarang', 15, 'deposit', '2020-09-26 02:18:31'),
-(9, 0, 'lion', '45', '45', '5', 2, '50000', '20000', '', '70000', '', '', 'Ahmad', 'degi', 15, 'deposit', '2020-09-26 02:46:18'),
-(10, 0, '45', '45', '45', '10', 2, '300000', '20000', '', '320000', '', '', 'Ahmad', 'degi', 14, 'deposit', '2020-09-26 02:52:55');
+(15, 2147483647, 'lion', '79234', '02938402', '10', 4, '300000', '13950', '10000', '323950', '', '', 'testing', 'tester', 14, 'cash', '2020-09-29 21:20:09'),
+(21, 2147483647, 'lion', '79234', '02938402', '10', 4, '203500', '13950', '10000', '227450', '', '', 'testing2', 'tester3', 14, 'cash', '2020-09-29 23:30:50'),
+(22, 2147483647, 'lion', '79234', '02938402', '10', 4, '205000', '13950', '10000', '228950', '', '', 'alskdjfl', 'test', 14, 'cash', '2020-09-29 23:47:36'),
+(23, 2147483647, 'lion', '79234', '02938402', '10', 4, '305000', '13950', '10000', '328950', '', '', 'alskdjfl', 'degi', 14, 'cash', '2020-09-29 23:50:13'),
+(24, 2147483647, 'lion', '79234', '02938402', '10', 4, '205000', '13950', '10000', '228950', '', '', 'Iavong', 'test', 14, 'deposit', '2020-09-30 00:35:38');
 
 -- --------------------------------------------------------
 
@@ -253,7 +257,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `deposit`
 --
 ALTER TABLE `deposit`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT untuk tabel `pembelian`
@@ -277,7 +281,7 @@ ALTER TABLE `pengirim`
 -- AUTO_INCREMENT untuk tabel `penjualan`
 --
 ALTER TABLE `penjualan`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT untuk tabel `tujuan`
