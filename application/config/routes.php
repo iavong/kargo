@@ -102,9 +102,17 @@ $route['pengirim-hutang/bayar/delete'] = 'PengirimHutangController/deleteBayar';
 
 
 
-// Laporan
+// Laporan Penjualan
 $route['laporan-penjualan'] = 'laporan/LaporanPenjualanController';
+$route['laporan-penjualan/cetak-perbulan'] = 'laporan/LaporanPenjualanController/cetak_perbulan';
+$route['laporan-penjualan/cetak-perperiode'] = 'laporan/LaporanPenjualanController/cetak_perperiode';
+
+// Laporan Pembelian
 $route['laporan-pembelian'] = 'laporan/LaporanPembelianController';
+$route['laporan-pembelian/cetak-perbulan'] = 'laporan/LaporanPembelianController/cetak_perbulan';
+$route['laporan-pembelian/cetak-perperiode'] = 'laporan/LaporanPembelianController/cetak_perperiode';
+
+// Laporan keuangan
 $route['laporan-keuangan'] = 'laporan/LaporanKeuanganController';
 
 

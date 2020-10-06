@@ -19,7 +19,7 @@
                         <div class="col-md-6">
                             <div class="card">
                                 <div class="card-body">
-                                    <form action="" target="_blank" method="post">
+                                    <form action="<?= base_url('laporan-pembelian/cetak-perbulan'); ?>" target="_blank" method="post">
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="col-lg-6">
@@ -44,12 +44,10 @@
                                                     <label for="tahun">Pilih Tahun</label>
                                                     <select name="tahun" id="tahun" class="form-control" required>
                                                         <option value="">--- Pilih Tahun ---</option>
-                                                        <option value="2020" selected>2020</option>
-                                                        <option value="2019">2019</option>
-                                                        <option value="2018">2018</option>
-                                                        <option value="2017">2017</option>
-                                                        <option value="2016">2016</option>
-                                                        <option value="2015">2015</option>
+                                                        <?php $tahun = date("Y"); ?>
+                                                        <?php for ($t = $tahun; $t >= 2015; $t--) : ?>
+                                                            <option value="<?= $t; ?>" <?= ($tahun == $t) ? "selected" : ""; ?>><?= $t; ?></option>
+                                                        <?php endfor; ?>
                                                     </select>
                                                 </div>
                                             </div>
@@ -66,7 +64,7 @@
                         <div class="col-md-6">
                             <div class="card">
                                 <div class="card-body">
-                                    <form action="" target="_blank" method="post">
+                                    <form action="<?= base_url('laporan-pembelian/cetak-perperiode'); ?>" target="_blank" method="post">
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="col-lg-6">
