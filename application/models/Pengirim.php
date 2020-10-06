@@ -6,13 +6,16 @@ class Pengirim extends CI_Model
 
     private $_table = 'pengirim';
 
-    public function getPengirim()
+    public function getPengirim($key)
     {
-        $query = $this->db->select('*')
+        $this->db->select('*')
             ->from($this->_table)
-            ->order_by('id', 'DESC')
-            ->get();
-        return $query;
+            ->order_by('id', 'DESC');
+
+        if ($key !== null) {
+            $this->db->where('tipe', $key);
+        }
+        return $this->db->get();
     }
 
     public function getPengirimById($id)
@@ -26,13 +29,14 @@ class Pengirim extends CI_Model
 
 
     // simpan
-    public function insertPengirim($nama, $hp, $alamat, $deposit)
+    public function insertPengirim($nama, $hp, $alamat, $deposit, $tipe)
     {
         $data = [
             'nama' => $nama,
             'no_hp' => $hp,
             'alamat' => $alamat,
-            'deposit' => $deposit
+            'deposit' => $deposit,
+            'tipe' => $tipe
         ];
         if ($this->db->insert($this->_table, $data)) {
             return true;

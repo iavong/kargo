@@ -31,7 +31,8 @@
                     <table class="table stripe hover nowrap table-responsive" id="dataTable">
                         <thead>
                             <tr>
-                                <th class="table-plus datatable-nosort">Pengirim</th>
+                                <th class="table-plus datatable-nosort">No.Kwitansi</th>
+                                <th>Pengirim</th>
                                 <th>Penerima</th>
                                 <th>Tujuan</th>
                                 <th>Airlines</th>
@@ -45,7 +46,8 @@
                         <tbody>
                             <?php foreach ($penjualans->result() as $penjualan) : ?>
                                 <tr>
-                                    <td class="table-plus"><?= $penjualan->pengirim; ?></td>
+                                    <td class="table-plus"><?= $penjualan->no_kwitansi; ?></td>
+                                    <td><?= $penjualan->pengirim; ?></td>
                                     <td><?= $penjualan->penerima; ?></td>
                                     <td><?= $penjualan->kota_tujuan; ?></td>
                                     <td><?= $penjualan->airlines; ?></td>
@@ -142,7 +144,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-12 col-md-2 col-form-label">Berat</label>
+                        <label class="col-sm-12 col-md-2 col-form-label">Berat(Kg)</label>
                         <div class="col-sm-12 col-md-10">
                             <input class="form-control" type="text" value="<?= $penjualan->berat; ?>" readonly>
                         </div>

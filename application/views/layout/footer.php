@@ -30,8 +30,22 @@
         $('#dataTable').DataTable({
             "ordering": false
         });
+
+        // input integer
+
     });
 </script>
+
+<script>
+    $(function() {
+        $('.int').on('input', function() {
+            this.value = this.value
+                .replace(/[^\d]/g, ''); // numbers and decimals only
+
+        });
+    });
+</script>
+
 </body>
 
 </html>

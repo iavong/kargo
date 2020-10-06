@@ -10,14 +10,18 @@ class PengirimController extends CI_Controller
         //Do your magic here
         $this->load->model('Pengirim');
         $this->load->model('Deposit');
+        if (empty($this->session->userdata('username'))) {
+            redirect('login');
+        }
     }
 
 
     public function index()
     {
+        $key = 0; //langganan
         $data = [
-            'pengirim' => $this->Pengirim->getPengirim(),
-            'title' => 'Pengirim',
+            'pengirim' => $this->Pengirim->getPengirim($key),
+            'title' => 'Pengirim Langganan',
             'content' => 'pengirim/v_pengirim'
         ];
         $this->load->view('layout/wrapper', $data);
@@ -50,9 +54,10 @@ class PengirimController extends CI_Controller
         $hp = htmlspecialchars($this->input->post('hp'));
         $alamat = htmlspecialchars($this->input->post('alamat'));
         $deposit = htmlspecialchars($this->input->post('deposit'));
+        $tipe = 0;
 
 
-        if ($this->Pengirim->insertPengirim($nama, $hp, $alamat, $deposit) == true) {
+        if ($this->Pengirim->insertPengirim($nama, $hp, $alamat, $deposit, $tipe) == true) {
             $this->session->set_flashdata('success', 'Pengirim berhasil ditambahkan.');
             redirect('pengirim');
         } else {

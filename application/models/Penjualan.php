@@ -30,6 +30,30 @@ class Penjualan extends CI_Model
     }
 
 
+    public function getKwitansiMax() //cek no kwitansi terakhir
+    {
+        $this->db->select_max('no_kwitansi');
+        $this->db->from($this->_table);
+        $query = $this->db->get();
+        return $query;
+    }
+    public function getNewKwitansi($autoId, $prefix) //generate no kwitansi baru
+    {
+        $newId = substr($autoId, 1, 4);
+        $tambah = (int)$newId + 1;
+        if (strlen($tambah) == 1) {
+            $noKwitansi = $prefix . "000" . $tambah;
+        } else if (strlen($tambah) == 2) {
+            $noKwitansi = $prefix . "00" . $tambah;
+        } else if (strlen($tambah) == 3) {
+            $noKwitansi = $prefix . "0" . $tambah;
+        } else if (strlen($tambah) == 4) {
+            $noKwitansi = $prefix . $tambah;
+        }
+        return $noKwitansi;
+    }
+
+
     // simpan data penjualan
     public function insertPenjualan($noKwitansi, $pengirim, $penerima, $kotaTujuan, $airlines, $noPenerbangan, $noSMU, $berat, $koli, $biayaSMU, $isi, $catatan, $biayaGudang, $biayaTambahan, $biayaTotal, $jenisPembayaran)
     {

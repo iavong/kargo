@@ -67,6 +67,7 @@ $route['penjualan/tambah'] = 'PenjualanController/tambah';
 $route['penjualan/detail/(:num)'] = 'PenjualanController/detail/$1';
 $route['penjualan/delete'] = 'PenjualanController/delete';
 $route['penjualan/getHarga'] = 'PenjualanController/getHarga';
+$route['penjualan/cekHarga'] = 'PenjualanController/cekHarga';
 
 
 // Pembelian
@@ -88,6 +89,18 @@ $route['pengirim/edit/(:num)'] = 'PengirimController/edit/$1';
 $route['pengirim/delete'] = 'PengirimController/delete';
 $route['pengirim/deposit/(:num)'] = 'PengirimController/deposit/$1';
 $route['pengirim/deposit/delete'] = 'PengirimController/deleteDeposit';
+
+// Pengirim Hutang
+$route['pengirim-hutang'] = 'PengirimHutangController';
+$route['pengirim-hutang/tambah'] = 'PengirimHutangController/tambah';
+$route['pengirim-hutang/edit/(:num)'] = 'PengirimHutangController/edit/$1';
+$route['pengirim-hutang/delete'] = 'PengirimHutangController/delete';
+$route['pengirim-hutang/bayar/(:num)'] = 'PengirimHutangController/bayar/$1';
+$route['pengirim-hutang/bayar/delete'] = 'PengirimHutangController/deleteBayar';
+
+
+
+
 
 // Laporan
 $route['laporan-penjualan'] = 'laporan/LaporanPenjualanController';

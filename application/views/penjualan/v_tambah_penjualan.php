@@ -25,7 +25,7 @@ $langganan = $this->uri->segment(2) == 'tambah';
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">No. Kwitansi</label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control <?= (form_error('no_kwitansi') ? 'form-control-danger' : null) ?>" name="no_kwitansi" type="text" placeholder="No kwitansi .." value="<?= set_value('no_kwitansi') ?>">
+                            <input class="form-control <?= (form_error('no_kwitansi') ? 'form-control-danger' : null) ?>" name="no_kwitansi" type="text" placeholder="No kwitansi .." value="<?= $no_kwitansi; ?>" readonly>
                             <?php echo form_error('no_kwitansi', '<small class="text-danger">', '</small>'); ?>
                         </div>
                     </div>
@@ -83,7 +83,7 @@ $langganan = $this->uri->segment(2) == 'tambah';
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Biaya Admin SMU<span class="text-danger">*</span></label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control <?= (form_error('admin_smu') ? 'form-control-danger' : null) ?>" name="admin_smu" type="text" placeholder="Biaya Admin SMU .." value="<?= set_value('admin_smu') ?>">
+                            <input class="form-control <?= (form_error('admin_smu') ? 'form-control-danger' : null) ?>" name="admin_smu" type="text" placeholder="Biaya Admin SMU .." value="<?= set_value('admin_smu') ?>" id="adminSMU">
                             <?php echo form_error('admin_smu', '<small class="text-danger">', '</small>'); ?>
                         </div>
                     </div>
@@ -97,7 +97,13 @@ $langganan = $this->uri->segment(2) == 'tambah';
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Airlines<span class="text-danger">*</span></label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control <?= (form_error('airlines') ? 'form-control-danger' : null) ?>" name="airlines" placeholder="Airlines .." type="text" value="<?= set_value('airlines') ?>">
+
+                            <select class="custom-select2 form-control <?= (form_error('airlines') ? 'form-control-danger' : null) ?>" name="airlines" value="<?= set_value('airlines') ?>" style="width: 100%; height: 60px;">
+                                <option value="">Pilih airlines..</option>
+                                <option value="lion">Lion</option>
+                                <option value="sriwijaya">Sriwijaya</option>
+                                <option value="namair">Namair</option>
+                            </select>
                             <?php echo form_error('airlines', '<small class="text-danger">', '</small>'); ?>
                         </div>
                     </div>
@@ -121,7 +127,7 @@ $langganan = $this->uri->segment(2) == 'tambah';
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Berat<span class="text-danger">*</span></label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control <?= (form_error('berat') ? 'form-control-danger' : null) ?>" name="berat" placeholder="Berat .." type="text" value="<?= set_value('berat') ?>">
+                            <input class="form-control <?= (form_error('berat') ? 'form-control-danger' : null) ?>" name="berat" placeholder="Berat .." id="berat" type="text" value="<?= set_value('berat') ?>">
                             <?php echo form_error('berat', '<small class="text-danger">', '</small>'); ?>
                         </div>
                     </div>
@@ -156,7 +162,7 @@ $langganan = $this->uri->segment(2) == 'tambah';
                             <div class="form-group row">
                                 <label class="col-sm-6 col-md-4 col-form-label">Biaya Gudang<span class="text-danger">*</span></label>
                                 <div class="col-sm-6 col-md-8">
-                                    <input class="form-control <?= (form_error('biaya_gudang') ? 'form-control-danger' : null) ?>" name="biaya_gudang" placeholder="Biaya gudang .." type="text" value="1045">
+                                    <input class="form-control <?= (form_error('biaya_gudang') ? 'form-control-danger' : null) ?>" name="biaya_gudang" placeholder="Biaya gudang .." type="text" value="1045" id="bGudang">
                                     <?php echo form_error('biaya_gudang', '<small class="text-danger">', '</small>'); ?>
                                 </div>
                             </div>
@@ -165,7 +171,7 @@ $langganan = $this->uri->segment(2) == 'tambah';
                             <div class="form-group row">
                                 <label class="col-sm-6 col-md-4 col-form-label">Biaya Admin<span class="text-danger">*</span></label>
                                 <div class="col-sm-6 col-md-8">
-                                    <input class="form-control <?= (form_error('admin_gudang') ? 'form-control-danger' : null) ?>" name="admin_gudang" placeholder="Biaya gudang .." type="text" value="3500">
+                                    <input class="form-control <?= (form_error('admin_gudang') ? 'form-control-danger' : null) ?>" name="admin_gudang" placeholder="Biaya gudang .." type="text" value="3500" id="adminGudang">
                                     <?php echo form_error('admin_gudang', '<small class="text-danger">', '</small>'); ?>
                                 </div>
                             </div>
@@ -173,9 +179,13 @@ $langganan = $this->uri->segment(2) == 'tambah';
                     </div>
 
                     <div class="form-group row">
-                        <label class="col-sm-12 col-md-2 col-form-label">Biaya Tambahan</label>
+                        <label class="col-sm-12 col-md-2 col-form-label">Biaya Tambahan
+                            <div class="form-check d-inline ml-2">
+                                <input type="checkbox" class="form-check-input check" id="cekBiayaTambahan">
+                            </div>
+                        </label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control <?= (form_error('biaya_tambahan') ? 'form-control-danger' : null) ?>" name="biaya_tambahan" placeholder="Biaya tambahan .." type="text" value="<?= set_value('biaya_tambahan') ?>">
+                            <input class="form-control biayaTambahan <?= (form_error('biaya_tambahan') ? 'form-control-danger' : null) ?>" name="biaya_tambahan" placeholder="Biaya tambahan .." type="text" value="<?= set_value('biaya_tambahan') ?>" id="biayaTambahan" readonly>
                             <?php echo form_error('biaya_tambahan', '<small class="text-danger">', '</small>'); ?>
                         </div>
                     </div>
@@ -203,9 +213,13 @@ $langganan = $this->uri->segment(2) == 'tambah';
                         </div>
                     </div>
 
+                    <div class="form-group" id="result">
+                    </div>
+
                     <div class="form-group row">
                         <div class="col-sm-12 col-md-10 offset-md-2">
                             <button type="submit" name="<?= ($baru ? 'tambah-baru' : 'tambah'); ?>" class="btn btn-primary">Simpan</button>
+                            <button type="button" class="btn btn-info" id="cekHarga">Cek Harga</button>
                             <a href="<?= base_url('penjualan'); ?>" class="btn btn-outline-secondary">Kembali</a>
                         </div>
                     </div>
