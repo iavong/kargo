@@ -241,6 +241,7 @@ $(document).ready(function () {
    * if hutang no deposit
    */
   $("#pengirim").on("change", function () {
+    $("#namaPengirim").html("");
     const id = $(this).children("option:selected").val();
 
     if (id == 0) {
@@ -254,6 +255,7 @@ $(document).ready(function () {
       `);
       $("#depo").hide();
     } else {
+      // $("#namaPengirim").html("");
       $.ajax({
         url: base_url + "penjualan/cekTipePengirim",
         data: {

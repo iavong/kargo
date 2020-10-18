@@ -45,7 +45,7 @@
                         </thead>
                         <tbody>
                             <?php foreach ($penjualans->result() as $penjualan) : ?>
-                                <tr>
+                                <tr style="text-transform: uppercase;">
                                     <td class="table-plus"><?= $penjualan->no_kwitansi; ?></td>
                                     <td><?= $penjualan->pengirim; ?></td>
                                     <td><?= $penjualan->penerima; ?></td>

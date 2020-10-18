@@ -35,7 +35,7 @@ $langganan = $this->uri->segment(2) == 'tambah';
                         <div class="col-sm-12 col-md-10">
 
                             <select class="custom-select2 form-control <?= (form_error('pengirim') ? 'form-control-danger' : null) ?>" id="pengirim" name="pengirim" style="width: 100%; height: 38px;">
-                                <option value="">Pilih pengirim..</option>
+                                <option>Pilih pengirim..</option>
                                 <?php foreach ($dataPengirim->result() as $pengirim) : ?>
                                     <option value="<?= $pengirim->id . '-' . $pengirim->nama; ?>"> <?= $pengirim->nama; ?></option>
                                 <?php endforeach; ?>
