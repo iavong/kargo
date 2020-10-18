@@ -30,8 +30,8 @@ class LaporanPembelianController extends CI_Controller
     {
         $this->load->library('dompdf_gen');
 
-        $bulan = $this->input->post('bulan');
-        $tahun = $this->input->post('tahun');
+        $bulan = date('m', strtotime($this->input->post('bulan')));
+        $tahun = date('Y', strtotime($this->input->post('bulan')));
 
         $data['title'] = 'Laporan Pembelian';
         $data['datapembelian'] = $this->Pembelian->getPembelianByDate($bulan, $tahun);
@@ -60,8 +60,8 @@ class LaporanPembelianController extends CI_Controller
     {
         $this->load->library('dompdf_gen');
 
-        $tglAwal = $this->input->post('tgl_awal');
-        $tglAkhir = $this->input->post('tgl_akhir');
+        $tglAwal = date('Y-m-d', strtotime($this->input->post('tgl_awal')));
+        $tglAkhir = date('Y-m-d', strtotime($this->input->post('tgl_akhir')));
 
         $data['title'] = 'Laporan Pembelian';
         $data['datapembelian'] = $this->Pembelian->getPembelianByPeriode($tglAwal, $tglAkhir);

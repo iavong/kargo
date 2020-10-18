@@ -29,6 +29,19 @@ class Penjualan extends CI_Model
         return $query;
     }
 
+    public function getPenjualanByNow()
+    {
+        // $today = date('Y-m-d');
+
+        $query = $this->db->select('p.*, t.kota_tujuan')
+            ->from($this->_table . ' p')
+            ->join($this->_join . ' t', 't.id = p.tujuan_id')
+            // ->where('DATE(created_at) "' . $today . '"', '', false)
+            ->where('date_format(created_at,"%Y-%m-%d")', 'CURDATE()', FALSE)
+            ->get();
+        return $query;
+    }
+
 
     public function getKwitansiMax() //cek no kwitansi terakhir
     {
@@ -55,7 +68,7 @@ class Penjualan extends CI_Model
 
 
     // simpan data penjualan
-    public function insertPenjualan($noKwitansi, $pengirim, $penerima, $kotaTujuan, $airlines, $noPenerbangan, $noSMU, $berat, $koli, $biayaSMU, $isi, $catatan, $biayaGudang, $biayaTambahan, $biayaTotal, $jenisPembayaran)
+    public function insertPenjualan($noKwitansi, $pengirim, $penerima, $kotaTujuan, $airlines, $noPenerbangan, $noSMU, $berat, $koli, $biaya, $biayaSMU, $adminSMU, $isi, $catatan, $hargaGudang, $adminGudang, $biayaGudang, $biayaTambahan, $biayaTotal, $jenisPembayaran)
     {
         $data = [
             'no_kwitansi' => $noKwitansi,
@@ -64,8 +77,12 @@ class Penjualan extends CI_Model
             'no_smu' => $noSMU,
             'berat' => $berat,
             'koli' => $koli,
+            'harga_smu' => $biaya, // harga mentah smu
             'biaya_smu' => $biayaSMU, // biaya * berat
-            'biaya_gudang' => $biayaGudang,
+            'biaya_admin_smu' => $adminSMU,
+            'harga_gudang' => $hargaGudang,
+            'harga_admin_gudang' => $adminGudang,
+            'total_biaya_gudang' => $biayaGudang, // proses harga gudang & admin gudang
             'biaya_tambahan' => $biayaTambahan,
             'biaya_total' => $biayaTotal, // biayaSMU+biayaGudang+biayaTambahan
             'isi' => $isi,
@@ -89,6 +106,33 @@ class Penjualan extends CI_Model
         if ($this->db->delete($this->_table)) {
             return true;
         }
+    }
+
+
+    /**
+     * @method Cetak Laporan
+     * 
+     */
+    public function getPenjualanByDate($bulan, $tahun)
+    {
+        // $query = $this->db->query("SELECT * FROM Penjualan WHERE month(created_at)='$bulan' AND year(created_at)='$tahun'");
+        $query = $this->db->select('p.*, t.kota_tujuan')
+            ->from($this->_table . ' p')
+            ->join($this->_join . ' t', 't.id = p.tujuan_id')
+            ->where('MONTH(created_at)', $bulan)
+            ->where('YEAR(created_at)', $tahun)
+            ->get();
+        return $query;
+    }
+
+    public function getPenjualanByPeriode($tglAwal, $tglAkhir)
+    {
+        $query = $this->db->select('p.*, t.kota_tujuan')
+            ->from($this->_table . ' p')
+            ->join($this->_join . ' t', 't.id = p.tujuan_id')
+            ->where('DATE(created_at) BETWEEN "' . $tglAwal . '" AND "' . $tglAkhir . '"', '', false)
+            ->get();
+        return $query;
     }
 }
 

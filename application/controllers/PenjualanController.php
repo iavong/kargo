@@ -90,7 +90,7 @@ class PenjualanController extends CI_Controller
             $biayaTotal = $biayaSMU + $biayaGudang + $biayaTambahan;
 
             // echo json_encode($biayaTotal);
-            $this->_simpan($biayaSMU, $biayaGudang, $biayaTotal);
+            $this->_simpan($biaya, $biayaSMU, $biayaGudang, $biayaTotal);
         }
     }
 
@@ -106,7 +106,7 @@ class PenjualanController extends CI_Controller
     }
 
 
-    private function _simpan($biayaSMU, $biayaGudang, $biayaTotal)
+    private function _simpan($biaya, $biayaSMU, $biayaGudang, $biayaTotal)
     {
         $noKwitansi = htmlspecialchars($this->input->post('no_kwitansi'));
         $praPengirim = htmlspecialchars($this->input->post('pengirim'));
@@ -128,9 +128,9 @@ class PenjualanController extends CI_Controller
 
 
         // cek apakah pengirim baru atau langganan
-        if (isset($_POST['tambah-baru'])) {
-            $pengirim = $praPengirim;
-        } elseif (isset($_POST['tambah'])) {
+        if ($praPengirim == 0) {
+            $pengirim = htmlspecialchars($this->input->post('pengirim_baru'));
+        } else {
             $pecah = explode("-", $praPengirim); // pecah id pengirim dan nama pengirim
 
             $id = $pecah[0]; // id pengirim
@@ -149,7 +149,7 @@ class PenjualanController extends CI_Controller
         }
 
 
-        if ($this->Penjualan->insertPenjualan($noKwitansi, $pengirim, $penerima, $kotaTujuan, $airlines, $noPenerbangan, $noSMU, $berat, $koli, $biayaSMU, $isi, $catatan, $biayaGudang, $biayaTambahan, $biayaTotal, $jenisPembayaran)) {
+        if ($this->Penjualan->insertPenjualan($noKwitansi, $pengirim, $penerima, $kotaTujuan, $airlines, $noPenerbangan, $noSMU, $berat, $koli, $biaya, $biayaSMU, $adminSMU, $isi, $catatan, $hargaGudang, $adminGudang, $biayaGudang, $biayaTambahan, $biayaTotal, $jenisPembayaran)) {
             $this->session->set_flashdata('success', 'Data berhasil ditambahkan.');
             redirect('penjualan');
         }
@@ -184,7 +184,19 @@ class PenjualanController extends CI_Controller
         $biayaGudang = ($hargaGudang * $berat) + $adminGudang;
         $biayaTotal = $biayaSMU + $biayaGudang + $biayaTambahan;
 
-        echo json_encode($biayaTotal); // over total ke view
+        $data['biaya'] = $biaya;
+        $data['berat'] = $berat;
+        $data['adminSMU'] = $adminSMU;
+        $data['biayaSMU'] = $biayaSMU;
+
+        $data['hargaGudang'] = $hargaGudang;
+        $data['adminGudang'] = $adminGudang;
+        $data['biayaTambahan'] = $biayaTambahan;
+        $data['biayaGudang'] = $biayaGudang;
+
+        $data['biayaTotal'] = $biayaTotal;
+
+        echo json_encode($data); // over total ke view
     }
 
 
@@ -206,6 +218,13 @@ class PenjualanController extends CI_Controller
         $id = $this->input->post('id');
         $items = $this->Tujuan->getTujuanById($id)->row();
         echo json_encode($items);
+    }
+
+    public function cekTipePengirim()
+    {
+        $id = $this->input->post('id');
+        $pengirim = $this->Pengirim->getPengirimById($id)->row();
+        echo json_encode($pengirim);
     }
 
 

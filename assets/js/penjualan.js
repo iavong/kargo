@@ -1,5 +1,14 @@
 $(document).ready(function () {
-  // ketika memilih kota
+  const formatter = new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+    minimumFractionDigits: 2,
+  });
+
+  /**
+   * ketika memilih kota
+   * Pilih harga official / Custom
+   */
   $("#kota").on("change", function () {
     $("#tipe").val("").html("");
     $("#custom2").val("").html("");
@@ -24,7 +33,7 @@ $(document).ready(function () {
                     <div class="custom-control custom-radio mb-5">
                         <input type="radio" id="custom1" name="tipe" class="custom-control-input" checked required>
                         <label class="custom-control-label" for="custom1">Harga Official (` +
-            data.biaya +
+            formatter.format(data.biaya) +
             `)</label>
                     </div>
                     <div class="custom-control custom-radio mb-5">
@@ -45,13 +54,13 @@ $(document).ready(function () {
           //   var kota = $(this).children("option:selected").val();
           //   console.log("ok");
           $("#customHarga").append(`
-                  <div class="form-group row">
-                      <label class="col-sm-12 col-md-2 col-form-label">Custom Harga<span class="text-danger">*</span></label>
-                      <div class="col-sm-12 col-md-10">
-                          <input class="form-control" name="custom_harga" placeholder="Custom harga .." type="text" value="" id="cusHarga">
-                      </div>
+              <div class="form-group row">
+                  <label class="col-sm-12 col-md-2 col-form-label">Custom Harga<span class="text-danger">*</span></label>
+                  <div class="col-sm-12 col-md-10">
+                      <input class="form-control" name="custom_harga" placeholder="Custom harga .." type="text" value="" id="cusHarga">
                   </div>
-              `);
+              </div>
+          `);
           //
         });
       },
@@ -66,7 +75,9 @@ $(document).ready(function () {
 
   //
 
-  // Cek Total Harga
+  /**
+   * Tombol Cek TOtal Harga
+   */
   $("#cekHarga").click(function () {
     // $(this).prop("disabled", true);
     $("#result").html("");
@@ -79,7 +90,7 @@ $(document).ready(function () {
     var adminGudang = $("#adminGudang").val();
     var biayaTambahan = $("#biayaTambahan").val();
 
-    if (biayaTambahan === "") {
+    if (biayaTambahan == "") {
       $.ajax({
         url: base_url + "penjualan/cekHarga",
         data: {
@@ -95,15 +106,42 @@ $(document).ready(function () {
         dataType: "JSON",
         success: function (data) {
           //
-          console.log(data);
+          // console.log(data);
           $("#result").append(
             `
               <div class="form-group row">
                   <label class="col-sm-12 col-md-2 col-form-label">Total Harga</label>
                   <div class="col-sm-12 col-md-10">
-                  <span class="text-danger">*</span><small>Simpan untuk melanjutkan, refresh halaman ini jika melakukan perubahan data.</small>
-                  <h5 class="font-weight-bold">Rp. ` +
-              data +
+                  <span class="text-danger">*</span><small>Simpan untuk melanjutkan, refresh halaman ini jika melakukan perubahan data.</small><br/>
+                  <small>(` +
+              formatter.format(data.biaya) +
+              ` x ` +
+              data.berat +
+              `) + ` +
+              formatter.format(data.adminSMU) +
+              ` = ` +
+              formatter.format(data.biayaSMU) +
+              `</small><br/>
+                  <small>(` +
+              formatter.format(data.hargaGudang) +
+              ` x ` +
+              data.berat +
+              `) + ` +
+              formatter.format(data.adminGudang) +
+              ` = ` +
+              formatter.format(data.biayaGudang) +
+              `</small><br/>
+                  <small>` +
+              formatter.format(data.biayaSMU) +
+              ` + ` +
+              formatter.format(data.biayaGudang) +
+              ` + ` +
+              formatter.format(data.biayaTambahan) +
+              ` = ` +
+              formatter.format(data.biayaTotal) +
+              `</small>
+                      <h5 class="font-weight-bold harga">` +
+              formatter.format(data.biayaTotal) +
               `</h5>
                   </div>
               </div>
@@ -131,16 +169,44 @@ $(document).ready(function () {
         method: "POST",
         dataType: "JSON",
         success: function (data) {
-          //
-          console.log(data);
+          // var responsedata = $.parseJSON(data);
+
+          // console.log(data);
           $("#result").append(
             `
               <div class="form-group row">
                   <label class="col-sm-12 col-md-2 col-form-label">Total Harga</label>
                   <div class="col-sm-12 col-md-10">
-                  <span class="text-danger">*</span><small>Simpan untuk melanjutkan, refresh halaman ini jika melakukan perubahan data.</small>
-                      <h5 class="font-weight-bold">Rp. ` +
-              data +
+                  <span class="text-danger">*</span><small>Simpan untuk melanjutkan, refresh halaman ini jika melakukan perubahan data.</small><br/>
+                  <small>(` +
+              formatter.format(data.biaya) +
+              ` x ` +
+              data.berat +
+              `) + ` +
+              formatter.format(data.adminSMU) +
+              ` = ` +
+              formatter.format(data.biayaSMU) +
+              `</small><br/>
+                  <small>(` +
+              formatter.format(data.hargaGudang) +
+              ` x ` +
+              data.berat +
+              `) + ` +
+              formatter.format(data.adminGudang) +
+              ` = ` +
+              formatter.format(data.biayaGudang) +
+              `</small><br/>
+                  <small>` +
+              formatter.format(data.biayaSMU) +
+              ` + ` +
+              formatter.format(data.biayaGudang) +
+              ` + ` +
+              formatter.format(data.biayaTambahan) +
+              ` = ` +
+              formatter.format(data.biayaTotal) +
+              `</small>
+                      <h5 class="font-weight-bold harga">` +
+              formatter.format(data.biayaTotal) +
               `</h5>
                   </div>
               </div>
@@ -148,8 +214,8 @@ $(document).ready(function () {
           );
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
-          alert("Harap isi data terlebih dahulu!");
-          // alert("Error: " + errorThrown);
+          // alert("Harap isi data terlebih dahulu!");
+          alert("Error: " + errorThrown);
         },
       });
     }
@@ -169,5 +235,49 @@ $(document).ready(function () {
     }
   });
 
+  /**
+   * ketika pengirim diklik
+   * if langganan tampil deposit
+   * if hutang no deposit
+   */
+  $("#pengirim").on("change", function () {
+    const id = $(this).children("option:selected").val();
+
+    if (id == 0) {
+      $("#namaPengirim").append(`
+          <div class="form-group row">
+              <label class="col-sm-12 col-md-2 col-form-label">Nama Pengirim<span class="text-danger">*</span></label>
+              <div class="col-sm-12 col-md-10">
+                  <input class="form-control" name="pengirim_baru" placeholder="Nama pengirim baru .." type="text" value="" required>
+              </div>
+          </div>
+      `);
+      $("#depo").hide();
+    } else {
+      $.ajax({
+        url: base_url + "penjualan/cekTipePengirim",
+        data: {
+          id: id,
+        },
+        method: "POST",
+        dataType: "JSON",
+        success: function (data) {
+          // console.log(data);
+          if (data.tipe == 1) {
+            $(".deposit").html("Hutang");
+          } else {
+            $(".deposit").html("Deposit");
+          }
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+          alert(errorThrown);
+        },
+      });
+
+      $("#depo").show();
+    }
+
+    //
+  });
   //
 });

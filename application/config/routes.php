@@ -62,12 +62,12 @@ $route['logout'] = 'auth/AuthController/logout';
 
 // Penjualan
 $route['penjualan'] = 'PenjualanController';
-$route['penjualan/tambah-baru'] = 'PenjualanController/tambah';
 $route['penjualan/tambah'] = 'PenjualanController/tambah';
 $route['penjualan/detail/(:num)'] = 'PenjualanController/detail/$1';
 $route['penjualan/delete'] = 'PenjualanController/delete';
 $route['penjualan/getHarga'] = 'PenjualanController/getHarga';
 $route['penjualan/cekHarga'] = 'PenjualanController/cekHarga';
+$route['penjualan/cekTipePengirim'] = 'PenjualanController/cekTipePengirim';
 
 
 // Pembelian

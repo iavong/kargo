@@ -80,8 +80,7 @@ class Pembelian extends CI_Model
 
     public function getPembelianByPeriode($tglAwal, $tglAkhir)
     {
-        $this->db->where('created_at >=', $tglAwal);
-        $this->db->where('created_at <=', $tglAkhir);
+        $this->db->where('DATE(created_at) BETWEEN "' . $tglAwal . '" AND "' . $tglAkhir . '"', '', false);
         return $this->db->get($this->_table);
     }
 }
