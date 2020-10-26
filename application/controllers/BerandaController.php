@@ -10,12 +10,20 @@ class BerandaController extends CI_Controller
 		if (empty($this->session->userdata('username'))) {
 			redirect('login');
 		}
+		$this->load->model('Beranda');
 	}
 
 
 	public function index()
 	{
 		$data = [
+			// penjualan
+			'penjualanToday' => $this->Beranda->getPenjualanToday(),
+			'penjualanThisMonth' => $this->Beranda->getPenjualanThisMonth(),
+			// pembelian
+			'pembelianToday' => $this->Beranda->getPembelianToday(),
+			'pembelianThisMonth' => $this->Beranda->getPembelianThisMonth(),
+			// 
 			'title' => 'Beranda',
 			'content' => 'beranda/v_beranda'
 		];

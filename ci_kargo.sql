@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 18 Okt 2020 pada 03.20
+-- Waktu pembuatan: 26 Okt 2020 pada 22.20
 -- Versi server: 10.4.14-MariaDB
 -- Versi PHP: 7.4.9
 
@@ -51,7 +51,14 @@ INSERT INTO `deposit` (`id`, `id_pengirim`, `deposit`, `tipe`, `created_at`) VAL
 (37, 9, '228950', 0, '2020-09-30 00:35:38'),
 (41, 15, '30000', 1, '2020-10-06 22:45:03'),
 (43, 12, '343950', 0, '2020-10-07 01:54:07'),
-(44, 15, '343950', 0, '2020-10-18 05:14:56');
+(44, 15, '343950', 0, '2020-10-18 05:14:56'),
+(45, 12, '118725', 0, '2020-10-26 22:42:34'),
+(46, 12, '138725', 0, '2020-10-26 22:43:56'),
+(47, 12, '118725', 0, '2020-10-26 22:46:18'),
+(48, 12, '203950', 0, '2020-10-26 22:51:20'),
+(49, 12, '243950', 0, '2020-10-26 22:53:56'),
+(50, 9, '193950', 0, '2020-10-26 22:54:59'),
+(51, 8, '97680', 0, '2020-10-27 02:16:43');
 
 -- --------------------------------------------------------
 
@@ -74,7 +81,8 @@ INSERT INTO `pembelian` (`id`, `keterangan`, `harga`, `created_at`) VALUES
 (2, 'makanan', '50000', '2020-09-07 04:12:45'),
 (5, 'Galon', '7000', '2020-09-07 21:22:22'),
 (6, 'Kopi', '5000', '2020-09-07 21:23:15'),
-(9, 'Nasi Bungkus', '12000', '2020-10-07 04:46:07');
+(9, 'Nasi Bungkus', '12000', '2020-10-07 04:46:07'),
+(10, 'batagor dadan', '10000', '2020-10-27 02:24:43');
 
 -- --------------------------------------------------------
 
@@ -112,9 +120,9 @@ CREATE TABLE `pengirim` (
 --
 
 INSERT INTO `pengirim` (`id`, `nama`, `no_hp`, `alamat`, `deposit`, `tipe`, `created_at`) VALUES
-(8, 'Ahmad', '089999999', 'pontianak', '-190000', 0, '2020-09-13 23:30:38'),
-(9, 'Iavong', '0884787485784', 'pontianak', '866050', 0, '2020-09-13 23:41:45'),
-(12, 'Hap', '98989898', 'Pontianak', '-343950', 1, '2020-10-06 21:38:52'),
+(8, 'Ahmad', '089999999', 'pontianak', '-287680', 0, '2020-09-13 23:30:38'),
+(9, 'Iavong', '0884787485784', 'pontianak', '672100', 0, '2020-09-13 23:41:45'),
+(12, 'Hap', '98989898', 'Pontianak', '-1168025', 1, '2020-10-06 21:38:52'),
 (15, 'Riko', '98989898', 'Pontianak', '-313950', 1, '2020-10-06 22:00:28');
 
 -- --------------------------------------------------------
@@ -131,6 +139,7 @@ CREATE TABLE `penjualan` (
   `no_smu` varchar(100) DEFAULT NULL,
   `berat` decimal(10,0) DEFAULT NULL,
   `koli` int(11) DEFAULT NULL,
+  `custom_harga` varchar(100) DEFAULT NULL,
   `harga_smu` varchar(100) DEFAULT NULL,
   `biaya_smu` varchar(100) DEFAULT NULL,
   `biaya_admin_smu` varchar(100) DEFAULT NULL,
@@ -152,12 +161,15 @@ CREATE TABLE `penjualan` (
 -- Dumping data untuk tabel `penjualan`
 --
 
-INSERT INTO `penjualan` (`id`, `no_kwitansi`, `airlines`, `no_penerbangan`, `no_smu`, `berat`, `koli`, `harga_smu`, `biaya_smu`, `biaya_admin_smu`, `harga_gudang`, `harga_admin_gudang`, `total_biaya_gudang`, `biaya_tambahan`, `biaya_total`, `isi`, `catatan`, `pengirim`, `penerima`, `tujuan_id`, `jenis_pembayaran`, `created_at`) VALUES
-(30, 10004, 'lion', '79234', '02938402', '10', 4, '15000', '170000', '20000', '1045', '3500', '13950', '10000', '193950', '', '', 'Hap', 'degi', 14, 'cash', '2020-10-18 01:16:18'),
-(31, 10005, 'lion', '79234', '02938402', '10', 4, '30000', '320000', '20000', '1045', '3500', '13950', '10000', '343950', '', '', 'Iavong', 'lkasjdlfa', 14, 'deposit', '2020-10-18 04:41:52'),
-(32, 10006, 'lion', '79234', '02938402', '21', 4, '100', '21200', '20000', '1045', '3500', '16040', '', '37240', '', '', 'Hap', 'lkasjdlfa', 12, 'cash', '2020-10-18 04:31:36'),
-(33, 10007, 'sriwijaya', '79234', '02938402', '10', 4, '30000', '320000', '20000', '1045', '3500', '13950', '10000', '343950', '', '', 'Riko', 'degi', 14, 'deposit', '2020-10-18 05:14:56'),
-(34, 10008, 'lion', '79234', '02938402', '10', 4, '30000', '320000', '20000', '1045', '3500', '13950', '10000', '343950', '', '', 'Bambang', 'degi', 14, 'cash', '2020-10-18 06:43:35');
+INSERT INTO `penjualan` (`id`, `no_kwitansi`, `airlines`, `no_penerbangan`, `no_smu`, `berat`, `koli`, `custom_harga`, `harga_smu`, `biaya_smu`, `biaya_admin_smu`, `harga_gudang`, `harga_admin_gudang`, `total_biaya_gudang`, `biaya_tambahan`, `biaya_total`, `isi`, `catatan`, `pengirim`, `penerima`, `tujuan_id`, `jenis_pembayaran`, `created_at`) VALUES
+(30, 10004, 'lion', '79234', '02938402', '10', 4, '', '15000', '170000', '20000', '1045', '3500', '13950', '10000', '193950', '', '', 'Hap', 'degi', 14, 'cash', '2020-10-18 01:16:18'),
+(31, 10005, 'lion', '79234', '02938402', '10', 4, '', '30000', '320000', '20000', '1045', '3500', '13950', '10000', '343950', '', '', 'Iavong', 'lkasjdlfa', 14, 'deposit', '2020-10-18 04:41:52'),
+(32, 10006, 'lion', '79234', '02938402', '21', 4, '', '100', '21200', '20000', '1045', '3500', '16040', '', '37240', '', '', 'Hap', 'lkasjdlfa', 12, 'cash', '2020-10-18 04:31:36'),
+(33, 10007, 'sriwijaya', '79234', '02938402', '10', 4, '', '30000', '320000', '20000', '1045', '3500', '13950', '10000', '343950', '', '', 'Riko', 'degi', 14, 'deposit', '2020-10-18 05:14:56'),
+(34, 10008, 'lion', '79234', '02938402', '10', 4, '', '30000', '320000', '20000', '1045', '3500', '13950', '10000', '343950', '', '', 'Bambang', 'degi', 14, 'cash', '2020-10-18 06:43:35'),
+(39, 10009, 'lion', '79234', '02938402', '10', 4, '20000', '20000', '220000', '20000', '1045', '3500', '13950', '10000', '243950', '', '', 'Hap', 'degi', 11, 'deposit', '2020-10-26 22:53:56'),
+(40, 10010, 'lion', '79234', '02938402', '10', 4, '', '16000', '180000', '20000', '1045', '3500', '13950', '', '193950', '', '', 'Iavong', 'degi', 11, 'deposit', '2020-10-26 22:54:59'),
+(41, 10011, 'namair', '79234', '02938402', '4', 4, '', '15000', '80000', '20000', '1045', '3500', '7680', '10000', '97680', '', '', 'Ahmad', 'degi', 12, 'deposit', '2020-10-27 02:16:43');
 
 -- --------------------------------------------------------
 
@@ -182,7 +194,7 @@ INSERT INTO `tujuan` (`id`, `berat`, `kota_tujuan`, `biaya`) VALUES
 (9, '1', 'Zimbabwe', '1000000'),
 (10, '1', 'Ketapang', '100'),
 (11, '1', 'Solo', '16000'),
-(12, '1', 'Bebas', '100'),
+(12, '1', 'Bebas', '15000'),
 (14, '1', 'Sintang', '30000'),
 (15, '1', 'Daerah Istimewa Yogyakarta', '10000');
 
@@ -264,13 +276,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `deposit`
 --
 ALTER TABLE `deposit`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT untuk tabel `pembelian`
 --
 ALTER TABLE `pembelian`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `penerima`
@@ -288,7 +300,7 @@ ALTER TABLE `pengirim`
 -- AUTO_INCREMENT untuk tabel `penjualan`
 --
 ALTER TABLE `penjualan`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT untuk tabel `tujuan`

@@ -221,13 +221,13 @@ $(document).ready(function () {
     }
   });
 
-  $(document).on("click", ".form-check-input", function () {
+  $(document).on("click", ".form-check-tambah", function () {
     if ($("input.check").prop("checked", true)) {
       $(".biayaTambahan").attr("readonly", false);
     }
   });
 
-  $(document).on("dblclick", ".form-check-input", function () {
+  $(document).on("dblclick", ".form-check-tambah", function () {
     if (this.checked) {
       $(this).prop("checked", false);
       $(".biayaTambahan").attr("readonly", true);

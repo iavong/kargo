@@ -31,6 +31,7 @@
                     <table class="table stripe hover nowrap table-responsive" id="dataTable">
                         <thead>
                             <tr>
+                                <th class="datatable-nosort">Action</th>
                                 <th class="table-plus datatable-nosort">No.Kwitansi</th>
                                 <th>Pengirim</th>
                                 <th>Penerima</th>
@@ -40,21 +41,11 @@
                                 <th>Jenis Pembayaran</th>
                                 <th>Biaya Total</th>
                                 <th>Tanggal Pengiriman</th>
-                                <th class="datatable-nosort">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php foreach ($penjualans->result() as $penjualan) : ?>
                                 <tr style="text-transform: uppercase;">
-                                    <td class="table-plus"><?= $penjualan->no_kwitansi; ?></td>
-                                    <td><?= $penjualan->pengirim; ?></td>
-                                    <td><?= $penjualan->penerima; ?></td>
-                                    <td><?= $penjualan->kota_tujuan; ?></td>
-                                    <td><?= $penjualan->airlines; ?></td>
-                                    <td><?= $penjualan->berat . ' Kg'; ?></td>
-                                    <td><?= ucwords($penjualan->jenis_pembayaran); ?></td>
-                                    <td><?= rupiah($penjualan->biaya_total); ?></td>
-                                    <td><?= date('H:i - d M Y', strtotime($penjualan->created_at)); ?></td>
                                     <td>
                                         <div class="dropdown">
                                             <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
@@ -62,6 +53,8 @@
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
                                                 <a class="dropdown-item" data-toggle="modal" data-target="#viewModal<?= $penjualan->id; ?>" type="button"><i class="dw dw-eye"></i> View</a>
+                                                <!-- Edit -->
+                                                <a class="dropdown-item" href="<?= base_url('penjualan/edit/' . $penjualan->id); ?>"><i class="dw dw-pencil"></i> Edit</a>
 
                                                 <!-- delete -->
                                                 <form action="<?= base_url('penjualan/delete'); ?>" method="post" class="d-inline">
@@ -71,6 +64,15 @@
                                             </div>
                                         </div>
                                     </td>
+                                    <td class="table-plus"><?= $penjualan->no_kwitansi; ?></td>
+                                    <td><?= $penjualan->pengirim; ?></td>
+                                    <td><?= $penjualan->penerima; ?></td>
+                                    <td><?= $penjualan->kota_tujuan; ?></td>
+                                    <td><?= $penjualan->airlines; ?></td>
+                                    <td><?= $penjualan->berat . ' Kg'; ?></td>
+                                    <td><?= ucwords($penjualan->jenis_pembayaran); ?></td>
+                                    <td><?= rupiah($penjualan->biaya_total); ?></td>
+                                    <td><?= date('H:i - d M Y', strtotime($penjualan->created_at)); ?></td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
@@ -159,13 +161,13 @@
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Isi</label>
                         <div class="col-sm-12 col-md-10">
-                            <textarea class="form-control" readonly><?= $penjualan->isi; ?></textarea>
+                            <input class="form-control" type="text" value="<?= $penjualan->isi; ?>" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Catatan</label>
                         <div class="col-sm-12 col-md-10">
-                            <textarea class="form-control" readonly><?= $penjualan->catatan; ?></textarea>
+                            <input class="form-control" type="text" value="<?= $penjualan->catatan; ?>" readonly>
                         </div>
                     </div>
                     <hr>
@@ -178,7 +180,7 @@
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Biaya Gudang</label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control" type="text" value="<?= rupiah($penjualan->biaya_gudang); ?>" readonly>
+                            <input class="form-control" type="text" value="<?= rupiah($penjualan->total_biaya_gudang); ?>" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -191,7 +193,7 @@
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Biaya Total</label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control" type="text" value="<?= rupiah($penjualan->biaya_total); ?>" readonly>
+                            <input class="form-control font-weight-bold" type="text" value="<?= rupiah($penjualan->biaya_total); ?>" readonly>
                         </div>
                     </div>
 
@@ -199,7 +201,15 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                    <button type="button" class="btn btn-primary"><i class="fa fa-print"></i> Cetak Nota</button>
+
+                    <?php
+                    $attributes = array('class' => 'd-inline-block', 'target' => '_blank', 'style' => 'vertical-align: middle;', 'title' => 'Cetak Nota');
+                    $hidden = array('id' => $penjualan->id);
+                    echo form_open('penjualan/cetak-nota', $attributes, $hidden);
+                    ?>
+                    <!-- <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-print"></i></button> -->
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-print"></i> Cetak Nota</button>
+                    <?php echo form_close(); ?>
                 </div>
             </div>
         </div>

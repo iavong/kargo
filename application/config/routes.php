@@ -63,11 +63,14 @@ $route['logout'] = 'auth/AuthController/logout';
 // Penjualan
 $route['penjualan'] = 'PenjualanController';
 $route['penjualan/tambah'] = 'PenjualanController/tambah';
+$route['penjualan/edit/(:num)'] = 'PenjualanController/edit/$1/$2';
 $route['penjualan/detail/(:num)'] = 'PenjualanController/detail/$1';
 $route['penjualan/delete'] = 'PenjualanController/delete';
 $route['penjualan/getHarga'] = 'PenjualanController/getHarga';
 $route['penjualan/cekHarga'] = 'PenjualanController/cekHarga';
 $route['penjualan/cekTipePengirim'] = 'PenjualanController/cekTipePengirim';
+$route['penjualan/cetak-nota'] = 'PenjualanController/cetakNota';
+$route['penjualan/cekCustomHarga'] = 'PenjualanController/cekCustomHarga';
 
 
 // Pembelian

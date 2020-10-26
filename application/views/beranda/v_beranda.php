@@ -13,62 +13,48 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-xl-3 mb-30">
-                <div class="card-box height-100-p widget-style1">
-                    <div class="d-flex flex-wrap align-items-center">
-                        <div class="progress-data">
-                            <div id="chart"></div>
-                        </div>
-                        <div class="widget-data">
-                            <div class="h4 mb-0">2020</div>
-                            <div class="weight-600 font-14">Contact</div>
-                        </div>
+
+
+        <div class="row clearfix progress-box">
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-30">
+                <div class="card-box pd-30 height-100-p">
+                    <div class="progress-box text-center">
+                        <strong class="text-primary"><?php echo $penjualanToday->num_rows(); ?></strong>
+                        <h5 class="text-blue padding-top-10 h5">Penjualan Hari ini</h5>
+                        <span class="d-block"><i class="fa fa-line-chart text-blue"></i></span>
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 mb-30">
-                <div class="card-box height-100-p widget-style1">
-                    <div class="d-flex flex-wrap align-items-center">
-                        <div class="progress-data">
-                            <div id="chart2"></div>
-                        </div>
-                        <div class="widget-data">
-                            <div class="h4 mb-0">400</div>
-                            <div class="weight-600 font-14">Deals</div>
-                        </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-30">
+                <div class="card-box pd-30 height-100-p">
+                    <div class="progress-box text-center">
+                        <strong class="text-light-green"><?php echo $penjualanThisMonth->num_rows(); ?></strong>
+                        <h5 class="text-light-green padding-top-10 h5">Penjualan Bulan ini</h5>
+                        <span class="d-block"> <i class="fa text-light-green fa-line-chart"></i></span>
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 mb-30">
-                <div class="card-box height-100-p widget-style1">
-                    <div class="d-flex flex-wrap align-items-center">
-                        <div class="progress-data">
-                            <div id="chart3"></div>
-                        </div>
-                        <div class="widget-data">
-                            <div class="h4 mb-0">350</div>
-                            <div class="weight-600 font-14">Campaign</div>
-                        </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-30">
+                <div class="card-box pd-30 height-100-p">
+                    <div class="progress-box text-center">
+                        <strong class="text-light-orange"><?php echo $pembelianToday->num_rows(); ?></strong>
+                        <h5 class="text-light-orange padding-top-10 h5">Pembelian Hari ini</h5>
+                        <span class="d-block"><i class="fa text-light-orange fa-line-chart"></i></span>
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 mb-30">
-                <div class="card-box height-100-p widget-style1">
-                    <div class="d-flex flex-wrap align-items-center">
-                        <div class="progress-data">
-                            <div id="chart4"></div>
-                        </div>
-                        <div class="widget-data">
-                            <div class="h4 mb-0">$6060</div>
-                            <div class="weight-600 font-14">Worth</div>
-                        </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-30">
+                <div class="card-box pd-30 height-100-p">
+                    <div class="progress-box text-center">
+                        <strong class="text-light-purple"><?php echo $pembelianThisMonth->num_rows(); ?></strong>
+                        <h5 class="text-light-purple padding-top-10 h5">Pembelian Bulan ini</h5>
+                        <span class="d-block"><i class="fa text-light-purple fa-line-chart"></i></span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-xl-8 mb-30">
                 <div class="card-box height-100-p pd-20">
                     <h2 class="h4 mb-20">Activity</h2>
@@ -81,7 +67,7 @@
                     <div id="chart6"></div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <?php $this->load->view('layout/partials/_footer'); ?>
 

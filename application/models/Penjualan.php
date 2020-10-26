@@ -20,7 +20,7 @@ class Penjualan extends CI_Model
 
     public function getPenjualanById($id)
     {
-        $query = $this->db->select('p.*, t.kota_tujuan')
+        $query = $this->db->select('p.*, t.kota_tujuan ,t.biaya biaya_tujuan')
             ->from($this->_table . ' p')
             ->join($this->_join . ' t', 'p.tujuan_id=t.id', 'left')
             ->where('p.id', $id)
@@ -68,7 +68,7 @@ class Penjualan extends CI_Model
 
 
     // simpan data penjualan
-    public function insertPenjualan($noKwitansi, $pengirim, $penerima, $kotaTujuan, $airlines, $noPenerbangan, $noSMU, $berat, $koli, $biaya, $biayaSMU, $adminSMU, $isi, $catatan, $hargaGudang, $adminGudang, $biayaGudang, $biayaTambahan, $biayaTotal, $jenisPembayaran)
+    public function insertPenjualan($noKwitansi, $pengirim, $penerima, $kotaTujuan, $airlines, $noPenerbangan, $noSMU, $berat, $koli, $customHarga = null, $biaya, $biayaSMU, $adminSMU, $isi, $catatan, $hargaGudang, $adminGudang, $biayaGudang, $biayaTambahan, $biayaTotal, $jenisPembayaran)
     {
         $data = [
             'no_kwitansi' => $noKwitansi,
@@ -77,6 +77,7 @@ class Penjualan extends CI_Model
             'no_smu' => $noSMU,
             'berat' => $berat,
             'koli' => $koli,
+            'custom_harga' => $customHarga,
             'harga_smu' => $biaya, // harga mentah smu
             'biaya_smu' => $biayaSMU, // biaya * berat
             'biaya_admin_smu' => $adminSMU,
@@ -106,6 +107,20 @@ class Penjualan extends CI_Model
         if ($this->db->delete($this->_table)) {
             return true;
         }
+    }
+
+
+    /**
+     * @method cetak nota
+     */
+    public function cetakNotaPenjualan($id)
+    {
+        $query = $this->db->select('p.*, t.kota_tujuan')
+            ->from($this->_table . ' p')
+            ->join($this->_join . ' t', 't.id = p.tujuan_id')
+            ->where('p.id', $id)
+            ->get();
+        return $query;
     }
 
 

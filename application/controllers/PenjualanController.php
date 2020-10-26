@@ -15,6 +15,7 @@ class PenjualanController extends CI_Controller
         $this->load->model('Tujuan');
         $this->load->model('Pengirim');
         $this->load->model('Deposit');
+        $this->load->library('dompdf_gen');
     }
 
     public function index()
@@ -149,7 +150,7 @@ class PenjualanController extends CI_Controller
         }
 
 
-        if ($this->Penjualan->insertPenjualan($noKwitansi, $pengirim, $penerima, $kotaTujuan, $airlines, $noPenerbangan, $noSMU, $berat, $koli, $biaya, $biayaSMU, $adminSMU, $isi, $catatan, $hargaGudang, $adminGudang, $biayaGudang, $biayaTambahan, $biayaTotal, $jenisPembayaran)) {
+        if ($this->Penjualan->insertPenjualan($noKwitansi, $pengirim, $penerima, $kotaTujuan, $airlines, $noPenerbangan, $noSMU, $berat, $koli, $customHarga, $biaya, $biayaSMU, $adminSMU, $isi, $catatan, $hargaGudang, $adminGudang, $biayaGudang, $biayaTambahan, $biayaTotal, $jenisPembayaran)) {
             $this->session->set_flashdata('success', 'Data berhasil ditambahkan.');
             redirect('penjualan');
         }
@@ -219,6 +220,12 @@ class PenjualanController extends CI_Controller
         $items = $this->Tujuan->getTujuanById($id)->row();
         echo json_encode($items);
     }
+    public function cekCustomHarga()
+    {
+        $id = $this->input->post('idUser');
+        $items = $this->Penjualan->getPenjualanById($id)->row();
+        echo json_encode($items);
+    }
 
     public function cekTipePengirim()
     {
@@ -228,6 +235,26 @@ class PenjualanController extends CI_Controller
     }
 
 
+
+
+
+    /**
+     * EDIT PENJUALAN
+     * 
+     */
+    public function edit($id)
+    {
+        $key = null;
+        $data = [
+            'penjualan' => $this->Penjualan->getPenjualanById($id)->row(),
+            'no_kwitansi' => $this->getNoKwitansi(),
+            'kotatujuan' => $this->Tujuan->getTujuan(),
+            'dataPengirim' => $this->Pengirim->getPengirim($key),
+            'title' => 'Edit Penjualan',
+            'content' => 'penjualan/v_edit_penjualan'
+        ];
+        $this->load->view('layout/wrapper', $data);
+    }
 
 
 
@@ -242,5 +269,33 @@ class PenjualanController extends CI_Controller
             $this->session->set_flashdata('error', 'Data gagal dihapus.');
             redirect('penjualan');
         }
+    }
+
+
+
+    /**
+     * 
+     * @method Cetak Nota 
+     */
+    public function cetakNota()
+    {
+        // echo 'sip';
+        $id = $this->input->post('id');
+
+        $data['penjualan'] = $this->Penjualan->cetakNotaPenjualan($id);
+
+        $this->load->view('penjualan/export/cetak_nota', $data);
+
+        // $paper_size = 'A5';
+        $paper_size = array(0, 0, 204, 650);
+        $orientation = 'potrait';
+        $html = $this->output->get_output();
+
+        $this->dompdf->set_paper($paper_size, $orientation);
+
+        $this->dompdf->load_html($html);
+        $this->dompdf->render();
+        ob_end_clean();
+        $this->dompdf->stream("nota_transaksi.pdf", array('Attachment' => 0));
     }
 }
