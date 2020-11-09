@@ -68,7 +68,7 @@ class Penjualan extends CI_Model
 
 
     // simpan data penjualan
-    public function insertPenjualan($noKwitansi, $pengirim, $penerima, $kotaTujuan, $airlines, $noPenerbangan, $noSMU, $berat, $koli, $customHarga = null, $biaya, $biayaSMU, $adminSMU, $isi, $catatan, $hargaGudang, $adminGudang, $biayaGudang, $biayaTambahan, $biayaTotal, $jenisPembayaran)
+    public function insertPenjualan($noKwitansi, $pengirim, $penerima, $kotaTujuan, $airlines, $noPenerbangan, $noSMU, $berat, $koli, $customHarga = null, $biaya, $biayaSMU, $adminSMU, $biayaOperasional, $totalOperasional, $isi, $catatan, $hargaGudang, $adminGudang, $biayaGudang, $biayaTambahan, $biayaTotal, $jenisPembayaran)
     {
         $data = [
             'no_kwitansi' => $noKwitansi,
@@ -81,6 +81,8 @@ class Penjualan extends CI_Model
             'harga_smu' => $biaya, // harga mentah smu
             'biaya_smu' => $biayaSMU, // biaya * berat
             'biaya_admin_smu' => $adminSMU,
+            'biaya_operasional' => $biayaOperasional,
+            'total_operasional' => $totalOperasional,
             'harga_gudang' => $hargaGudang,
             'harga_admin_gudang' => $adminGudang,
             'total_biaya_gudang' => $biayaGudang, // proses harga gudang & admin gudang
@@ -96,6 +98,13 @@ class Penjualan extends CI_Model
         if ($this->db->insert($this->_table, $data)) {
             return true;
         }
+    }
+
+
+    public function getMaxIdPenjualan()
+    {
+        $maxid = $this->db->query('SELECT MAX(id) AS `maxid` FROM `penjualan`')->row()->maxid+1;
+        return $maxid;
     }
 
 

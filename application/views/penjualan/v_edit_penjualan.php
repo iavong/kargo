@@ -17,7 +17,7 @@
 
                 <div class="pb-20">
                     <!-- Form -->
-                    <?php echo form_open('penjualan/edit'); ?>
+                    <?php echo form_open('penjualan/edit/' . $penjualan->id); ?>
                     <input type="hidden" name="id" class="id-user" value="<?= $penjualan->id; ?>" hidden>
 
                     <div class="form-group row">
@@ -77,6 +77,15 @@
                         </div>
                     </div>
 
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label">Biaya Operasional<span class="text-danger">*</span></label>
+                        <div class="col-sm-12 col-md-10">
+                            <input class="form-control <?= (form_error('biaya_operasional') ? 'form-control-danger' : null) ?>" name="biaya_operasional" type="text" placeholder="Biaya Operasional .." id="biaya_operasional_edit" value="<?= $penjualan->biaya_operasional ?>">
+                            <?php echo form_error('biaya_operasional', '<small class="text-danger">', '</small>'); ?>
+                        </div>
+                    </div>
+
+
                     <hr>
 
                     <div class="form-group row">
@@ -132,7 +141,7 @@
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Isi</label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control <?= (form_error('isi') ? 'form-control-danger' : null) ?>" name="koli" placeholder="Isi menurut pengakuan.." type="text" value="<?= $penjualan->isi; ?>">
+                            <input class="form-control <?= (form_error('isi') ? 'form-control-danger' : null) ?>" name="isi" placeholder="Isi menurut pengakuan.." type="text" value="<?= $penjualan->isi; ?>">
                             <?php echo form_error('isi', '<small class="text-danger">', '</small>'); ?>
                         </div>
                     </div>

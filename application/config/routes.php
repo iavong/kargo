@@ -63,7 +63,7 @@ $route['logout'] = 'auth/AuthController/logout';
 // Penjualan
 $route['penjualan'] = 'PenjualanController';
 $route['penjualan/tambah'] = 'PenjualanController/tambah';
-$route['penjualan/edit/(:num)'] = 'PenjualanController/edit/$1/$2';
+$route['penjualan/edit/(:num)'] = 'PenjualanController/edit/$1';
 $route['penjualan/detail/(:num)'] = 'PenjualanController/detail/$1';
 $route['penjualan/delete'] = 'PenjualanController/delete';
 $route['penjualan/getHarga'] = 'PenjualanController/getHarga';

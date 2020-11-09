@@ -17,6 +17,16 @@ class Deposit extends CI_Model
         return $query;
     }
 
+
+    public function getDepositByIdPenjualan($id)
+    {
+        $query = $this->db->select('*')
+            ->from($this->_table)
+            ->where('id_penjualan', $id)
+            ->get();
+        return $query;
+    }
+
     public function insertDeposit($id, $deposit)
     {
         $data = [
@@ -29,10 +39,11 @@ class Deposit extends CI_Model
     }
 
     // ketika menambahkan history pengeluaran
-    public function insertPengeluaran($id, $biayaTotal)
+    public function insertPengeluaran($id, $penjualanID, $biayaTotal)
     {
         $data = [
             'id_pengirim' => $id,
+            'id_penjualan' => $penjualanID,
             'deposit' => $biayaTotal,
             'tipe' => 0
         ];
@@ -55,6 +66,15 @@ class Deposit extends CI_Model
     public function deleteDepositByPengirim($id)
     {
         $this->db->where('id_pengirim', $id);
+        if ($this->db->delete($this->_table)) {
+            return true;
+        }
+    }
+
+    // hapus deposit berdasar id penjualan
+    public function deleteDepositByPenjualan($id)
+    {
+        $this->db->where('id_penjualan', $id);
         if ($this->db->delete($this->_table)) {
             return true;
         }

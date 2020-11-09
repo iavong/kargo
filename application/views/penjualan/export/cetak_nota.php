@@ -101,7 +101,7 @@ $row = $penjualan->row();
     <tr>
         <td>Biaya SMU</td>
         <td> : </td>
-        <td><?= rupiah($row->biaya_smu); ?></td>
+        <td><?= rupiah($row->biaya_smu + $row->total_operasional); ?></td>
     </tr>
     <tr>
         <td>Admin SMU</td>

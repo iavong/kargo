@@ -39,6 +39,7 @@
                                 <th>Airlines</th>
                                 <th>Berat</th>
                                 <th>Jenis Pembayaran</th>
+                                <th>Total Operasional</th>
                                 <th>Biaya Total</th>
                                 <th>Tanggal Pengiriman</th>
                             </tr>
@@ -71,6 +72,7 @@
                                     <td><?= $penjualan->airlines; ?></td>
                                     <td><?= $penjualan->berat . ' Kg'; ?></td>
                                     <td><?= ucwords($penjualan->jenis_pembayaran); ?></td>
+                                    <td><?= rupiah($penjualan->total_operasional); ?></td>
                                     <td><?= rupiah($penjualan->biaya_total); ?></td>
                                     <td><?= date('H:i - d M Y', strtotime($penjualan->created_at)); ?></td>
                                 </tr>
@@ -175,6 +177,12 @@
                         <label class="col-sm-12 col-md-2 col-form-label">Biaya SMU</label>
                         <div class="col-sm-12 col-md-10">
                             <input class="form-control" type="text" value="<?= rupiah($penjualan->biaya_smu); ?>" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label">Total Operasional</label>
+                        <div class="col-sm-12 col-md-10">
+                            <input class="form-control" type="text" value="<?= rupiah($penjualan->total_operasional); ?>" readonly>
                         </div>
                     </div>
                     <div class="form-group row">

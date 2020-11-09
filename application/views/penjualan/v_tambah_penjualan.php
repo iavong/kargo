@@ -84,6 +84,15 @@ $langganan = $this->uri->segment(2) == 'tambah';
                         </div>
                     </div>
 
+
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label">Biaya Operasional<span class="text-danger">*</span></label>
+                        <div class="col-sm-12 col-md-10">
+                            <input class="form-control <?= (form_error('biaya_operasional') ? 'form-control-danger' : null) ?>" name="biaya_operasional" type="text" placeholder="Biaya Operasional .." id="biaya_operasional" value="<?= set_value('biaya_operasional') ?>">
+                            <?php echo form_error('biaya_operasional', '<small class="text-danger">', '</small>'); ?>
+                        </div>
+                    </div>
+
                     <hr>
 
                     <div class="form-group row">
