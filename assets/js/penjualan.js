@@ -91,87 +91,45 @@ $(document).ready(function () {
     var adminGudang = $("#adminGudang").val();
     var biayaTambahan = $("#biayaTambahan").val();
 
-    if (biayaTambahan == "") {
-      $.ajax({
-        url: base_url + "penjualan/cekHarga",
-        data: {
-          tujuan: tujuan,
-          custom_harga: cusHarga,
-          berat: berat,
-          biaya_gudang: hargaGudang,
-          admin_smu: adminSMU,
-          biaya_operasional: biayaOperasional,
-          admin_gudang: adminGudang,
-          biaya_tambahan: 0,
-        },
-        method: "POST",
-        dataType: "JSON",
-        success: function (data) {
-          //
-          // console.log(data);
-          $("#result").append(
-            `
-              <div class="form-group row">
-                  <label class="col-sm-12 col-md-2 col-form-label">Total Harga</label>
-                  <div class="col-sm-12 col-md-10">
-                  <span class="text-danger">*</span><small>Simpan untuk melanjutkan, refresh halaman ini jika melakukan perubahan data.</small><br/>
-                  <small>(` + formatter.format(data.biaya) +` x ` + data.berat + `) + ` + formatter.format(data.adminSMU) + ` = ` + formatter.format(data.biayaSMU) + `</small><br/>
-                  <small>(` + formatter.format(data.hargaGudang) + ` x ` + data.berat + `) + ` + formatter.format(data.adminGudang) + ` = ` + formatter.format(data.biayaGudang) + `</small><br/>
-                  <small>`+ formatter.format(data.biayaOperasional) +` X `+ data.berat +` = `+ formatter.format(data.totalOperasional) +`</small><br>
-                  <small>` + formatter.format(data.biayaSMU) + ` + ` + formatter.format(data.biayaGudang) + ` + ` + formatter.format(data.biayaTambahan) + ` + ` +formatter.format(data.totalOperasional)+ ` = ` + formatter.format(data.biayaTotal) + `</small><h5 class="font-weight-bold harga">` + formatter.format(data.biayaTotal) +
-              `</h5>
-                  </div>
-              </div>
-          `
-          );
-        },
-        error: function (XMLHttpRequest, textStatus, errorThrown) {
-          alert("Harap isi data terlebih dahulu!");
-        },
-      });
+    const data = {
+      tujuan: tujuan,
+      custom_harga: cusHarga,
+      berat: berat,
+      biaya_gudang: hargaGudang,
+      admin_smu: adminSMU,
+      biaya_operasional: biayaOperasional,
+      admin_gudang: adminGudang,
+      biaya_tambahan: (biayaTambahan == "") ? 0 : biayaTambahan, // cek apakah ada biaya tambahan atau tidak
     }
-    // biaya tambahan tidak kosong
-    else {
-      $.ajax({
-        url: base_url + "penjualan/cekHarga",
-        data: {
-          tujuan: tujuan,
-          custom_harga: cusHarga,
-          berat: berat,
-          biaya_gudang: hargaGudang,
-          admin_smu: adminSMU,
-          biaya_operasional: biayaOperasional,
-          admin_gudang: adminGudang,
-          biaya_tambahan: biayaTambahan,
-        },
-        method: "POST",
-        dataType: "JSON",
-        success: function (data) {
-          // var responsedata = $.parseJSON(data);
 
-          // console.log(data);
-          $("#result").append(
-            `
-              <div class="form-group row">
-                  <label class="col-sm-12 col-md-2 col-form-label">Total Harga</label>
-                  <div class="col-sm-12 col-md-10">
-                  <span class="text-danger">*</span><small>Simpan untuk melanjutkan, refresh halaman ini jika melakukan perubahan data.</small><br/>
-                  <small>(` + formatter.format(data.biaya) +` x ` + data.berat + `) + ` + formatter.format(data.adminSMU) + ` = ` + formatter.format(data.biayaSMU) + `</small><br/>
-                  <small>(` + formatter.format(data.hargaGudang) + ` x ` + data.berat + `) + ` + formatter.format(data.adminGudang) + ` = ` + formatter.format(data.biayaGudang) + `</small><br/>
-                  <small>`+ formatter.format(data.biayaOperasional) +` X `+ data.berat +` = `+ formatter.format(data.totalOperasional) +`</small><br>
-                  <small>` + formatter.format(data.biayaSMU) + ` + ` + formatter.format(data.biayaGudang) + ` + ` + formatter.format(data.biayaTambahan) + ` + ` +formatter.format(data.totalOperasional)+ ` = ` + formatter.format(data.biayaTotal) + `</small><h5 class="font-weight-bold harga">` + formatter.format(data.biayaTotal) +
-              `</h5>
-                  </div>
-              </div>
+    $.ajax({
+      url: base_url + "penjualan/cekHarga",
+      data: data,
+      method: "POST",
+      dataType: "JSON",
+      success: function (data) {
+        //
+        // console.log(data);
+        $("#result").append(
           `
-          );
-        },
-        error: function (XMLHttpRequest, textStatus, errorThrown) {
-          // alert("Harap isi data terlebih dahulu!");
-          alert("Error: " + errorThrown);
-        },
-      });
-    }
+            <div class="form-group row">
+                <label class="col-sm-12 col-md-2 col-form-label">Total Harga</label>
+                <div class="col-sm-12 col-md-10">
+                <span class="text-danger">*</span><small>Simpan untuk melanjutkan, refresh halaman ini jika melakukan perubahan data.</small><br/>
+                <small>(` + formatter.format(data.biaya) +` x ` + data.berat + `) + ` + formatter.format(data.adminSMU) + ` = ` + formatter.format(data.biayaSMU) + `</small><br/>
+                <small>(` + formatter.format(data.hargaGudang) + ` x ` + data.berat + `) + ` + formatter.format(data.adminGudang) + ` = ` + formatter.format(data.biayaGudang) + `</small><br/>
+                <small>`+ formatter.format(data.biayaOperasional) +` X `+ data.berat +` = `+ formatter.format(data.totalOperasional) +`</small><br>
+                <small>` + formatter.format(data.biayaSMU) + ` + ` + formatter.format(data.biayaGudang) + ` + ` + formatter.format(data.biayaTambahan) + ` + ` +formatter.format(data.totalOperasional)+ ` = ` + formatter.format(data.biayaTotal) + `</small><h5 class="font-weight-bold harga">` + formatter.format(data.biayaTotal) +
+            `</h5>
+                </div>
+            </div>
+        `
+        );
+      },
+      error: function (XMLHttpRequest, textStatus, errorThrown) {
+        alert("Terjadi kesalahan harap periksa kembali data!");
+      },
+    });
   });
 
   $(document).on("click", ".form-check-tambah", function () {
