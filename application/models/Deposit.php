@@ -18,11 +18,11 @@ class Deposit extends CI_Model
     }
 
 
-    public function getDepositByIdPenjualan($id)
+    public function getDepositByIdPenjualan($id = null, $idPenjualan = null)
     {
         $query = $this->db->select('*')
             ->from($this->_table)
-            ->where('id_penjualan', $id)
+            ->where('id_penjualan', ($id != null) ? $id : $idPenjualan)
             ->get();
         return $query;
     }
@@ -48,6 +48,17 @@ class Deposit extends CI_Model
             'tipe' => 0
         ];
         if ($this->db->insert($this->_table, $data)) {
+            return true;
+        }
+    }
+
+    public function updatePengeluaran($idPenjualan, $biayaTotal)
+    {
+        $data = [
+            'deposit' => $biayaTotal,
+        ];
+        $this->db->where('id_penjualan', $idPenjualan);
+        if ($this->db->update($this->_table, $data)) {
             return true;
         }
     }

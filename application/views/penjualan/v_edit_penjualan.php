@@ -32,6 +32,7 @@
                         <label class="col-sm-12 col-md-2 col-form-label">Pengirim<span class="text-danger">*</span></label>
                         <div class="col-sm-12 col-md-10">
                             <input type="text" name="pengirim" class="form-control" value="<?= $penjualan->pengirim; ?>" readonly>
+                            <input type="hidden" name="id_pengirim" value="<?= (!empty($penjualan->id_pengirim)? $penjualan->id_pengirim : null) ?>" hidden>
                         </div>
                     </div>
 
@@ -195,10 +196,12 @@
                             <?php
                             $jnsPembayaran = $penjualan->jenis_pembayaran;
                             ?>
-                            <div class="custom-control custom-radio mb-5" id="depo">
-                                <input type="radio" id="radio1" name="jenis_pembayaran" value="deposit" class="custom-control-input" <?= ($jnsPembayaran == 'deposit' ? 'checked' : ''); ?> required>
+                            <?php if(!empty($penjualan->id_pengirim)): ?>
+                            <div class="custom-control custom-radio mb-5" id="depoEdit">
+                                <input type="radio" id="radio1Edit" name="jenis_pembayaran" value="deposit" class="custom-control-input" <?= ($jnsPembayaran == 'deposit' ? 'checked' : ''); ?> required>
                                 <label class="custom-control-label deposit" for="radio1">Deposit</label>
                             </div>
+                            <?php endif; ?>
 
                             <div class="custom-control custom-radio mb-5">
                                 <input type="radio" id="radio2" name="jenis_pembayaran" value="cash" class="custom-control-input" <?= ($jnsPembayaran == 'cash' ? 'checked' : ''); ?> required>

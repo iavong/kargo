@@ -68,6 +68,18 @@ class Pengirim extends CI_Model
         }
     }
 
+    // replace deposit saat update penjualan
+    public function replaceDeposit($id, $deposit) // $id = id pengirim
+    {
+        $data = [
+            'deposit' => $deposit,
+        ];
+        $this->db->where('id', $id);
+        if ($this->db->update($this->_table, $data)) {
+            return true;
+        }
+    }
+
     // kurangi deposit ketika menghapus history
     public function updateDeposit($idPengirim, $deposit)
     {

@@ -20,6 +20,7 @@ class PenjualanController extends CI_Controller
 
     public function index()
     {
+       
         $data = [
             'penjualans' => $this->Penjualan->getPenjualan(),
             'title' => 'Penjualan',
@@ -86,6 +87,10 @@ class PenjualanController extends CI_Controller
                 $biaya = $customHarga;
             }
 
+            if ($berat <= 10) {
+                $berat = 10;
+            }
+
             // hitung biaya
             $biayaSMU = ($biaya * $berat) + $adminSMU;
             $biayaGudang = ($hargaGudang * $berat) + $adminGudang;
@@ -96,18 +101,6 @@ class PenjualanController extends CI_Controller
             $this->_simpan($biaya, $biayaSMU, $biayaGudang, $totalOperasional, $biayaTotal);
         }
     }
-
-    public function getNoKwitansi() // proses no kwitansi
-    {
-        $newKwitansi =  $this->Penjualan->getKwitansiMax()->result();
-        if ($newKwitansi > 0) {
-            foreach ($newKwitansi as $key) {
-                $autoKwitansi = $key->no_kwitansi;
-            }
-        }
-        return $no_kwitansi = $this->Penjualan->getNewKwitansi($autoKwitansi, '1');
-    }
-
 
     private function _simpan($biaya, $biayaSMU, $biayaGudang, $totalOperasional, $biayaTotal)
     {
@@ -142,23 +135,33 @@ class PenjualanController extends CI_Controller
 
             // cek jika jenis pembayaran deposit
             if ($jenisPembayaran == 'deposit') {
-                // $cekPengirim = $this->Pengirim->getPengirimById($id)->row();
-                // $deposit = $cekPengirim->deposit;
-
                 // kurangi deposit dengan totalbiaya
                 $this->Pengirim->kurangiDeposit($id, $biayaTotal);
                 // tambah history pengurangan deposit
-                $penjualanID = $this->Penjualan->getMaxIdPenjualan();
+                $penjualanID = $this->Penjualan->getMaxIdPenjualan()->AUTO_INCREMENT;
                 $this->Deposit->insertPengeluaran($id, $penjualanID, $biayaTotal);
             }
         }
 
-
-        if ($this->Penjualan->insertPenjualan($noKwitansi, $pengirim, $penerima, $kotaTujuan, $airlines, $noPenerbangan, $noSMU, $berat, $koli, $customHarga, $biaya, $biayaSMU, $adminSMU, $biayaOperasional, $totalOperasional, $isi, $catatan, $hargaGudang, $adminGudang, $biayaGudang, $biayaTambahan, $biayaTotal, $jenisPembayaran)) {
+        if ($this->Penjualan->insertPenjualan($noKwitansi, $id, $pengirim, $penerima, $kotaTujuan, $airlines, $noPenerbangan, $noSMU, $berat, $koli, $customHarga, $biaya, $biayaSMU, $adminSMU, $biayaOperasional, $totalOperasional, $isi, $catatan, $hargaGudang, $adminGudang, $biayaGudang, $biayaTambahan, $biayaTotal, $jenisPembayaran)) {
             $this->session->set_flashdata('success', 'Data berhasil ditambahkan.');
             redirect('penjualan');
         }
     }
+
+
+    public function getNoKwitansi() // proses no kwitansi
+    {
+        $newKwitansi =  $this->Penjualan->getKwitansiMax()->result();
+        if ($newKwitansi > 0) {
+            foreach ($newKwitansi as $key) {
+                $autoKwitansi = $key->no_kwitansi;
+            }
+        }
+        return $no_kwitansi = $this->Penjualan->getNewKwitansi($autoKwitansi, '1');
+    }
+
+
 
     // cek total harga
     public function cekHarga()
@@ -309,6 +312,10 @@ class PenjualanController extends CI_Controller
                 $biaya = $customHarga;
             }
 
+            if ($berat <= 10) {
+                $berat = 10;
+            }
+
             // hitung biaya
             $biayaSMU = ($biaya * $berat) + $adminSMU;
             $biayaGudang = ($hargaGudang * $berat) + $adminGudang;
@@ -322,8 +329,9 @@ class PenjualanController extends CI_Controller
 
     private function _update($biaya, $biayaSMU, $biayaGudang, $totalOperasional, $biayaTotal)
     {
-        $id = htmlspecialchars($this->input->post('id'));
+        $idPenjualan = htmlspecialchars($this->input->post('id'));
         $noKwitansi = htmlspecialchars($this->input->post('no_kwitansi'));
+        $idPengirim = htmlspecialchars($this->input->post('id_pengirim'));
         $praPengirim = htmlspecialchars($this->input->post('pengirim'));
         $penerima = htmlspecialchars($this->input->post('penerima'));
         $kotaTujuan = htmlspecialchars($this->input->post('tujuan'));
@@ -343,30 +351,47 @@ class PenjualanController extends CI_Controller
         $jenisPembayaran = htmlspecialchars($this->input->post('jenis_pembayaran'));
 
 
-        // cek apakah pengirim baru atau langganan
-        if ($praPengirim == 0) {
-            $pengirim = htmlspecialchars($this->input->post('pengirim_baru'));
-        } else {
-            $pecah = explode("-", $praPengirim); // pecah id pengirim dan nama pengirim
+        // cek jenis pembayaran didalam database;
+        $id = $idPengirim; // id pengirim
+        $dataPenjualan = $this->Penjualan->getPenjualanByIdPenjualan($idPenjualan)->row();
+        $dataJenisPembayaran = $dataPenjualan->jenis_pembayaran;
 
-            $id = $pecah[0]; // id pengirim
-            $pengirim = $pecah[1]; //nama pengirim
-
-            // cek jika jenis pembayaran deposit
+        // jika jenis pembayaran di DB bukan deposit
+        if ($dataJenisPembayaran != 'deposit') {
             if ($jenisPembayaran == 'deposit') {
-                // $cekPengirim = $this->Pengirim->getPengirimById($id)->row();
-                // $deposit = $cekPengirim->deposit;
-
                 // kurangi deposit dengan totalbiaya
                 $this->Pengirim->kurangiDeposit($id, $biayaTotal);
-                // tambah history pengurangan deposit
-                $penjualanID = $this->Penjualan->getMaxIdPenjualan();
-                $this->Deposit->insertPengeluaran($id, $penjualanID, $biayaTotal);
             }
+        }
+        // 
+        elseif($dataJenisPembayaran == 'deposit') {
+            // ambil data deposit sebelum update
+            $dataDeposit = $this->Deposit->getDepositByIdPenjualan($idPenjualan)->row();
+            $dataDepositSebelum = $dataDeposit->deposit;
+            // ambil data deposit dari pengirim
+            $dataPengirim = $this->Pengirim->getPengirimById($id)->row();
+            $dataDepositPengirim = $dataPengirim->deposit;
+
+            if($jenisPembayaran == 'deposit'){
+        
+                // hitung selisih
+                $selisihUpdate = $dataDepositSebelum - $biayaTotal;
+        
+                $deposit = $dataDepositPengirim + $selisihUpdate;
+                $this->Pengirim->replaceDeposit($id, $deposit);
+        
+                // update history deposit
+                $this->Deposit->updatePengeluaran($idPenjualan, $biayaTotal);
+            } 
+
+            elseif($jenisPembayaran != 'deposit'){
+                // belom fix
+            }
+
         }
 
 
-        if ($this->Penjualan->updatePenjualan($id, $noKwitansi, $pengirim, $penerima, $kotaTujuan, $airlines, $noPenerbangan, $noSMU, $berat, $koli, $customHarga, $biaya, $biayaSMU, $adminSMU, $biayaOperasional, $totalOperasional, $isi, $catatan, $hargaGudang, $adminGudang, $biayaGudang, $biayaTambahan, $biayaTotal, $jenisPembayaran)) {
+        if ($this->Penjualan->updatePenjualan($idPenjualan, $noKwitansi, $penerima, $kotaTujuan, $airlines, $noPenerbangan, $noSMU, $berat, $koli, $customHarga, $biaya, $biayaSMU, $adminSMU, $biayaOperasional, $totalOperasional, $isi, $catatan, $hargaGudang, $adminGudang, $biayaGudang, $biayaTambahan, $biayaTotal, $jenisPembayaran)) {
             $this->session->set_flashdata('success', 'Data berhasil diubah.');
             redirect('penjualan');
         }

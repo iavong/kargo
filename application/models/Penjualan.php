@@ -29,6 +29,17 @@ class Penjualan extends CI_Model
         return $query;
     }
 
+    public function getPenjualanByIdPenjualan($idPenjualan)
+    {
+        $query = $this->db->select('p.*, t.kota_tujuan ,t.biaya biaya_tujuan')
+            ->from($this->_table . ' p')
+            ->join($this->_join . ' t', 'p.tujuan_id=t.id', 'left')
+            ->where('p.id', $idPenjualan)
+            ->order_by('p.id', 'DESC')
+            ->get();
+        return $query;
+    }
+
     public function getPenjualanByNow()
     {
         // $today = date('Y-m-d');
@@ -68,7 +79,7 @@ class Penjualan extends CI_Model
 
 
     // simpan data penjualan
-    public function insertPenjualan($noKwitansi, $pengirim, $penerima, $kotaTujuan, $airlines, $noPenerbangan, $noSMU, $berat, $koli, $customHarga = null, $biaya, $biayaSMU, $adminSMU, $biayaOperasional, $totalOperasional, $isi, $catatan, $hargaGudang, $adminGudang, $biayaGudang, $biayaTambahan, $biayaTotal, $jenisPembayaran)
+    public function insertPenjualan($noKwitansi, $id = null,$pengirim, $penerima, $kotaTujuan, $airlines, $noPenerbangan, $noSMU, $berat, $koli, $customHarga = null, $biaya, $biayaSMU, $adminSMU, $biayaOperasional, $totalOperasional, $isi, $catatan, $hargaGudang, $adminGudang, $biayaGudang, $biayaTambahan, $biayaTotal, $jenisPembayaran)
     {
         $data = [
             'no_kwitansi' => $noKwitansi,
@@ -90,6 +101,7 @@ class Penjualan extends CI_Model
             'biaya_total' => $biayaTotal, // biayaSMU+biayaGudang+biayaTambahan
             'isi' => $isi,
             'catatan' => $catatan,
+            'id_pengirim' => $id,
             'pengirim' => $pengirim,
             'penerima' => $penerima,
             'tujuan_id' => $kotaTujuan,
@@ -102,7 +114,7 @@ class Penjualan extends CI_Model
 
 
     // simpan data penjualan
-    public function updatePenjualan($id, $noKwitansi, $pengirim, $penerima, $kotaTujuan, $airlines, $noPenerbangan, $noSMU, $berat, $koli, $customHarga = null, $biaya, $biayaSMU, $adminSMU, $biayaOperasional, $totalOperasional, $isi, $catatan, $hargaGudang, $adminGudang, $biayaGudang, $biayaTambahan, $biayaTotal, $jenisPembayaran)
+    public function updatePenjualan($idPenjualan, $noKwitansi, $penerima, $kotaTujuan, $airlines, $noPenerbangan, $noSMU, $berat, $koli, $customHarga = null, $biaya, $biayaSMU, $adminSMU, $biayaOperasional, $totalOperasional, $isi, $catatan, $hargaGudang, $adminGudang, $biayaGudang, $biayaTambahan, $biayaTotal, $jenisPembayaran)
     {
         $data = [
             'no_kwitansi' => $noKwitansi,
@@ -124,12 +136,11 @@ class Penjualan extends CI_Model
             'biaya_total' => $biayaTotal, // biayaSMU+biayaGudang+biayaTambahan
             'isi' => $isi,
             'catatan' => $catatan,
-            'pengirim' => $pengirim,
             'penerima' => $penerima,
             'tujuan_id' => $kotaTujuan,
             'jenis_pembayaran' => $jenisPembayaran,
         ];
-        $this->db->where('id', $id);
+        $this->db->where('id', $idPenjualan);
         if ($this->db->update($this->_table, $data)) {
             return true;
         }
@@ -138,8 +149,8 @@ class Penjualan extends CI_Model
 
     public function getMaxIdPenjualan()
     {
-        $maxid = $this->db->query('SELECT MAX(id) AS `maxid` FROM `penjualan`')->row()->maxid+1;
-        return $maxid;
+        $maxid = $this->db->query('SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = "'.$this->db->database.'" AND TABLE_NAME = "'.$this->_table.'"');
+        return $maxid->row();
     }
 
 
