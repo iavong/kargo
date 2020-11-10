@@ -258,6 +258,7 @@ class PenjualanController extends CI_Controller
         $this->form_validation->set_rules('penerima', 'Nama penerima', 'required');
         $this->form_validation->set_rules('tujuan', 'Kota tujuan', 'required');
         $this->form_validation->set_rules('admin_smu', 'Biaya Admin SMU', 'required');
+        $this->form_validation->set_rules('biaya_operasional', 'Biaya Operasional', 'required');
         $this->form_validation->set_rules('airlines', 'Airlines', 'required');
         $this->form_validation->set_rules('no_penerbangan', 'No. penerbangan', 'required');
         $this->form_validation->set_rules('no_smu', 'No. SMU', 'required');
@@ -294,6 +295,7 @@ class PenjualanController extends CI_Controller
             $catatan = htmlspecialchars($this->input->post('catatan'));
             $hargaGudang = htmlspecialchars($this->input->post('biaya_gudang'));
             $adminSMU = htmlspecialchars($this->input->post('admin_smu'));
+            $biayaOperasional = htmlspecialchars($this->input->post('biaya_operasional'));
             $adminGudang = htmlspecialchars($this->input->post('admin_gudang'));
             $biayaTambahan = htmlspecialchars($this->input->post('biaya_tambahan'));
             $jenisPembayaran = htmlspecialchars($this->input->post('jenis_pembayaran'));
@@ -310,17 +312,64 @@ class PenjualanController extends CI_Controller
             // hitung biaya
             $biayaSMU = ($biaya * $berat) + $adminSMU;
             $biayaGudang = ($hargaGudang * $berat) + $adminGudang;
-            $biayaTotal = $biayaSMU + $biayaGudang + $biayaTambahan;
+            $totalOperasional = $biayaOperasional * $berat;
+            $biayaTotal = $biayaSMU + $biayaGudang + $biayaTambahan + $totalOperasional;
 
             // echo json_encode($biayaTotal);
-            $this->_update($biaya, $biayaSMU, $biayaGudang, $biayaTotal);
+            $this->_update($biaya, $biayaSMU, $biayaGudang, $totalOperasional, $biayaTotal);
         }
     }
 
-    private function _update($biaya, $biayaSMU, $biayaGudang, $biayaTotal)
+    private function _update($biaya, $biayaSMU, $biayaGudang, $totalOperasional, $biayaTotal)
     {
-        echo 'sip';
-        die;
+        $id = htmlspecialchars($this->input->post('id'));
+        $noKwitansi = htmlspecialchars($this->input->post('no_kwitansi'));
+        $praPengirim = htmlspecialchars($this->input->post('pengirim'));
+        $penerima = htmlspecialchars($this->input->post('penerima'));
+        $kotaTujuan = htmlspecialchars($this->input->post('tujuan'));
+        $customHarga = htmlspecialchars($this->input->post('custom_harga'));
+        $airlines = htmlspecialchars($this->input->post('airlines'));
+        $noPenerbangan = htmlspecialchars($this->input->post('no_penerbangan'));
+        $noSMU = htmlspecialchars($this->input->post('no_smu'));
+        $berat = htmlspecialchars($this->input->post('berat'));
+        $koli = htmlspecialchars($this->input->post('koli'));
+        $isi = htmlspecialchars($this->input->post('isi'));
+        $catatan = htmlspecialchars($this->input->post('catatan'));
+        $hargaGudang = htmlspecialchars($this->input->post('biaya_gudang'));
+        $adminSMU = htmlspecialchars($this->input->post('admin_smu'));
+        $biayaOperasional = htmlspecialchars($this->input->post('biaya_operasional'));
+        $adminGudang = htmlspecialchars($this->input->post('admin_gudang'));
+        $biayaTambahan = htmlspecialchars($this->input->post('biaya_tambahan'));
+        $jenisPembayaran = htmlspecialchars($this->input->post('jenis_pembayaran'));
+
+
+        // cek apakah pengirim baru atau langganan
+        if ($praPengirim == 0) {
+            $pengirim = htmlspecialchars($this->input->post('pengirim_baru'));
+        } else {
+            $pecah = explode("-", $praPengirim); // pecah id pengirim dan nama pengirim
+
+            $id = $pecah[0]; // id pengirim
+            $pengirim = $pecah[1]; //nama pengirim
+
+            // cek jika jenis pembayaran deposit
+            if ($jenisPembayaran == 'deposit') {
+                // $cekPengirim = $this->Pengirim->getPengirimById($id)->row();
+                // $deposit = $cekPengirim->deposit;
+
+                // kurangi deposit dengan totalbiaya
+                $this->Pengirim->kurangiDeposit($id, $biayaTotal);
+                // tambah history pengurangan deposit
+                $penjualanID = $this->Penjualan->getMaxIdPenjualan();
+                $this->Deposit->insertPengeluaran($id, $penjualanID, $biayaTotal);
+            }
+        }
+
+
+        if ($this->Penjualan->updatePenjualan($id, $noKwitansi, $pengirim, $penerima, $kotaTujuan, $airlines, $noPenerbangan, $noSMU, $berat, $koli, $customHarga, $biaya, $biayaSMU, $adminSMU, $biayaOperasional, $totalOperasional, $isi, $catatan, $hargaGudang, $adminGudang, $biayaGudang, $biayaTambahan, $biayaTotal, $jenisPembayaran)) {
+            $this->session->set_flashdata('success', 'Data berhasil diubah.');
+            redirect('penjualan');
+        }
     }
 
 

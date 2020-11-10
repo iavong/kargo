@@ -101,6 +101,41 @@ class Penjualan extends CI_Model
     }
 
 
+    // simpan data penjualan
+    public function updatePenjualan($id, $noKwitansi, $pengirim, $penerima, $kotaTujuan, $airlines, $noPenerbangan, $noSMU, $berat, $koli, $customHarga = null, $biaya, $biayaSMU, $adminSMU, $biayaOperasional, $totalOperasional, $isi, $catatan, $hargaGudang, $adminGudang, $biayaGudang, $biayaTambahan, $biayaTotal, $jenisPembayaran)
+    {
+        $data = [
+            'no_kwitansi' => $noKwitansi,
+            'airlines' => $airlines,
+            'no_penerbangan' => $noPenerbangan,
+            'no_smu' => $noSMU,
+            'berat' => $berat,
+            'koli' => $koli,
+            'custom_harga' => $customHarga,
+            'harga_smu' => $biaya, // harga mentah smu
+            'biaya_smu' => $biayaSMU, // biaya * berat
+            'biaya_admin_smu' => $adminSMU,
+            'biaya_operasional' => $biayaOperasional,
+            'total_operasional' => $totalOperasional,
+            'harga_gudang' => $hargaGudang,
+            'harga_admin_gudang' => $adminGudang,
+            'total_biaya_gudang' => $biayaGudang, // proses harga gudang & admin gudang
+            'biaya_tambahan' => $biayaTambahan,
+            'biaya_total' => $biayaTotal, // biayaSMU+biayaGudang+biayaTambahan
+            'isi' => $isi,
+            'catatan' => $catatan,
+            'pengirim' => $pengirim,
+            'penerima' => $penerima,
+            'tujuan_id' => $kotaTujuan,
+            'jenis_pembayaran' => $jenisPembayaran,
+        ];
+        $this->db->where('id', $id);
+        if ($this->db->update($this->_table, $data)) {
+            return true;
+        }
+    }
+
+
     public function getMaxIdPenjualan()
     {
         $maxid = $this->db->query('SELECT MAX(id) AS `maxid` FROM `penjualan`')->row()->maxid+1;

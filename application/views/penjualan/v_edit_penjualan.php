@@ -17,7 +17,7 @@
 
                 <div class="pb-20">
                     <!-- Form -->
-                    <?php echo form_open('penjualan/edit/' . $penjualan->id); ?>
+                    <?php echo form_open('penjualan/edit/'. $penjualan->id); ?>
                     <input type="hidden" name="id" class="id-user" value="<?= $penjualan->id; ?>" hidden>
 
                     <div class="form-group row">
@@ -31,8 +31,7 @@
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Pengirim<span class="text-danger">*</span></label>
                         <div class="col-sm-12 col-md-10">
-
-                            <input type="text" class="form-control" value="<?= $penjualan->pengirim; ?>" readonly>
+                            <input type="text" name="pengirim" class="form-control" value="<?= $penjualan->pengirim; ?>" readonly>
                         </div>
                     </div>
 
