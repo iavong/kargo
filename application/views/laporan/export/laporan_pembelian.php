@@ -23,7 +23,7 @@
     <p style="text-align: center; font-weight: bold;text-transform: uppercase;">
         LAPORAN PEMBELIAN <br>
         cv. KALBAR KARGO MANDIRI <br>
-        BULAN <?= bulan_indo($bulan); ?> TAHUN <?= $tahun; ?>
+        BULAN <?= strftime('%B', mktime(0, 0, 0, $bulan)); ?> TAHUN <?= $tahun; ?>
     </p>
 <?php else : ?>
     <p style="text-align: center; font-weight: bold;text-transform: uppercase;">
