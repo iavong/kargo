@@ -35,7 +35,22 @@
             "ordering": false
         });
 
-        // input integer
+
+        // alert leaves page
+        formmodified = 0;
+        $('form *').change(function() {
+            formmodified = 1;
+        });
+        window.onbeforeunload = confirmExit;
+
+        function confirmExit() {
+            if (formmodified == 1) {
+                return "Test?";
+            }
+        }
+        $("input[name='commit']").click(function() {
+            formmodified = 0;
+        });
 
     });
 </script>

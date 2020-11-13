@@ -21,13 +21,13 @@
 <?php echo '</head><body>'; ?>
 <?php if (!empty($bulan || $tahun)) : ?>
     <p style="text-align: center; font-weight: bold;text-transform: uppercase;">
-        LAPORAN PENJUALAN <br>
+        LAPORAN KEUANGAN <br>
         cv. KALBAR KARGO MANDIRI <br>
         BULAN <?= strftime('%B', mktime(0, 0, 0, $bulan)); ?> TAHUN <?= $tahun; ?>
     </p>
 <?php else : ?>
     <p style="text-align: center; font-weight: bold;text-transform: uppercase;">
-        LAPORAN PENJUALAN <br>
+        LAPORAN KEUANGAN <br>
         cv. KALBAR KARGO MANDIRI <br>
         PERIODE <?= tgl_indo(date('Y-m-d', strtotime($tgl_awal))); ?> s/d <?= tgl_indo(date('Y-m-d', strtotime($tgl_akhir))); ?>
     </p>
@@ -36,49 +36,49 @@
 <table cellpadding="1" cellspacing="0" style="width:100%;">
     <tr style="font-size:11px;">
         <td class="center td-bold">NO.</td>
-        <td class="center td-bold">NO. KWT.</td>
         <td class="center td-bold">TANGGAL</td>
-        <td class="center td-bold">PENGIRIM</td>
-        <td class="center td-bold">PENERIMA</td>
-        <td class="center td-bold">RUTE</td>
-        <td class="center td-bold">BERAT</td>
-        <td class="center td-bold">KOLI</td>
-        <td class="center td-bold">BIAYA SMU</td>
-        <td class="center td-bold">ADMIN SMU</td>
-        <td class="center td-bold">JS. GDG.</td>
-        <td class="center td-bold">ADM. JS. GDG.</td>
-        <td class="center td-bold">OPS</td>
+        <td class="center td-bold">PENJUALAN</td>
+        <td class="center td-bold">PENGELUARAN</td>
         <td class="center td-bold">TOTAL</td>
     </tr>
 
+    <!-- |PENJUALAN| -->
     <?php
     $no = 0;
     foreach ($datapenjualan->result() as $row) : ?>
         <tr style="text-transform: uppercase;font-size:11px;text-align: center;">
             <td style="text-align: center;"><?= ++$no; ?></td>
-            <td><?= $row->no_kwitansi; ?></td>
             <td><?= tgl_indo(date('Y-m-d', strtotime($row->created_at))); ?></td>
-            <td><?= $row->pengirim; ?></td>
-            <td><?= $row->penerima; ?></td>
-            <td><?= $row->kota_tujuan; ?></td>
-            <td><?= $row->berat . ' Kg'; ?></td>
-            <td><?= $row->koli; ?></td>
-            <td><?= rupiah($row->harga_smu); ?></td>
-            <td><?= rupiah($row->biaya_admin_smu); ?></td>
-            <td><?= rupiah($row->harga_gudang); ?></td>
-            <td><?= rupiah($row->harga_admin_gudang); ?></td>
             <td><?= rupiah($row->total_operasional); ?></td>
-            <td><?= rupiah($row->biaya_total); ?></td>
+            <td> - </td>
+            <td><?= rupiah($row->total_operasional); ?></td>
         </tr>
         <?php
-            $total += $row->biaya_total;
             $totalOperasional += $row->total_operasional;
             ?>
     <?php endforeach; ?>
+
+    <!-- |PENGELUARAN| -->
+    <?php
+    $no = 0;
+    foreach ($datapembelian->result() as $row) : ?>
+        <tr style="text-transform: uppercase;font-size:11px;text-align: center;">
+            <td style="text-align: center;"><?= ++$no; ?></td>
+            <td><?= tgl_indo(date('Y-m-d', strtotime($row->created_at))); ?></td>
+            <td> - </td>
+            <td><?= rupiah($row->harga); ?></td>
+            <td><?= rupiah('-' . $row->harga); ?></td>
+        </tr>
+        <?php
+            $totalPembelian += $row->harga;
+            ?>
+    <?php endforeach; ?>
+
     <tr style="text-transform: uppercase;font-size:12px;">
-        <td colspan="12" class="td-bold">TOTAL</td>
-        <td class="td-bold"><?= rupiah($totalOperasional); ?></td>
-        <td class="td-bold"><?= rupiah($total); ?></td>
+        <td colspan="2" class="td-bold">TOTAL</td>
+        <td class="td-bold center"><?= rupiah($totalOperasional); ?></td>
+        <td class="td-bold center"><?= rupiah('-' . $totalPembelian); ?></td>
+        <td class="td-bold center"><?= rupiah($totalOperasional - $totalPembelian); ?></td>
     </tr>
 </table>
 

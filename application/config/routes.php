@@ -117,6 +117,8 @@ $route['laporan-pembelian/cetak-perperiode'] = 'laporan/LaporanPembelianControll
 
 // Laporan keuangan
 $route['laporan-keuangan'] = 'laporan/LaporanKeuanganController';
+$route['laporan-keuangan/cetak-perbulan'] = 'laporan/LaporanKeuanganController/cetak_perbulan';
+$route['laporan-keuangan/cetak-perperiode'] = 'laporan/LaporanKeuanganController/cetak_perperiode';
 
 
 

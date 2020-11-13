@@ -33,7 +33,7 @@
     </p>
 <?php endif; ?>
 <hr style="height: 2px; color: #000; margin: 10px 0 20px 0;">
-<table cellpadding="8" cellspacing="0" style="width:100%;">
+<table cellpadding="2" cellspacing="0" style="width:100%;">
     <tr>
         <td class="center td-bold">NO.</td>
         <td class="center td-bold">TANGGAL</td>
@@ -51,8 +51,8 @@
             <td><?= rupiah($row->harga); ?></td>
         </tr>
         <?php
-        $total += $row->harga;
-        ?>
+            $total += $row->harga;
+            ?>
     <?php endforeach; ?>
     <tr>
         <td colspan="3" class="td-bold">TOTAL</td>

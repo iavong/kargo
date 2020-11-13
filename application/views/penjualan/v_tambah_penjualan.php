@@ -241,3 +241,17 @@ $langganan = $this->uri->segment(2) == 'tambah';
 
     </div>
 </div>
+
+<script>
+    // window.onbeforeunload = function() {
+    //     // return 'Apakah anda yakin keluar dari halaman ini?';
+    //     alert('Apakah anda yakin keluar dari halaman ini?');
+    // };
+
+    // window.addEventListener('beforeunload', function(e) {
+    //     // Cancel the event
+    //     e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
+    //     // Chrome requires returnValue to be set
+    //     e.returnValue = 'Yes oke beib';
+    // });
+</script>
