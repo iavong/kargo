@@ -20,7 +20,7 @@ class PenjualanController extends CI_Controller
 
     public function index()
     {
-       
+
         $data = [
             'penjualans' => $this->Penjualan->getPenjualan(),
             'title' => 'Penjualan',
@@ -359,12 +359,15 @@ class PenjualanController extends CI_Controller
         // jika jenis pembayaran di DB bukan deposit
         if ($dataJenisPembayaran != 'deposit') {
             if ($jenisPembayaran == 'deposit') {
+
+                $penjualanID = $idPenjualan;
+                $this->Deposit->insertPengeluaran($id, $penjualanID, $biayaTotal);
                 // kurangi deposit dengan totalbiaya
                 $this->Pengirim->kurangiDeposit($id, $biayaTotal);
             }
         }
         // 
-        elseif($dataJenisPembayaran == 'deposit') {
+        elseif ($dataJenisPembayaran == 'deposit') {
             // ambil data deposit sebelum update
             $dataDeposit = $this->Deposit->getDepositByIdPenjualan($idPenjualan)->row();
             $dataDepositSebelum = $dataDeposit->deposit;
@@ -372,22 +375,25 @@ class PenjualanController extends CI_Controller
             $dataPengirim = $this->Pengirim->getPengirimById($id)->row();
             $dataDepositPengirim = $dataPengirim->deposit;
 
-            if($jenisPembayaran == 'deposit'){
-        
+            if ($jenisPembayaran == 'deposit') {
                 // hitung selisih
                 $selisihUpdate = $dataDepositSebelum - $biayaTotal;
-        
+
                 $deposit = $dataDepositPengirim + $selisihUpdate;
                 $this->Pengirim->replaceDeposit($id, $deposit);
-        
+
                 // update history deposit
                 $this->Deposit->updatePengeluaran($idPenjualan, $biayaTotal);
-            } 
-
-            elseif($jenisPembayaran != 'deposit'){
+            } elseif ($jenisPembayaran != 'deposit') {
                 // belom fix
-            }
+                $dbHistoryDeposit = $this->Deposit->getDepositByIdPenjualan($idPenjualan)->row();
+                $historyDeposit = $dbHistoryDeposit->deposit;
 
+                $deposit = $historyDeposit + $dataDepositPengirim;
+
+                $this->Pengirim->replaceDeposit($id, $deposit);
+                $this->Deposit->deleteDepositByPenjualan($idPenjualan);
+            }
         }
 
 
@@ -405,7 +411,7 @@ class PenjualanController extends CI_Controller
         $id = htmlspecialchars($this->input->post('id'));
         $biayaTotal = $this->Penjualan->getPenjualanById($id)->row()->biaya_total;
         $getIdPengirim = $this->Deposit->getDepositByIdPenjualan($id)->row()->id_pengirim;
-        $idPengirim = (!empty($getIdPengirim)) ? $getIdPengirim :'';
+        $idPengirim = (!empty($getIdPengirim)) ? $getIdPengirim : '';
 
         // var_dump($idPengirim);die;
 

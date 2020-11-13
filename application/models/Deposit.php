@@ -18,6 +18,10 @@ class Deposit extends CI_Model
     }
 
 
+    /**
+     * $id  -> id penjualan
+     * $idPenjualan -> id penjualan 
+     */
     public function getDepositByIdPenjualan($id = null, $idPenjualan = null)
     {
         $query = $this->db->select('*')
@@ -83,9 +87,9 @@ class Deposit extends CI_Model
     }
 
     // hapus deposit berdasar id penjualan
-    public function deleteDepositByPenjualan($id)
+    public function deleteDepositByPenjualan($id = null, $idPenjualan = null)
     {
-        $this->db->where('id_penjualan', $id);
+        $this->db->where('id_penjualan', ($id != null) ? $id : $idPenjualan);
         if ($this->db->delete($this->_table)) {
             return true;
         }

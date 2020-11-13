@@ -74,8 +74,8 @@ $(document).ready(function () {
                     <div class="custom-control custom-radio mb-5">
                         <input type="radio" id="custom1-edit" name="tipe" class="custom-control-input" checked required>
                         <label class="custom-control-label" for="custom1-edit">Harga Official (` +
-            formatter.format(data.biaya) +
-            `)</label>
+          formatter.format(data.biaya) +
+          `)</label>
                     </div>
                     <div class="custom-control custom-radio mb-5">
                         <input type="radio" id="custom2-edit" name="tipe" class="custom-control-input" checked required>
@@ -119,8 +119,8 @@ $(document).ready(function () {
                     <div class="custom-control custom-radio mb-5">
                         <input type="radio" id="custom1-edit" name="tipe" class="custom-control-input" checked required>
                         <label class="custom-control-label" for="custom1-edit">Harga Official (` +
-            formatter.format(data.biaya) +
-            `)</label>
+          formatter.format(data.biaya) +
+          `)</label>
                     </div>
                     <div class="custom-control custom-radio mb-5">
                         <input type="radio" id="custom2-edit" name="tipe" class="custom-control-input" required>
@@ -169,8 +169,8 @@ $(document).ready(function () {
                     <div class="custom-control custom-radio mb-5">
                         <input type="radio" id="custom1-edit" name="tipe" class="custom-control-input" checked required>
                         <label class="custom-control-label" for="custom1-edit">Harga Official (` +
-              formatter.format(data.biaya) +
-              `)</label>
+            formatter.format(data.biaya) +
+            `)</label>
                     </div>
                     <div class="custom-control custom-radio mb-5">
                         <input type="radio" id="custom2-edit" name="tipe" class="custom-control-input" required>
@@ -209,8 +209,8 @@ $(document).ready(function () {
               <label class="col-sm-12 col-md-2 col-form-label">Custom Harga<span class="text-danger">*</span></label>
               <div class="col-sm-12 col-md-10">
                   <input class="form-control" name="custom_harga" placeholder="Custom harga .." type="text" value="` +
-            (customHarga == "" ? "" : customHarga) +
-            `" id="cusHarga">
+          (customHarga == "" ? "" : customHarga) +
+          `" id="cusHarga">
               </div>
           </div>
       `
@@ -229,8 +229,8 @@ $(document).ready(function () {
             <label class="col-sm-12 col-md-2 col-form-label">Custom Harga<span class="text-danger">*</span></label>
             <div class="col-sm-12 col-md-10">
                 <input class="form-control" name="custom_harga" placeholder="Custom harga .." type="text" value="` +
-          (customHarga == "" ? "" : customHarga) +
-          `" id="cusHarga">
+        (customHarga == "" ? "" : customHarga) +
+        `" id="cusHarga">
             </div>
         </div>
     `
@@ -279,11 +279,11 @@ $(document).ready(function () {
                 <label class="col-sm-12 col-md-2 col-form-label">Total Harga</label>
                 <div class="col-sm-12 col-md-10">
                 <span class="text-danger">*</span><small>Simpan untuk melanjutkan, refresh halaman ini jika melakukan perubahan data.</small><br/>
-                <small>(` + formatter.format(data.biaya) +` x ` + data.berat + `) + ` + formatter.format(data.adminSMU) + ` = ` + formatter.format(data.biayaSMU) + `</small><br/>
+                <small>(` + formatter.format(data.biaya) + ` x ` + data.berat + `) + ` + formatter.format(data.adminSMU) + ` = ` + formatter.format(data.biayaSMU) + `</small><br/>
                 <small>(` + formatter.format(data.hargaGudang) + ` x ` + data.berat + `) + ` + formatter.format(data.adminGudang) + ` = ` + formatter.format(data.biayaGudang) + `</small><br/>
-                <small>`+ formatter.format(data.biayaOperasional) +` x `+ data.berat +` = `+ formatter.format(data.totalOperasional) +`</small><br>
-                <small>` + formatter.format(data.biayaSMU) + ` + ` + formatter.format(data.biayaGudang) + ` + ` + formatter.format(data.biayaTambahan) + ` + ` +formatter.format(data.totalOperasional)+ ` = ` + formatter.format(data.biayaTotal) + `</small><h5 class="font-weight-bold harga">` + formatter.format(data.biayaTotal) +
-            `</h5>
+                <small>`+ formatter.format(data.biayaOperasional) + ` x ` + data.berat + ` = ` + formatter.format(data.totalOperasional) + `</small><br>
+                <small>` + formatter.format(data.biayaSMU) + ` + ` + formatter.format(data.biayaGudang) + ` + ` + formatter.format(data.biayaTambahan) + ` + ` + formatter.format(data.totalOperasional) + ` = ` + formatter.format(data.biayaTotal) + `</small><h5 class="font-weight-bold harga">` + formatter.format(data.biayaTotal) +
+          `</h5>
                 </div>
             </div>
         `
