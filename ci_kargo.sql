@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 13 Nov 2020 pada 15.56
+-- Waktu pembuatan: 14 Nov 2020 pada 08.48
 -- Versi server: 10.4.14-MariaDB
 -- Versi PHP: 7.4.9
 
@@ -41,8 +41,7 @@ CREATE TABLE `deposit` (
 --
 
 INSERT INTO `deposit` (`id`, `id_pengirim`, `id_penjualan`, `deposit`, `tipe`, `created_at`) VALUES
-(1, 2, NULL, '1000000', 1, '2020-11-10 23:33:10'),
-(11, 2, 5, '506950', 0, '2020-11-13 21:52:16');
+(1, 2, NULL, '1000000', 1, '2020-11-10 23:33:10');
 
 -- --------------------------------------------------------
 
@@ -66,7 +65,8 @@ INSERT INTO `pembelian` (`id`, `keterangan`, `harga`, `created_at`) VALUES
 (5, 'Galon', '7000', '2020-09-07 21:22:22'),
 (6, 'Kopi', '5000', '2020-09-07 21:23:15'),
 (9, 'Nasi Bungkus', '12000', '2020-10-07 04:46:07'),
-(10, 'batagor dadan', '10000', '2020-10-27 02:24:43');
+(10, 'batagor dadan', '10000', '2020-10-27 02:24:43'),
+(11, 'Kopi Asiang 5 Gelas', '50000', '2020-11-14 00:03:05');
 
 -- --------------------------------------------------------
 
@@ -90,7 +90,7 @@ CREATE TABLE `pengirim` (
 
 INSERT INTO `pengirim` (`id`, `nama`, `no_hp`, `alamat`, `deposit`, `tipe`, `created_at`) VALUES
 (1, 'Fikri', '089595959555', 'Pontianak', '-483950', 0, '2020-11-10 23:02:08'),
-(2, 'Iavong', '08989898998', 'Pontianak', '493050', 0, '2020-11-10 23:02:23');
+(2, 'Iavong', '08989898998', 'Pontianak', '1000000', 0, '2020-11-10 23:02:23');
 
 -- --------------------------------------------------------
 
@@ -133,8 +133,9 @@ CREATE TABLE `penjualan` (
 
 INSERT INTO `penjualan` (`id`, `no_kwitansi`, `airlines`, `no_penerbangan`, `no_smu`, `berat`, `koli`, `custom_harga`, `harga_smu`, `biaya_smu`, `biaya_admin_smu`, `biaya_operasional`, `total_operasional`, `harga_gudang`, `harga_admin_gudang`, `total_biaya_gudang`, `biaya_tambahan`, `biaya_total`, `isi`, `catatan`, `id_pengirim`, `pengirim`, `penerima`, `tujuan_id`, `jenis_pembayaran`, `created_at`) VALUES
 (2, 10002, 'sriwijaya', '79234', '02938402', '7', 2, '', '30000', '320000', '20000', '15000', '150000', '1045', '3500', '13950', '', '483950', '', '', 1, 'Fikri', 'degi', 14, 'deposit', '2020-11-13 21:17:48'),
-(5, 10003, 'sriwijaya', '79234', '02938402', '7', 2, '', '30000', '320000', '20000', '15000', '150000', '1045', '3500', '13950', '23000', '506950', '', '', 2, 'Iavong', 'degi', 14, 'deposit', '2020-11-13 21:47:32'),
-(6, 10004, 'sriwijaya', '79234', '02938402', '7', 2, '', '30000', '305000', '5000', '5000', '50000', '1045', '3500', '13950', '', '368950', '', '', 2, 'Iavong', 'Reki', 14, 'cash', '2020-11-13 21:55:08');
+(5, 10003, 'sriwijaya', '79234', '02938402', '7', 2, '', '30000', '320000', '20000', '15000', '150000', '1045', '3500', '13950', '23000', '506950', '', '', 2, 'Iavong', 'degi', 14, 'cash', '2020-11-13 21:47:32'),
+(6, 10004, 'sriwijaya', '79234', '02938402', '7', 2, '', '30000', '305000', '5000', '5000', '50000', '1045', '3500', '13950', '', '368950', '', '', 2, 'Iavong', 'Reki', 14, 'cash', '2020-11-13 21:55:08'),
+(7, 10005, 'sriwijaya', '79234', '02938402', '5', 4, '', '15000', '170000', '20000', '15000', '150000', '1045', '3500', '13950', '', '333950', '', '', NULL, 'Rina', 'Reki', 12, 'cash', '2020-11-14 14:25:17');
 
 -- --------------------------------------------------------
 
@@ -241,7 +242,7 @@ ALTER TABLE `deposit`
 -- AUTO_INCREMENT untuk tabel `pembelian`
 --
 ALTER TABLE `pembelian`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT untuk tabel `pengirim`
@@ -253,13 +254,13 @@ ALTER TABLE `pengirim`
 -- AUTO_INCREMENT untuk tabel `penjualan`
 --
 ALTER TABLE `penjualan`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `tujuan`
 --
 ALTER TABLE `tujuan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`

@@ -196,10 +196,12 @@
                             <?php
                             $jnsPembayaran = $penjualan->jenis_pembayaran;
                             ?>
-                            <div class="custom-control custom-radio mb-5" id="depoEdit">
-                                <input type="radio" id="radio1Edit" name="jenis_pembayaran" value="deposit" class="custom-control-input" <?= ($jnsPembayaran == 'deposit' ? 'checked' : ''); ?> required>
-                                <label class="custom-control-label deposit" for="radio1Edit">Deposit</label>
-                            </div>
+                            <?php if (!empty($penjualan->id_pengirim)) : ?>
+                                <div class="custom-control custom-radio mb-5" id="depoEdit">
+                                    <input type="radio" id="radio1Edit" name="jenis_pembayaran" value="deposit" class="custom-control-input" <?= ($jnsPembayaran == 'deposit' ? 'checked' : ''); ?> required>
+                                    <label class="custom-control-label deposit" for="radio1Edit">Deposit</label>
+                                </div>
+                            <?php endif; ?>
 
                             <div class="custom-control custom-radio mb-5">
                                 <input type="radio" id="radio2" name="jenis_pembayaran" value="cash" class="custom-control-input" <?= ($jnsPembayaran == 'cash' ? 'checked' : ''); ?> required>

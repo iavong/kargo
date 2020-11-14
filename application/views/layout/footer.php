@@ -48,7 +48,7 @@
                 return "Test?";
             }
         }
-        $("input[name='commit']").click(function() {
+        $("button[type='submit']").click(function() {
             formmodified = 0;
         });
 
