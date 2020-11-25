@@ -22,13 +22,14 @@
                         <thead>
                             <tr>
                                 <th class="datatable-nosort">Action</th>
-                                <th class="table-plus datatable-nosort">Keterangan</th>
-                                <th>Harga</th>
+                                <th class="table-plus datatable-nosort">Nama</th>
+                                <th>Keterangan</th>
+                                <th>Gaji</th>
                                 <th>Tanggal</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($pembelian->result() as $row) : ?>
+                            <?php foreach ($gaji->result() as $row) : ?>
                                 <tr style="text-transform: uppercase;">
                                     <td>
                                         <div class="dropdown">
@@ -44,7 +45,7 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="table-plus"><?= $row->keterangan; ?></td>
+                                    <td class="table-plus"> <?= $row->keterangan; ?> </td>
                                     <td><?= rupiah($row->harga); ?></td>
                                     <td><?= date('H:i - d M Y', strtotime($row->created_at)); ?></td>
                                 </tr>

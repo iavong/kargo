@@ -79,6 +79,12 @@ $route['pembelian/tambah'] = 'PembelianController/tambah';
 $route['pembelian/edit/(:num)'] = 'PembelianController/edit/$1';
 $route['pembelian/delete'] = 'PembelianController/delete';
 
+// Pembelian
+$route['gaji'] = 'GajiController';
+$route['gaji/tambah'] = 'GajiController/tambah';
+$route['gaji/edit/(:num)'] = 'GajiController/edit/$1';
+$route['gaji/delete'] = 'GajiController/delete';
+
 // Tujuan
 $route['tujuan'] = 'TujuanController';
 $route['tujuan/tambah'] = 'TujuanController/tambah';
