@@ -6,6 +6,7 @@ class Penjualan extends CI_Model
 
     private $_table = "penjualan";
     private $_join = "tujuan";
+    private $_trash = "trash";
 
     public function getPenjualan()
     {
@@ -64,7 +65,7 @@ class Penjualan extends CI_Model
     public function getNewKwitansi($autoId, $prefix) //generate no kwitansi baru
     {
         $newId = substr($autoId, 1, 4);
-        $tambah = (int)$newId + 1;
+        $tambah = (int) $newId + 1;
         if (strlen($tambah) == 1) {
             $noKwitansi = $prefix . "000" . $tambah;
         } else if (strlen($tambah) == 2) {
@@ -79,7 +80,7 @@ class Penjualan extends CI_Model
 
 
     // simpan data penjualan
-    public function insertPenjualan($noKwitansi, $id = null,$pengirim, $penerima, $kotaTujuan, $airlines, $noPenerbangan, $noSMU, $berat, $koli, $customHarga = null, $biaya, $biayaSMU, $adminSMU, $biayaOperasional, $totalOperasional, $isi, $catatan, $hargaGudang, $adminGudang, $biayaGudang, $biayaTambahan, $biayaTotal, $jenisPembayaran)
+    public function insertPenjualan($noKwitansi, $id = null, $pengirim, $penerima, $kotaTujuan, $airlines, $noPenerbangan, $noSMU, $berat, $koli, $customHarga = null, $biaya, $biayaSMU, $adminSMU, $biayaOperasional, $totalOperasional, $isi, $catatan, $hargaGudang, $adminGudang, $biayaGudang, $biayaTambahan, $biayaTotal, $jenisPembayaran)
     {
         $data = [
             'no_kwitansi' => $noKwitansi,
@@ -149,7 +150,7 @@ class Penjualan extends CI_Model
 
     public function getMaxIdPenjualan()
     {
-        $maxid = $this->db->query('SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = "'.$this->db->database.'" AND TABLE_NAME = "'.$this->_table.'"');
+        $maxid = $this->db->query('SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = "' . $this->db->database . '" AND TABLE_NAME = "' . $this->_table . '"');
         return $maxid->row();
     }
 
@@ -158,8 +159,11 @@ class Penjualan extends CI_Model
     // hapus
     public function deletePenjualan($id)
     {
+        $data = [
+            'deleted' => 1
+        ];
         $this->db->where('id', $id);
-        if ($this->db->delete($this->_table)) {
+        if ($this->db->update($this->_table, $data)) {
             return true;
         }
     }
@@ -203,6 +207,22 @@ class Penjualan extends CI_Model
             ->where('DATE(created_at) BETWEEN "' . $tglAwal . '" AND "' . $tglAkhir . '"', '', false)
             ->get();
         return $query;
+    }
+
+
+    /**
+     * @method trash
+     * 
+     */
+    public function insertTrash($id, $noKwitansi)
+    {
+        $data = [
+            'penjualan_id' => $id,
+            'no_kwitansi' => $noKwitansi,
+        ];
+        if ($this->db->insert($this->_trash, $data)) {
+            return true;
+        }
     }
 }
 

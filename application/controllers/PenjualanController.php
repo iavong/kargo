@@ -16,6 +16,7 @@ class PenjualanController extends CI_Controller
         $this->load->model('Pengirim');
         $this->load->model('Deposit');
         $this->load->library('dompdf_gen');
+        error_reporting(0);
     }
 
     public function index()
@@ -411,9 +412,8 @@ class PenjualanController extends CI_Controller
         $id = htmlspecialchars($this->input->post('id'));
         $biayaTotal = $this->Penjualan->getPenjualanById($id)->row()->biaya_total;
         $getIdPengirim = $this->Deposit->getDepositByIdPenjualan($id)->row()->id_pengirim;
-        $idPengirim = (!empty($getIdPengirim)) ? $getIdPengirim : '';
+        $idPengirim = !empty($getIdPengirim) ? $getIdPengirim : null;
 
-        // var_dump($idPengirim);die;
 
         if ($this->Penjualan->deletePenjualan($id) == true) {
 
@@ -421,6 +421,7 @@ class PenjualanController extends CI_Controller
             $this->Deposit->deleteDepositByPenjualan($id);
             $id = $idPengirim;
             $this->Pengirim->tambahDeposit($id, $biayaTotal);
+
 
             $this->session->set_flashdata('success', 'Data berhasil dihapus.');
             redirect('penjualan');

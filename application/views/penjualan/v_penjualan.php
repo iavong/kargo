@@ -47,36 +47,39 @@
                         </thead>
                         <tbody>
                             <?php foreach ($penjualans->result() as $penjualan) : ?>
+                                <?php $deleted = $penjualan->deleted == 0; ?>
                                 <tr style="text-transform: uppercase;">
                                     <td>
-                                        <div class="dropdown">
-                                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                                                <i class="dw dw-more"></i>
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                                <a class="dropdown-item" data-toggle="modal" data-target="#viewModal<?= $penjualan->id; ?>" type="button"><i class="dw dw-eye"></i> View</a>
-                                                <!-- Edit -->
-                                                <a class="dropdown-item" href="<?= base_url('penjualan/edit/' . $penjualan->id); ?>"><i class="dw dw-pencil"></i> Edit</a>
+                                        <?php if ($deleted) : ?>
+                                            <div class="dropdown">
+                                                <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                                    <i class="dw dw-more"></i>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                                    <a class="dropdown-item" data-toggle="modal" data-target="#viewModal<?= $penjualan->id; ?>" type="button"><i class="dw dw-eye"></i> View</a>
+                                                    <!-- Edit -->
+                                                    <a class="dropdown-item" href="<?= base_url('penjualan/edit/' . $penjualan->id); ?>"><i class="dw dw-pencil"></i> Edit</a>
 
-                                                <!-- delete -->
-                                                <form action="<?= base_url('penjualan/delete'); ?>" method="post" class="d-inline">
-                                                    <input type="hidden" name="id" value="<?= $penjualan->id; ?>" hidden>
-                                                    <button onclick="return confirm('Apa anda yakin ?');" class="dropdown-item" title="Delete"><i class="dw dw-delete-3"></i> Delete</button>
-                                                </form>
+                                                    <!-- delete -->
+                                                    <form action="<?= base_url('penjualan/delete'); ?>" method="post" class="d-inline">
+                                                        <input type="hidden" name="id" value="<?= $penjualan->id; ?>" hidden>
+                                                        <button onclick="return confirm('Apa anda yakin ?');" class="dropdown-item" title="Delete"><i class="dw dw-delete-3"></i> Delete</button>
+                                                    </form>
+                                                </div>
                                             </div>
-                                        </div>
+                                        <?php endif; ?>
                                     </td>
                                     <td><?= date('H:i - d M Y', strtotime($penjualan->created_at)); ?></td>
                                     <td class="table-plus"><?= $penjualan->no_kwitansi; ?></td>
-                                    <td><?= $penjualan->no_smu; ?></td>
-                                    <td><?= $penjualan->pengirim; ?></td>
-                                    <td><?= $penjualan->penerima; ?></td>
-                                    <td><?= $penjualan->kota_tujuan; ?></td>
-                                    <td><?= $penjualan->airlines; ?></td>
-                                    <td><?= $penjualan->berat . ' Kg'; ?></td>
-                                    <td><?= ucwords($penjualan->jenis_pembayaran); ?></td>
-                                    <td><?= rupiah($penjualan->total_operasional); ?></td>
-                                    <td><?= rupiah($penjualan->biaya_total); ?></td>
+                                    <td><?= $deleted ? $penjualan->no_smu : '-'; ?></td>
+                                    <td><?= $deleted ? $penjualan->pengirim : '-'; ?></td>
+                                    <td><?= $deleted ? $penjualan->penerima : '-'; ?></td>
+                                    <td><?= $deleted ? $penjualan->kota_tujuan : '-'; ?></td>
+                                    <td><?= $deleted ? $penjualan->airlines : '-'; ?></td>
+                                    <td><?= $deleted ? $penjualan->berat . ' Kg' : '-'; ?></td>
+                                    <td><?= $deleted ? ucwords($penjualan->jenis_pembayaran) : '-'; ?></td>
+                                    <td><?= $deleted ? rupiah($penjualan->total_operasional) : '-'; ?></td>
+                                    <td><?= $deleted ? rupiah($penjualan->biaya_total) : '-'; ?></td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
@@ -213,10 +216,10 @@
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
 
                     <?php
-                    $attributes = array('class' => 'd-inline-block', 'target' => '_blank', 'style' => 'vertical-align: middle;', 'title' => 'Cetak Nota');
-                    $hidden = array('id' => $penjualan->id);
-                    echo form_open('penjualan/cetak-nota', $attributes, $hidden);
-                    ?>
+                        $attributes = array('class' => 'd-inline-block', 'target' => '_blank', 'style' => 'vertical-align: middle;', 'title' => 'Cetak Nota');
+                        $hidden = array('id' => $penjualan->id);
+                        echo form_open('penjualan/cetak-nota', $attributes, $hidden);
+                        ?>
                     <!-- <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-print"></i></button> -->
                     <button type="submit" class="btn btn-primary"><i class="fa fa-print"></i> Cetak Nota</button>
                     <?php echo form_close(); ?>
