@@ -43,11 +43,9 @@
         <td class="center td-bold">RUTE</td>
         <td class="center td-bold">BERAT</td>
         <td class="center td-bold">KOLI</td>
-        <td class="center td-bold">BIAYA SMU</td>
-        <td class="center td-bold">ADMIN SMU</td>
-        <td class="center td-bold">JS. GDG.</td>
-        <td class="center td-bold">ADM. JS. GDG.</td>
-        <td class="center td-bold">OPS</td>
+        <td class="center td-bold">TOTAL SMU</td>
+        <td class="center td-bold">TOTAL JSG</td>
+        <td class="center td-bold">HANDLING</td>
         <td class="center td-bold">TOTAL</td>
     </tr>
 
@@ -63,10 +61,8 @@
             <td><?= $row->kota_tujuan; ?></td>
             <td><?= $row->berat . ' Kg'; ?></td>
             <td><?= $row->koli; ?></td>
-            <td><?= rupiah($row->harga_smu); ?></td>
-            <td><?= rupiah($row->biaya_admin_smu); ?></td>
-            <td><?= rupiah($row->harga_gudang); ?></td>
-            <td><?= rupiah($row->harga_admin_gudang); ?></td>
+            <td><?= rupiah($row->harga_smu + $row->biaya_admin_smu); ?></td>
+            <td><?= rupiah($row->harga_gudang + $row->harga_admin_gudang); ?></td>
             <td><?= rupiah($row->total_operasional); ?></td>
             <td><?= rupiah($row->biaya_total); ?></td>
         </tr>
@@ -76,9 +72,9 @@
             ?>
     <?php endforeach; ?>
     <tr style="text-transform: uppercase;font-size:12px;">
-        <td colspan="12" class="td-bold">TOTAL</td>
-        <td class="td-bold"><?= rupiah($totalOperasional); ?></td>
-        <td class="td-bold"><?= rupiah($total); ?></td>
+        <td colspan="10" class="td-bold">TOTAL</td>
+        <td class="td-bold center"><?= rupiah($totalOperasional); ?></td>
+        <td class="td-bold center"><?= rupiah($total); ?></td>
     </tr>
 </table>
 
