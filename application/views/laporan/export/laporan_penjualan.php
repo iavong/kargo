@@ -67,9 +67,9 @@
             <td><?= rupiah($row->biaya_total); ?></td>
         </tr>
         <?php
-        $total += $row->biaya_total;
-        $totalOperasional += $row->total_operasional;
-        ?>
+            $total += $row->biaya_total;
+            $totalOperasional += $row->total_operasional;
+            ?>
     <?php endforeach; ?>
     <tr style="text-transform: uppercase;font-size:12px;">
         <td colspan="10" class="td-bold">TOTAL</td>

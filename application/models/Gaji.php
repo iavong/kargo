@@ -5,39 +5,31 @@ class Gaji extends CI_Model
 {
     private $_table = 'gaji';
 
-    public function getGaji() //ambilsemua harga
+    /**
+     * get by id
+     * $id = null ambil semua gaji
+     */
+    public function getGaji($id = null) //ambilsemua harga
     {
-        $query = $this->db->select('*')
-            ->from($this->_table)
-            ->order_by('id', 'DESC')
-            ->get();
-        return $query;
-    }
+        $this->db->select('*')
+            ->from($this->_table);
 
-    public function getPembelianById($id) // ambil berdasar id
-    {
-        $query = $this->db->select('*')
-            ->from($this->_table)
-            ->where('id', $id)
-            ->get();
-        return $query;
-    }
+        if (isset($id)) {
+            $this->db->where('id', $id);
+        }
 
-    public function getPembelianByKeterangan($keterangan)
-    {
-        $query = $this->db->select('*')
-            ->from($this->_table)
-            ->where('keterangan', $keterangan)
-            ->get();
+        $this->db->order_by('id', 'DESC');
+        $query = $this->db->get();
         return $query;
     }
 
 
-    public function insertPembelian($keterangan, $harga)
+    public function insertGaji($nama, $keterangan, $totalGaji)
     {
         $data = [
+            'nama' => $nama,
             'keterangan' => $keterangan,
-            'harga' => $harga
+            'total_gaji' => $totalGaji
         ];
         if ($this->db->insert($this->_table, $data)) {
             return true;
@@ -45,11 +37,12 @@ class Gaji extends CI_Model
     }
 
 
-    public function updatePembelian($id, $keterangan, $harga)
+    public function updateGaji($id, $nama, $keterangan, $totalGaji)
     {
         $data = [
+            'nama' => $nama,
             'keterangan' => $keterangan,
-            'harga' => $harga
+            'total_gaji' => $totalGaji
         ];
         $this->db->where('id', $id);
         if ($this->db->update($this->_table, $data)) {
@@ -57,31 +50,13 @@ class Gaji extends CI_Model
         }
     }
 
-    public function deletePembelian($id)
+
+    public function deleteGaji($id)
     {
         $this->db->where('id', $id);
         if ($this->db->delete($this->_table)) {
             return true;
         }
-    }
-
-
-    /**
-     * @method Cetak Laporan
-     * 
-     */
-    public function getPembelianByDate($bulan, $tahun)
-    {
-        // $query = $this->db->query("SELECT * FROM pembelian WHERE month(created_at)='$bulan' AND year(created_at)='$tahun'");
-        $this->db->where('MONTH(created_at)', $bulan);
-        $this->db->where('YEAR(created_at)', $tahun);
-        return $this->db->get($this->_table);
-    }
-
-    public function getPembelianByPeriode($tglAwal, $tglAkhir)
-    {
-        $this->db->where('DATE(created_at) BETWEEN "' . $tglAwal . '" AND "' . $tglAkhir . '"', '', false);
-        return $this->db->get($this->_table);
     }
 }
 

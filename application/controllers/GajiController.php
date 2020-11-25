@@ -26,18 +26,18 @@ class GajiController extends CI_Controller
     }
 
     #####################################################################
-    # Tambah Harga
+    # Tambah Gaji
     #####################################################################
     public function tambah()
     {
-        $this->form_validation->set_rules('keterangan', 'Keterangan', 'required');
-        $this->form_validation->set_rules('harga', 'Harga', 'required|numeric');
+        $this->form_validation->set_rules('nama', 'Nama', 'required');
+        $this->form_validation->set_rules('total_gaji', 'Total Gaji', 'required|numeric');
 
         // cek validasi form
         if ($this->form_validation->run() == FALSE) {
             $data = [
-                'title' => 'Tambah Pembelian',
-                'content' => 'pembelian/v_tambah_pembelian'
+                'title' => 'Tambah Gaji',
+                'content' => 'gaji/v_tambah_gaji'
             ];
             $this->load->view('layout/wrapper', $data);
         } else {
@@ -47,34 +47,35 @@ class GajiController extends CI_Controller
     // proses simpan
     private function _simpan()
     {
+        $nama = htmlspecialchars($this->input->post('nama'));
         $keterangan = htmlspecialchars($this->input->post('keterangan'));
-        $harga = htmlspecialchars($this->input->post('harga'));
+        $totalGaji = htmlspecialchars($this->input->post('total_gaji'));
 
-        if ($this->Pembelian->insertPembelian($keterangan, $harga) == true) {
-            $this->session->set_flashdata('success', 'Pembelian berhasil ditambahkan.');
-            redirect('pembelian');
+        if ($this->Gaji->insertGaji($nama, $keterangan, $totalGaji) == true) {
+            $this->session->set_flashdata('success', 'Gaji berhasil ditambahkan.');
+            redirect('gaji');
         } else {
-            $this->session->set_flashdata('error', 'Pembelian gagal ditambahkan.');
-            redirect('pembelian');
+            $this->session->set_flashdata('error', 'gaji gagal ditambahkan.');
+            redirect('gaji');
         }
     }
 
 
 
     #####################################################################
-    # Edit Harga
+    # Edit Gaji
     #####################################################################
     public function edit($id)
     {
-        $this->form_validation->set_rules('keterangan', 'Keterangan', 'required');
-        $this->form_validation->set_rules('harga', 'Harga', 'required|numeric');
+        $this->form_validation->set_rules('nama', 'Nama', 'required');
+        $this->form_validation->set_rules('total_gaji', 'Total Gaji', 'required|numeric');
 
         // cek validasi form
         if ($this->form_validation->run() == FALSE) {
             $data = [
-                'pembelian' => $this->Pembelian->getPembelianById($id)->row(),
-                'title' => 'Edit Pembelian',
-                'content' => 'pembelian/v_edit_pembelian'
+                'gaji' => $this->Gaji->getGaji($id)->row(),
+                'title' => 'Edit Gaji',
+                'content' => 'gaji/v_edit_gaji'
             ];
             $this->load->view('layout/wrapper', $data);
         } else {
@@ -85,33 +86,35 @@ class GajiController extends CI_Controller
     private function _update()
     {
         $id = htmlspecialchars($this->input->post('id'));
+        $nama = htmlspecialchars($this->input->post('nama'));
         $keterangan = htmlspecialchars($this->input->post('keterangan'));
-        $harga = htmlspecialchars($this->input->post('harga'));
+        $totalGaji = htmlspecialchars($this->input->post('total_gaji'));
 
-        if ($this->Pembelian->updatePembelian($id, $keterangan, $harga) == true) {
-            $this->session->set_flashdata('success', 'Pembelian berhasil diedit.');
-            redirect('pembelian');
+        if ($this->Gaji->updateGaji($id, $nama, $keterangan, $totalGaji) == true) {
+            $this->session->set_flashdata('success', 'Gaji berhasil diedit.');
+            redirect('gaji');
         } else {
-            $this->session->set_flashdata('error', 'Pembelian gagal diedit.');
-            redirect('pembelian');
+            $this->session->set_flashdata('error', 'Gaji gagal diedit.');
+            redirect('gaji');
         }
     }
 
 
     #####################################################################
-    # Delete Harga
+    # Delete Gaji
     #####################################################################
     public function delete()
     {
         $id = htmlspecialchars($this->input->post('id'));
-        if ($this->Pembelian->deletePembelian($id) == true) {
-            $this->session->set_flashdata('success', 'Pembelian berhasil dihapus.');
-            redirect('pembelian');
+
+        if ($this->Gaji->deleteGaji($id) == true) {
+            $this->session->set_flashdata('success', 'Gaji berhasil dihapus.');
+            redirect('gaji');
         } else {
-            $this->session->set_flashdata('error', 'Pembelian gagal dihapus.');
-            redirect('pembelian');
+            $this->session->set_flashdata('error', 'Gaji gagal dihapus.');
+            redirect('gaji');
         }
     }
 }
 
-/* End of file PembelianController.php */
+/* End of file GajiController.php */

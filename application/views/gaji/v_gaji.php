@@ -11,7 +11,7 @@
                         <!-- <p>Add class <code>.table</code></p> -->
                     </div>
                     <div class="pull-right">
-                        <a href="<?= base_url('pembelian/tambah'); ?>" class="btn btn-primary btn-sm scroll-click" rel="content-y"><i class="fa fa-plus"></i> Tambah</a>
+                        <a href="<?= base_url('gaji/tambah'); ?>" class="btn btn-primary btn-sm scroll-click" rel="content-y"><i class="fa fa-plus"></i> Tambah</a>
                     </div>
                 </div>
                 <hr>
@@ -37,17 +37,18 @@
                                                 <i class="dw dw-more"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                                <a class="dropdown-item" href="<?= base_url('pembelian/edit/' . $row->id); ?>"><i class="dw dw-edit2"></i> Edit</a>
-                                                <form action="<?= base_url('pembelian/delete'); ?>" method="post" class="d-inline">
+                                                <a class="dropdown-item" href="<?= base_url('gaji/edit/' . $row->id); ?>"><i class="dw dw-edit2"></i> Edit</a>
+                                                <form action="<?= base_url('gaji/delete'); ?>" method="post" class="d-inline">
                                                     <input type="hidden" name="id" value="<?= $row->id; ?>" hidden>
                                                     <button onclick="return confirm('Apa anda yakin ?');" class="dropdown-item" title="Delete"><i class="dw dw-delete-3"></i> Delete</button>
                                                 </form>
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="table-plus"> <?= $row->keterangan; ?> </td>
-                                    <td><?= rupiah($row->harga); ?></td>
-                                    <td><?= date('H:i - d M Y', strtotime($row->created_at)); ?></td>
+                                    <td class="table-plus"> <?= $row->nama; ?> </td>
+                                    <td class="table-plus"> <?= !empty($row->keterangan) ? $row->keterangan : '-'; ?> </td>
+                                    <td><?= rupiah($row->total_gaji); ?></td>
+                                    <td><?= date('d M Y', strtotime($row->created_at)); ?></td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
