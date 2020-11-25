@@ -32,16 +32,17 @@
                         <thead>
                             <tr>
                                 <th class="datatable-nosort">Action</th>
+                                <th>Tanggal Pengiriman</th>
                                 <th class="table-plus datatable-nosort">No.Kwitansi</th>
+                                <th>No. SMU</th>
                                 <th>Pengirim</th>
                                 <th>Penerima</th>
                                 <th>Tujuan</th>
                                 <th>Airlines</th>
                                 <th>Berat</th>
-                                <th>Jenis Pembayaran</th>
-                                <th>Total Operasional</th>
+                                <th>Jns Pmbyrnn</th>
+                                <th>By. Handling</th>
                                 <th>Biaya Total</th>
-                                <th>Tanggal Pengiriman</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -65,7 +66,9 @@
                                             </div>
                                         </div>
                                     </td>
+                                    <td><?= date('H:i - d M Y', strtotime($penjualan->created_at)); ?></td>
                                     <td class="table-plus"><?= $penjualan->no_kwitansi; ?></td>
+                                    <td><?= $penjualan->no_smu; ?></td>
                                     <td><?= $penjualan->pengirim; ?></td>
                                     <td><?= $penjualan->penerima; ?></td>
                                     <td><?= $penjualan->kota_tujuan; ?></td>
@@ -74,7 +77,6 @@
                                     <td><?= ucwords($penjualan->jenis_pembayaran); ?></td>
                                     <td><?= rupiah($penjualan->total_operasional); ?></td>
                                     <td><?= rupiah($penjualan->biaya_total); ?></td>
-                                    <td><?= date('H:i - d M Y', strtotime($penjualan->created_at)); ?></td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
