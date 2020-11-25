@@ -61,15 +61,15 @@
             <td><?= $row->kota_tujuan; ?></td>
             <td><?= $row->berat . ' Kg'; ?></td>
             <td><?= $row->koli; ?></td>
-            <td><?= rupiah($row->harga_smu + $row->biaya_admin_smu); ?></td>
-            <td><?= rupiah($row->harga_gudang + $row->harga_admin_gudang); ?></td>
+            <td><?= rupiah($row->biaya_smu); ?></td>
+            <td><?= rupiah($row->total_biaya_gudang); ?></td>
             <td><?= rupiah($row->total_operasional); ?></td>
             <td><?= rupiah($row->biaya_total); ?></td>
         </tr>
         <?php
-            $total += $row->biaya_total;
-            $totalOperasional += $row->total_operasional;
-            ?>
+        $total += $row->biaya_total;
+        $totalOperasional += $row->total_operasional;
+        ?>
     <?php endforeach; ?>
     <tr style="text-transform: uppercase;font-size:12px;">
         <td colspan="10" class="td-bold">TOTAL</td>
