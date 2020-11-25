@@ -26,7 +26,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-12 col-md-2 col-form-label">Nama Pengirim</label>
                                 <div class="col-sm-12 col-md-10">
-                                    <input class="form-control <?= (form_error('nama') ? 'form-control-danger' : null) ?>" name="nama" type="text" placeholder="Nama pengirim.." value="<?= $pengirim->nama; ?>" readonly>
+                                    <input class="form-control text-uppercase <?= (form_error('nama') ? 'form-control-danger' : null) ?>" name="nama" type="text" placeholder="Nama pengirim.." value="<?= $pengirim->nama; ?>" readonly>
                                     <?php echo form_error('nama', '<small class="text-danger">', '</small>'); ?>
                                 </div>
                             </div>

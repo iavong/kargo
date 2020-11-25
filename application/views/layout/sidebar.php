@@ -36,6 +36,13 @@
                     </a>
                 </li>
 
+                <!-- Gaji -->
+                <li>
+                    <a href="<?= base_url('gaji'); ?>" class="dropdown-toggle no-arrow <?= ($this->router->fetch_class() == 'GajiController') ? 'active' : '' ?>">
+                        <span class="micon dw dw-books"></span><span class="mtext">Gaji</span>
+                    </a>
+                </li>
+
 
                 <!-- Tujuan -->
                 <li>

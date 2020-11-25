@@ -31,7 +31,7 @@
                         </thead>
                         <tbody>
                             <?php foreach ($pengirim->result() as $row) : ?>
-                                <tr>
+                                <tr style="text-transform: uppercase;">
                                     <td class="table-plus"><?= ucwords($row->nama); ?></td>
                                     <td><?= $row->no_hp; ?></td>
                                     <td><?= $row->alamat; ?> </td>
@@ -43,7 +43,7 @@
                                                 <i class="dw dw-more"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                                <a class="dropdown-item" href="<?= base_url('pengirim/deposit/' . $row->id); ?>"><i class="dw dw-money"></i> Tambah Deposit</a>
+                                                <a class="dropdown-item" href="<?= base_url('pengirim/deposit/' . $row->id); ?>"><i class="dw dw-money"></i>Deposit</a>
                                                 <a class="dropdown-item" href="<?= base_url('pengirim/edit/' . $row->id); ?>"><i class="dw dw-edit2"></i> Edit</a>
                                                 <!-- delete -->
                                                 <form action="<?= base_url('pengirim/delete'); ?>" method="post" class="d-inline">

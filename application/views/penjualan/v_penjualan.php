@@ -32,15 +32,14 @@
                         <thead>
                             <tr>
                                 <th class="datatable-nosort">Action</th>
-                                <th>Tanggal Pengiriman</th>
-                                <th class="table-plus datatable-nosort">No.Kwitansi</th>
+                                <th>Tgl Pengiriman</th>
+                                <th class="table-plus datatable-nosort">No.Kwtnsi</th>
                                 <th>No. SMU</th>
                                 <th>Pengirim</th>
-                                <th>Penerima</th>
                                 <th>Tujuan</th>
                                 <th>Airlines</th>
                                 <th>Berat</th>
-                                <th>Jns Pmbyrnn</th>
+                                <th>Pmbyrnn</th>
                                 <th>By. Handling</th>
                                 <th>Biaya Total</th>
                             </tr>
@@ -69,8 +68,9 @@
                                             </div>
                                         <?php endif; ?>
                                     </td>
-                                    <td><?= date('H:i - d M Y', strtotime($penjualan->created_at)); ?></td>
+                                    <td><?= date('d M Y', strtotime($penjualan->created_at)); ?></td>
                                     <td class="table-plus"><?= $penjualan->no_kwitansi; ?></td>
+<<<<<<< HEAD
                                     <td><?= $deleted ? $penjualan->no_smu : '-'; ?></td>
                                     <td><?= $deleted ? $penjualan->pengirim : '-'; ?></td>
                                     <td><?= $deleted ? $penjualan->penerima : '-'; ?></td>
@@ -80,6 +80,16 @@
                                     <td><?= $deleted ? ucwords($penjualan->jenis_pembayaran) : '-'; ?></td>
                                     <td><?= $deleted ? rupiah($penjualan->total_operasional) : '-'; ?></td>
                                     <td><?= $deleted ? rupiah($penjualan->biaya_total) : '-'; ?></td>
+=======
+                                    <td><?= $penjualan->no_smu; ?></td>
+                                    <td><?= $penjualan->pengirim; ?></td>
+                                    <td><?= $penjualan->kota_tujuan; ?></td>
+                                    <td><?= $penjualan->airlines; ?></td>
+                                    <td><?= $penjualan->berat . ' Kg'; ?></td>
+                                    <td><?= ucwords($penjualan->jenis_pembayaran); ?></td>
+                                    <td><?= rupiah($penjualan->total_operasional); ?></td>
+                                    <td><?= rupiah($penjualan->biaya_total); ?></td>
+>>>>>>> b255d0aa88b0e77664c09b9fd1b9f073d885e182
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
@@ -112,101 +122,101 @@
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">No Kwitansi</label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control" type="text" value="<?= $penjualan->no_kwitansi; ?>" readonly>
+                            <input class="form-control text-uppercase" type="text" value="<?= $penjualan->no_kwitansi; ?>" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Pengirim</label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control" type="text" value="<?= $penjualan->pengirim; ?>" readonly>
+                            <input class="form-control text-uppercase" type="text" value="<?= $penjualan->pengirim; ?>" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Penerima</label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control" type="text" value="<?= $penjualan->penerima; ?>" readonly>
+                            <input class="form-control text-uppercase" type="text" value="<?= $penjualan->penerima; ?>" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Kota Tujuan</label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control" type="text" value="<?= $penjualan->kota_tujuan; ?>" readonly>
+                            <input class="form-control text-uppercase" type="text" value="<?= $penjualan->kota_tujuan; ?>" readonly>
                         </div>
                     </div>
                     <hr>
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Airlines</label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control" type="text" value="<?= $penjualan->airlines; ?>" readonly>
+                            <input class="form-control text-uppercase" type="text" value="<?= $penjualan->airlines; ?>" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">No. Penerbangan</label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control" type="text" value="<?= $penjualan->no_penerbangan; ?>" readonly>
+                            <input class="form-control text-uppercase" type="text" value="<?= $penjualan->no_penerbangan; ?>" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">No. SMU</label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control" type="text" value="<?= $penjualan->no_smu; ?>" readonly>
+                            <input class="form-control text-uppercase" type="text" value="<?= $penjualan->no_smu; ?>" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Berat(Kg)</label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control" type="text" value="<?= $penjualan->berat; ?>" readonly>
+                            <input class="form-control text-uppercase" type="text" value="<?= $penjualan->berat; ?>" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Jumlah Koli</label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control" type="text" value="<?= $penjualan->koli; ?>" readonly>
+                            <input class="form-control text-uppercase" type="text" value="<?= $penjualan->koli; ?>" readonly>
                         </div>
                     </div>
                     <hr>
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Isi</label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control" type="text" value="<?= $penjualan->isi; ?>" readonly>
+                            <input class="form-control text-uppercase" type="text" value="<?= $penjualan->isi; ?>" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Catatan</label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control" type="text" value="<?= $penjualan->catatan; ?>" readonly>
+                            <input class="form-control text-uppercase" type="text" value="<?= $penjualan->catatan; ?>" readonly>
                         </div>
                     </div>
                     <hr>
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Biaya SMU</label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control" type="text" value="<?= rupiah($penjualan->biaya_smu); ?>" readonly>
+                            <input class="form-control text-uppercase" type="text" value="<?= rupiah($penjualan->biaya_smu); ?>" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-12 col-md-2 col-form-label">Total Operasional</label>
+                        <label class="col-sm-12 col-md-2 col-form-label">Total Handling</label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control" type="text" value="<?= rupiah($penjualan->total_operasional); ?>" readonly>
+                            <input class="form-control text-uppercase" type="text" value="<?= rupiah($penjualan->total_operasional); ?>" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-12 col-md-2 col-form-label">Biaya Gudang</label>
+                        <label class="col-sm-12 col-md-2 col-form-label">Total Gudang</label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control" type="text" value="<?= rupiah($penjualan->total_biaya_gudang); ?>" readonly>
+                            <input class="form-control text-uppercase" type="text" value="<?= rupiah($penjualan->total_biaya_gudang); ?>" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Biaya Tambahan</label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control" type="text" value="<?= (!empty($penjualan->biaya_tambahan) ? rupiah($penjualan->biaya_tambahan) : ''); ?>" readonly>
+                            <input class="form-control text-uppercase" type="text" value="<?= (!empty($penjualan->biaya_tambahan) ? rupiah($penjualan->biaya_tambahan) : ''); ?>" readonly>
                         </div>
                     </div>
                     <hr>
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Biaya Total</label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control font-weight-bold" type="text" value="<?= rupiah($penjualan->biaya_total); ?>" readonly>
+                            <input class="form-control text-uppercase font-weight-bold" type="text" value="<?= rupiah($penjualan->biaya_total); ?>" readonly>
                         </div>
                     </div>
 

@@ -42,7 +42,7 @@ $row = $penjualan->row();
 <!-- <p style="text-align: left; font-weight: bold;text-transform: capitalize;">
     
 </p> -->
-<p style="font-size: 10px;"><strong>CV. Kalbar Kargo Mandiri</strong><br> Jl. Arteri Supadio, Komplek Adi Griya Karya No. K-17 - Kalimantan Barat <br>
+<p style="text-align: center; font-size: 9px;"><strong>CV. Kalbar Kargo Mandiri</strong><br> Jl. Arteri Supadio, Komplek Adi Griya Karya No. K-17 - Kalimantan Barat <br>
     Telp/Hp. 085787578464 <br>
     Email : kalbarkargomandiri@gmail.com</p>
 <hr style="height: 2px; color: #000; margin: 10px 0 20px 0;">
@@ -79,6 +79,11 @@ $row = $penjualan->row();
         <td class="kapital"><?= $row->penerima; ?></td>
     </tr>
     <tr>
+        <td>Airlines</td>
+        <td> : </td>
+        <td><?= ucfirst($row->airlines); ?></td>
+    </tr>
+    <tr>
         <td>Rute</td>
         <td> : </td>
         <td><?= 'Pontianak - ' . $row->kota_tujuan; ?></td>
@@ -99,12 +104,12 @@ $row = $penjualan->row();
         <td><?= $row->koli; ?></td>
     </tr>
     <tr>
-        <td>Biaya SMU</td>
+        <td>By.Pengiriman</td>
         <td> : </td>
         <td><?= rupiah($row->biaya_smu + $row->total_operasional); ?></td>
     </tr>
     <tr>
-        <td>Admin SMU</td>
+        <td>Adm.Pengiriman</td>
         <td> : </td>
         <td><?= rupiah($row->biaya_admin_smu); ?></td>
     </tr>
@@ -131,6 +136,7 @@ $row = $penjualan->row();
 </table>
 
 <hr style="height: 0px; color: #000; margin: 5px 0 20px 0;">
+<p class="textalign: center">Terima Kasih</p>
 <hr style="height: 2px; color: #000; margin: 15px 0 10px 0;">
 
 <!-- <p>SEMOGA PUAS DENGAN LAYANAN KAMI. TERIMA KASIH</p> -->
