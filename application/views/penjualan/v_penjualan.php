@@ -70,7 +70,6 @@
                                     </td>
                                     <td><?= date('d M Y', strtotime($penjualan->created_at)); ?></td>
                                     <td class="table-plus"><?= $penjualan->no_kwitansi; ?></td>
-<<<<<<< HEAD
                                     <td><?= $deleted ? $penjualan->no_smu : '-'; ?></td>
                                     <td><?= $deleted ? $penjualan->pengirim : '-'; ?></td>
                                     <td><?= $deleted ? $penjualan->penerima : '-'; ?></td>
@@ -80,16 +79,6 @@
                                     <td><?= $deleted ? ucwords($penjualan->jenis_pembayaran) : '-'; ?></td>
                                     <td><?= $deleted ? rupiah($penjualan->total_operasional) : '-'; ?></td>
                                     <td><?= $deleted ? rupiah($penjualan->biaya_total) : '-'; ?></td>
-=======
-                                    <td><?= $penjualan->no_smu; ?></td>
-                                    <td><?= $penjualan->pengirim; ?></td>
-                                    <td><?= $penjualan->kota_tujuan; ?></td>
-                                    <td><?= $penjualan->airlines; ?></td>
-                                    <td><?= $penjualan->berat . ' Kg'; ?></td>
-                                    <td><?= ucwords($penjualan->jenis_pembayaran); ?></td>
-                                    <td><?= rupiah($penjualan->total_operasional); ?></td>
-                                    <td><?= rupiah($penjualan->biaya_total); ?></td>
->>>>>>> b255d0aa88b0e77664c09b9fd1b9f073d885e182
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>

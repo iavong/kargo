@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 14 Nov 2020 pada 08.48
+-- Waktu pembuatan: 25 Nov 2020 pada 10.06
 -- Versi server: 10.4.14-MariaDB
 -- Versi PHP: 7.4.9
 
@@ -42,6 +42,20 @@ CREATE TABLE `deposit` (
 
 INSERT INTO `deposit` (`id`, `id_pengirim`, `id_penjualan`, `deposit`, `tipe`, `created_at`) VALUES
 (1, 2, NULL, '1000000', 1, '2020-11-10 23:33:10');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `gaji`
+--
+
+CREATE TABLE `gaji` (
+  `id` int(11) NOT NULL,
+  `nama` varchar(100) DEFAULT NULL,
+  `keterangan` varchar(100) DEFAULT NULL,
+  `total gaji` varchar(100) DEFAULT NULL,
+  `created_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -124,6 +138,7 @@ CREATE TABLE `penjualan` (
   `penerima` varchar(100) DEFAULT NULL,
   `tujuan_id` int(11) DEFAULT NULL,
   `jenis_pembayaran` enum('deposit','cash','debit') DEFAULT NULL,
+  `deleted` tinyint(4) DEFAULT 0,
   `created_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -131,11 +146,9 @@ CREATE TABLE `penjualan` (
 -- Dumping data untuk tabel `penjualan`
 --
 
-INSERT INTO `penjualan` (`id`, `no_kwitansi`, `airlines`, `no_penerbangan`, `no_smu`, `berat`, `koli`, `custom_harga`, `harga_smu`, `biaya_smu`, `biaya_admin_smu`, `biaya_operasional`, `total_operasional`, `harga_gudang`, `harga_admin_gudang`, `total_biaya_gudang`, `biaya_tambahan`, `biaya_total`, `isi`, `catatan`, `id_pengirim`, `pengirim`, `penerima`, `tujuan_id`, `jenis_pembayaran`, `created_at`) VALUES
-(2, 10002, 'sriwijaya', '79234', '02938402', '7', 2, '', '30000', '320000', '20000', '15000', '150000', '1045', '3500', '13950', '', '483950', '', '', 1, 'Fikri', 'degi', 14, 'deposit', '2020-11-13 21:17:48'),
-(5, 10003, 'sriwijaya', '79234', '02938402', '7', 2, '', '30000', '320000', '20000', '15000', '150000', '1045', '3500', '13950', '23000', '506950', '', '', 2, 'Iavong', 'degi', 14, 'cash', '2020-11-13 21:47:32'),
-(6, 10004, 'sriwijaya', '79234', '02938402', '7', 2, '', '30000', '305000', '5000', '5000', '50000', '1045', '3500', '13950', '', '368950', '', '', 2, 'Iavong', 'Reki', 14, 'cash', '2020-11-13 21:55:08'),
-(7, 10005, 'sriwijaya', '79234', '02938402', '5', 4, '', '15000', '170000', '20000', '15000', '150000', '1045', '3500', '13950', '', '333950', '', '', NULL, 'Rina', 'Reki', 12, 'cash', '2020-11-14 14:25:17');
+INSERT INTO `penjualan` (`id`, `no_kwitansi`, `airlines`, `no_penerbangan`, `no_smu`, `berat`, `koli`, `custom_harga`, `harga_smu`, `biaya_smu`, `biaya_admin_smu`, `biaya_operasional`, `total_operasional`, `harga_gudang`, `harga_admin_gudang`, `total_biaya_gudang`, `biaya_tambahan`, `biaya_total`, `isi`, `catatan`, `id_pengirim`, `pengirim`, `penerima`, `tujuan_id`, `jenis_pembayaran`, `deleted`, `created_at`) VALUES
+(2, 10002, 'sriwijaya', '79234', '02938402', '7', 2, '', '30000', '320000', '20000', '15000', '150000', '1045', '3500', '13950', '', '483950', '', '', 1, 'Fikri', 'degi', 14, 'deposit', 0, '2020-11-13 21:17:48'),
+(5, 10003, 'sriwijaya', '79234', '02938402', '7', 2, '', '30000', '320000', '20000', '15000', '150000', '1045', '3500', '13950', '23000', '506950', '', '', 2, 'Iavong', 'degi', 14, 'cash', 1, '2020-11-13 21:47:32');
 
 -- --------------------------------------------------------
 
@@ -199,6 +212,12 @@ ALTER TABLE `deposit`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indeks untuk tabel `gaji`
+--
+ALTER TABLE `gaji`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeks untuk tabel `pembelian`
 --
 ALTER TABLE `pembelian`
@@ -236,7 +255,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `deposit`
 --
 ALTER TABLE `deposit`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT untuk tabel `gaji`
+--
+ALTER TABLE `gaji`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `pembelian`
@@ -254,7 +279,7 @@ ALTER TABLE `pengirim`
 -- AUTO_INCREMENT untuk tabel `penjualan`
 --
 ALTER TABLE `penjualan`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT untuk tabel `tujuan`
