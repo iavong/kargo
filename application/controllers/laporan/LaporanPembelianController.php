@@ -17,6 +17,8 @@ class LaporanPembelianController extends CI_Controller
     public function index()
     {
         $data = [
+            'pembelian' => $this->Pembelian->getPembelianByNow(),
+            'pembelianBulan' => $this->Pembelian->getPembelianByMonth(),
             'title' => 'Laporan Pembelian',
             'content' => 'laporan/v_laporan_pembelian'
         ];

@@ -22,6 +22,7 @@ class LaporanPenjualanController extends CI_Controller
         $key = null;
         $data = [
             'penjualan' => $this->Penjualan->getPenjualanByNow(),
+            'penjualanBulan' => $this->Penjualan->getPenjualanByMonth(),
             'pengirims' => $this->Pengirim->getPengirim($key),
             'title' => 'Laporan Penjualan',
             'content' => 'laporan/v_laporan_penjualan'

@@ -72,7 +72,6 @@
                                     <td class="table-plus"><?= $penjualan->no_kwitansi; ?></td>
                                     <td><?= $deleted ? $penjualan->no_smu : '-'; ?></td>
                                     <td><?= $deleted ? $penjualan->pengirim : '-'; ?></td>
-                                    <td><?= $deleted ? $penjualan->penerima : '-'; ?></td>
                                     <td><?= $deleted ? $penjualan->kota_tujuan : '-'; ?></td>
                                     <td><?= $deleted ? $penjualan->airlines : '-'; ?></td>
                                     <td><?= $deleted ? $penjualan->berat . ' Kg' : '-'; ?></td>
@@ -215,10 +214,10 @@
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
 
                     <?php
-                        $attributes = array('class' => 'd-inline-block', 'target' => '_blank', 'style' => 'vertical-align: middle;', 'title' => 'Cetak Nota');
-                        $hidden = array('id' => $penjualan->id);
-                        echo form_open('penjualan/cetak-nota', $attributes, $hidden);
-                        ?>
+                    $attributes = array('class' => 'd-inline-block', 'target' => '_blank', 'style' => 'vertical-align: middle;', 'title' => 'Cetak Nota');
+                    $hidden = array('id' => $penjualan->id);
+                    echo form_open('penjualan/cetak-nota', $attributes, $hidden);
+                    ?>
                     <!-- <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-print"></i></button> -->
                     <button type="submit" class="btn btn-primary"><i class="fa fa-print"></i> Cetak Nota</button>
                     <?php echo form_close(); ?>

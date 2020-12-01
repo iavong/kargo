@@ -27,7 +27,7 @@
                                 <th class="datatable-nosort">Action</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody style="text-transform:uppercase">
                             <?php foreach ($users->result() as $user) : ?>
                                 <tr>
                                     <td><?= $user->nama; ?></td>

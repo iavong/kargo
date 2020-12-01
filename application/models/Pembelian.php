@@ -65,6 +65,30 @@ class Pembelian extends CI_Model
         }
     }
 
+    public function getPembelianByNow()
+    {
+        // $today = date('Y-m-d');
+
+        $query = $this->db->select('*')
+            ->from($this->_table)
+            // ->where('DATE(created_at) "' . $today . '"', '', false)
+            ->where('date_format(created_at,"%Y-%m-%d")', 'CURDATE()', FALSE)
+            ->get();
+        return $query;
+    }
+
+    public function getPembelianByMonth()
+    {
+        $bulan = date('m');
+        $tahun = date('Y');
+
+        $query = $this->db->select('*')
+            ->from($this->_table)
+            ->where('MONTH(created_at)', $bulan)
+            ->where('YEAR(created_at)', $tahun)
+            ->get();
+        return $query;
+    }
 
     /**
      * @method Cetak Laporan

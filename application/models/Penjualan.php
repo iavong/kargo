@@ -54,6 +54,19 @@ class Penjualan extends CI_Model
         return $query;
     }
 
+    public function getPenjualanByMonth()
+    {
+        $bulan = date('m');
+        $tahun = date('Y');
+
+        $query = $this->db->select('p.*, t.kota_tujuan')
+            ->from($this->_table . ' p')
+            ->join($this->_join . ' t', 't.id = p.tujuan_id')
+            ->where('MONTH(created_at)', $bulan)
+            ->where('YEAR(created_at)', $tahun)
+            ->get();
+        return $query;
+    }
 
     public function getKwitansiMax() //cek no kwitansi terakhir
     {

@@ -97,24 +97,35 @@
 
                         $totalBerat += $row->berat;
                         $totalPenjualan += $row->biaya_total;
-                        // $totalCash += $cash;
+
                         ?>
                     <?php endforeach; ?>
+
+                    <?php foreach ($penjualanBulan->result() as $row) : ?>
+                        <?php
+                        $row->berat;
+                        $row->biaya_total;
+
+                        $totalBeratBulan += $row->berat;
+                        $totalPenjualanBulan += $row->biaya_total;
+                        ?>
+                    <?php endforeach; ?>
+
                     <div class="card">
                         <div class="card-body">
 
                             <div class="row">
                                 <div class="col-md-6">
-                                    <strong>Total Kg Hari ini :</strong>
+                                    <strong>Total Penjualan Hari ini :</strong>
                                 </div>
-                                <div class="col-md-6"><?= $totalBerat . ' KG'; ?></div>
+                                <div class="col-md-6"><?= $totalBerat . ' KG   ' . rupiah($totalPenjualan); ?></div>
                             </div>
                             <hr>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <strong>Total Penjualan :</strong>
+                                    <strong>Total Penjualan Bulan ini :</strong>
                                 </div>
-                                <div class="col-md-6"><?= rupiah($totalPenjualan); ?></div>
+                                <div class="col-md-6"><?= $totalBeratBulan . ' KG   ' . rupiah($totalPenjualanBulan); ?></div>
                             </div>
                             <hr>
                             <div class="row">
