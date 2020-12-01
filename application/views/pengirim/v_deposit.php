@@ -58,9 +58,9 @@
 
                     <div class="pd-20 bg-white border-radius-4 box-shadow mb-20">
                         <div class="clearfix mb-20">
-                            <div class="pull-left">
+                            <div class="pull-left ">
                                 <h4 class="text-blue h4">History Deposit</h4>
-                                <!-- <p>Add class <code>.table</code></p> -->
+                                <a href="<?= base_url('pengirim/deposit/' . $pengirim->id . '/laporan'); ?>" class="btn btn-sm btn-success"><i class="fa fa-print"></i></a>
                             </div>
                         </div>
                         <hr>

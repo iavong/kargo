@@ -52,23 +52,24 @@
     <?php
     $no = 0;
     foreach ($datapenjualan->result() as $row) : ?>
+        <?php $deleted = $row->deleted == 0; ?>
         <tr style="text-transform: uppercase;font-size:11px;text-align: center;">
             <td style="text-align: center;"><?= ++$no; ?></td>
             <td><?= $row->no_kwitansi; ?></td>
             <td><?= tgl_indo(date('Y-m-d', strtotime($row->created_at))); ?></td>
-            <td><?= $row->pengirim; ?></td>
-            <td><?= $row->penerima; ?></td>
-            <td><?= $row->kota_tujuan; ?></td>
-            <td><?= $row->berat . ' Kg'; ?></td>
-            <td><?= $row->koli; ?></td>
-            <td><?= rupiah($row->biaya_smu); ?></td>
-            <td><?= rupiah($row->total_biaya_gudang); ?></td>
-            <td><?= rupiah($row->total_operasional); ?></td>
-            <td><?= rupiah($row->biaya_total); ?></td>
+            <td><?= $deleted ? $row->pengirim : '-'; ?></td>
+            <td><?= $deleted ? $row->penerima : '-'; ?></td>
+            <td><?= $deleted ? $row->kota_tujuan : '-'; ?></td>
+            <td><?= $deleted ? $row->berat . ' Kg' : '-'; ?></td>
+            <td><?= $deleted ? $row->koli : '-'; ?></td>
+            <td><?= $deleted ? rupiah($row->biaya_smu) : '-'; ?></td>
+            <td><?= $deleted ? rupiah($row->total_biaya_gudang) : '-'; ?></td>
+            <td><?= $deleted ? rupiah($row->total_operasional) : '-'; ?></td>
+            <td><?= $deleted ? rupiah($row->biaya_total) : '-'; ?></td>
         </tr>
         <?php
-            $total += $row->biaya_total;
-            $totalOperasional += $row->total_operasional;
+            $total += $deleted ? $row->biaya_total : null;
+            $totalOperasional += $deleted ? $row->total_operasional : null;
             ?>
     <?php endforeach; ?>
     <tr style="text-transform: uppercase;font-size:12px;">

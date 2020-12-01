@@ -36,6 +36,7 @@
                                 <th class="table-plus datatable-nosort">No.Kwtnsi</th>
                                 <th>No. SMU</th>
                                 <th>Pengirim</th>
+                                <th>Penerima</th>
                                 <th>Tujuan</th>
                                 <th>Airlines</th>
                                 <th>Berat</th>

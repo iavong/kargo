@@ -8,6 +8,7 @@ class PengirimController extends CI_Controller
     {
         parent::__construct();
         //Do your magic here
+        $this->load->library('dompdf_gen');
         $this->load->model('Pengirim');
         $this->load->model('Deposit');
         if (empty($this->session->userdata('username'))) {
@@ -172,6 +173,74 @@ class PengirimController extends CI_Controller
             $this->session->set_flashdata('error', 'Pengirim gagal dihapus.');
             redirect('pengirim');
         }
+    }
+
+    /**
+     * 
+     * LAPORAN DEPOSIT
+     */
+    public function laporan($id)
+    {
+        $data = [
+            'pengirim' => $this->Pengirim->getPengirimById($id)->row(),
+            'title' => 'Cetak Laporan Deposit',
+            'content' => 'pengirim/laporan/v_laporan'
+        ];
+        $this->load->view('layout/wrapper', $data);
+    }
+
+    // Cetak Laporan
+    public function cetak_perbulan()
+    {
+        $id = htmlspecialchars($this->input->post('id_pengirim'));
+        $bulan = date('m', strtotime($this->input->post('bulan')));
+        $tahun = date('Y', strtotime($this->input->post('bulan')));
+
+        $data['title'] = 'Laporan Deposit';
+        $data['datadeposit'] = $this->Deposit->getDepositByDate($bulan, $tahun, $id);
+        $data['bulan'] = $bulan;
+        $data['tahun'] = $tahun;
+        $data['pengirim'] = $this->Pengirim->getPengirimById($id)->row();
+
+        $this->load->view('pengirim/laporan/export/laporan_deposit', $data);
+
+        $paper_size = 'A4';
+        $orientation = 'potrait';
+        $html = $this->output->get_output();
+
+        $this->dompdf->set_paper($paper_size, $orientation);
+
+        $this->dompdf->load_html($html);
+        $this->dompdf->render();
+        ob_end_clean();
+        $this->dompdf->stream("laporan_deposit_perbulan.pdf", array('Attachment' => 0));
+    }
+
+    // Cetak perperiode
+    public function cetak_perperiode()
+    {
+        $id = htmlspecialchars($this->input->post('id_pengirim'));
+        $tglAwal = date('Y-m-d', strtotime($this->input->post('tgl_awal')));
+        $tglAkhir = date('Y-m-d', strtotime($this->input->post('tgl_akhir')));
+
+        $data['title'] = 'Laporan Deposit';
+        $data['datadeposit'] = $this->Deposit->getDepositByPeriode($tglAwal, $tglAkhir, $id);
+        $data['tgl_awal'] = $tglAwal;
+        $data['tgl_akhir'] = $tglAkhir;
+        $data['pengirim'] = $this->Pengirim->getPengirimById($id)->row();
+
+        $this->load->view('pengirim/laporan/export/laporan_deposit', $data);
+
+        $paper_size = 'A4';
+        $orientation = 'potrait';
+        $html = $this->output->get_output();
+
+        $this->dompdf->set_paper($paper_size, $orientation);
+
+        $this->dompdf->load_html($html);
+        $this->dompdf->render();
+        ob_end_clean();
+        $this->dompdf->stream("laporan_deposit_perperiode.pdf", array('Attachment' => 0));
     }
 }
 
