@@ -98,6 +98,10 @@ $route['pengirim/edit/(:num)'] = 'PengirimController/edit/$1';
 $route['pengirim/delete'] = 'PengirimController/delete';
 $route['pengirim/deposit/(:num)'] = 'PengirimController/deposit/$1';
 $route['pengirim/deposit/delete'] = 'PengirimController/deleteDeposit';
+// laporan deposit
+$route['pengirim/deposit/(:num)/laporan'] = 'PengirimController/laporan/$1';
+$route['pengirim-deposit/cetak-perbulan'] = 'PengirimController/cetak_perbulan';
+$route['pengirim-deposit/cetak-perperiode'] = 'PengirimController/cetak_perperiode';
 
 // Pengirim Hutang
 $route['pengirim-hutang'] = 'PengirimHutangController';

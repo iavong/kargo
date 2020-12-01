@@ -94,6 +94,28 @@ class Deposit extends CI_Model
             return true;
         }
     }
+
+
+    /**
+     * 
+     * LAPORAN
+     * 
+     */
+    public function getDepositByDate($bulan, $tahun, $id)
+    {
+        $this->db->where('MONTH(created_at)', $bulan);
+        $this->db->where('YEAR(created_at)', $tahun);
+        $this->db->where('id_pengirim', $id);
+
+        return $this->db->get($this->_table);
+    }
+
+    public function getDepositByPeriode($tglAwal, $tglAkhir, $id)
+    {
+        $this->db->where('DATE(created_at) BETWEEN "' . $tglAwal . '" AND "' . $tglAkhir . '"', '', false);
+        $this->db->where('id_pengirim', $id);
+        return $this->db->get($this->_table);
+    }
 }
 
 /* End of file Deposit.php */
