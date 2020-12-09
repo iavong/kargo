@@ -58,6 +58,25 @@ class Gaji extends CI_Model
             return true;
         }
     }
+
+
+    /**
+     * @method Cetak Laporan
+     * 
+     */
+    public function getGajiByDate($bulan, $tahun)
+    {
+        // $query = $this->db->query("SELECT * FROM Gaji WHERE month(created_at)='$bulan' AND year(created_at)='$tahun'");
+        $this->db->where('MONTH(created_at)', $bulan);
+        $this->db->where('YEAR(created_at)', $tahun);
+        return $this->db->get($this->_table);
+    }
+
+    public function getGajiByPeriode($tglAwal, $tglAkhir)
+    {
+        $this->db->where('DATE(created_at) BETWEEN "' . $tglAwal . '" AND "' . $tglAkhir . '"', '', false);
+        return $this->db->get($this->_table);
+    }
 }
 
 /* End of file Harga.php */

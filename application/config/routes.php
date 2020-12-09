@@ -125,6 +125,11 @@ $route['laporan-pembelian'] = 'laporan/LaporanPembelianController';
 $route['laporan-pembelian/cetak-perbulan'] = 'laporan/LaporanPembelianController/cetak_perbulan';
 $route['laporan-pembelian/cetak-perperiode'] = 'laporan/LaporanPembelianController/cetak_perperiode';
 
+// Laporan Gaji
+$route['laporan-gaji'] = 'laporan/LaporanGajiController';
+$route['laporan-gaji/cetak-perbulan'] = 'laporan/LaporanGajiController/cetak_perbulan';
+$route['laporan-gaji/cetak-perperiode'] = 'laporan/LaporanGajiController/cetak_perperiode';
+
 // Laporan keuangan
 $route['laporan-keuangan'] = 'laporan/LaporanKeuanganController';
 $route['laporan-keuangan/cetak-perbulan'] = 'laporan/LaporanKeuanganController/cetak_perbulan';

@@ -36,7 +36,7 @@
 <hr style="height: 2px; color: #000; margin: 10px 0 20px 0;">
 
 
-<!-- || PEMASUKAN -->
+<!-- |PENJUALAN / PEMASUKAN| -->
 <div class="center">
     <strong>PEMASUKAN</strong>
 </div>
@@ -47,7 +47,6 @@
         <th>PENJUALAN</th>
     </tr>
 
-    <!-- |PENJUALAN| -->
     <?php
     $no = 0;
     foreach ($datapenjualan->result() as $row) : ?>
@@ -69,7 +68,7 @@
 </table>
 
 
-<!-- || DEPOSIT DAN HISTORY -->
+<!-- |PENGELUARAN| -->
 <div class="center">
     <strong>PENGELUARAN</strong>
 </div>
@@ -80,7 +79,6 @@
         <th>PENGELUARAN</th>
     </tr>
 
-    <!-- |PENGELUARAN| -->
     <?php
     $no = 0;
     foreach ($datapembelian->result() as $row) : ?>
@@ -101,6 +99,40 @@
 </table>
 
 
+<!-- |GAJI| -->
+<div class="center">
+    <strong>GAJI</strong>
+</div>
+<table cellpadding="1" cellspacing="0" style="width:100%; margin: 10px 0px 15px 0px;">
+    <tr style="font-size:11px;">
+        <th>NO.</th>
+        <th>TANGGAL</th>
+        <th>NAMA</th>
+        <th>GAJI</th>
+    </tr>
+
+    <?php
+    $no = 0;
+    foreach ($datagaji->result() as $row) : ?>
+        <tr style="text-transform: uppercase;font-size:11px;text-align: center;">
+            <td style="text-align: center;"><?= ++$no; ?></td>
+            <td><?= tgl_indo(date('Y-m-d', strtotime($row->created_at))); ?></td>
+            <td><?= $row->nama ?></td>
+            <td><?= rupiah($row->total_gaji); ?></td>
+        </tr>
+        <?php
+            $totalGaji += $row->total_gaji;
+            ?>
+    <?php endforeach; ?>
+
+    <tr style="text-transform: uppercase;font-size:12px;">
+        <td colspan="3" class="td-bold">TOTAL</td>
+        <td class="td-bold center"><?= rupiah($totalGaji); ?></td>
+    </tr>
+</table>
+
+
+<!-- || LABA -->
 <div class="center">
     <strong>LABA</strong>
 </div>
@@ -108,12 +140,14 @@
     <tr style="text-transform: uppercase;font-size:11px;text-align: center;">
         <th>PEMASUKAN</th>
         <th>PENGELUARAN</th>
+        <th>GAJI</th>
         <th>LABA</th>
     </tr>
     <tr style="text-transform: uppercase;font-size:12px;">
         <td class="center"><?= rupiah($totalOperasional) ?></td>
         <td class="center"><?= rupiah($totalPembelian) ?></td>
-        <td class="center td-bold"><?= rupiah($totalOperasional - $totalPembelian) ?></td>
+        <td class="center"><?= rupiah($totalGaji) ?></td>
+        <td class="center td-bold"><?= rupiah($totalOperasional - $totalPembelian - $totalGaji) ?></td>
     </tr>
 </table>
 
