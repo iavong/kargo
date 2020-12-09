@@ -36,7 +36,6 @@
                                 <th class="table-plus datatable-nosort">No.Kwtnsi</th>
                                 <th>No. SMU</th>
                                 <th>Pengirim</th>
-                                <th>Penerima</th>
                                 <th>Tujuan</th>
                                 <th>Airlines</th>
                                 <th>Berat</th>
@@ -215,10 +214,10 @@
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
 
                     <?php
-                    $attributes = array('class' => 'd-inline-block', 'target' => '_blank', 'style' => 'vertical-align: middle;', 'title' => 'Cetak Nota');
-                    $hidden = array('id' => $penjualan->id);
-                    echo form_open('penjualan/cetak-nota', $attributes, $hidden);
-                    ?>
+                        $attributes = array('class' => 'd-inline-block', 'target' => '_blank', 'style' => 'vertical-align: middle;', 'title' => 'Cetak Nota');
+                        $hidden = array('id' => $penjualan->id);
+                        echo form_open('penjualan/cetak-nota', $attributes, $hidden);
+                        ?>
                     <!-- <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-print"></i></button> -->
                     <button type="submit" class="btn btn-primary"><i class="fa fa-print"></i> Cetak Nota</button>
                     <?php echo form_close(); ?>

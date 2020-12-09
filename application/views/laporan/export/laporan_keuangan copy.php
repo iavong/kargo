@@ -1,5 +1,4 @@
-<?php error_reporting(1); ?>
-
+<?php error_reporting(0); ?>
 <!DOCTYPE html>
 <?php echo '<html><head>'; ?>
 <title><?= $title; ?></title>
@@ -34,51 +33,30 @@
     </p>
 <?php endif; ?>
 <hr style="height: 2px; color: #000; margin: 10px 0 20px 0;">
-
-
-<!-- || PEMASUKAN -->
-<div class="center">
-    <strong>PEMASUKAN</strong>
-</div>
-<table cellpadding="1" cellspacing="0" style="width:100%; margin: 10px 0px 15px 0px;">
+<table cellpadding="1" cellspacing="0" style="width:100%;">
     <tr style="font-size:11px;">
-        <th>NO.</th>
-        <th>TANGGAL</th>
-        <th>PENJUALAN</th>
+        <td class="center td-bold">NO.</td>
+        <td class="center td-bold">TANGGAL</td>
+        <td class="center td-bold">PENJUALAN</td>
+        <td class="center td-bold">PENGELUARAN</td>
+        <td class="center td-bold">TOTAL</td>
     </tr>
 
     <!-- |PENJUALAN| -->
     <?php
     $no = 0;
     foreach ($datapenjualan->result() as $row) : ?>
-        <?php $deleted = $row->deleted == 0; ?>
         <tr style="text-transform: uppercase;font-size:11px;text-align: center;">
             <td style="text-align: center;"><?= ++$no; ?></td>
             <td><?= tgl_indo(date('Y-m-d', strtotime($row->created_at))); ?></td>
-            <td><?= $deleted ? rupiah($row->total_operasional) : '-'; ?></td>
+            <td><?= rupiah($row->total_operasional); ?></td>
+            <td> - </td>
+            <td><?= rupiah($row->total_operasional); ?></td>
         </tr>
         <?php
-            $totalOperasional += $deleted ? $row->total_operasional : null;
+            $totalOperasional += $row->total_operasional;
             ?>
     <?php endforeach; ?>
-
-    <tr style="text-transform: uppercase;font-size:12px;">
-        <td colspan="2" class="td-bold">TOTAL</td>
-        <td class="td-bold center"><?= rupiah($totalOperasional); ?></td>
-    </tr>
-</table>
-
-
-<!-- || DEPOSIT DAN HISTORY -->
-<div class="center">
-    <strong>PENGELUARAN</strong>
-</div>
-<table cellpadding="1" cellspacing="0" style="width:100%; margin: 10px 0px 15px 0px;">
-    <tr style="font-size:11px;">
-        <th>NO.</th>
-        <th>TANGGAL</th>
-        <th>PENGELUARAN</th>
-    </tr>
 
     <!-- |PENGELUARAN| -->
     <?php
@@ -87,7 +65,9 @@
         <tr style="text-transform: uppercase;font-size:11px;text-align: center;">
             <td style="text-align: center;"><?= ++$no; ?></td>
             <td><?= tgl_indo(date('Y-m-d', strtotime($row->created_at))); ?></td>
+            <td> - </td>
             <td><?= rupiah($row->harga); ?></td>
+            <td><?= rupiah('-' . $row->harga); ?></td>
         </tr>
         <?php
             $totalPembelian += $row->harga;
@@ -96,24 +76,9 @@
 
     <tr style="text-transform: uppercase;font-size:12px;">
         <td colspan="2" class="td-bold">TOTAL</td>
-        <td class="td-bold center"><?= rupiah($totalPembelian); ?></td>
-    </tr>
-</table>
-
-
-<div class="center">
-    <strong>LABA</strong>
-</div>
-<table cellpadding="1" cellspacing="0" style="width:100%; margin: 10px 0px 15px 0px;">
-    <tr style="text-transform: uppercase;font-size:11px;text-align: center;">
-        <th>PEMASUKAN</th>
-        <th>PENGELUARAN</th>
-        <th>LABA</th>
-    </tr>
-    <tr style="text-transform: uppercase;font-size:12px;">
-        <td class="center"><?= rupiah($totalOperasional) ?></td>
-        <td class="center"><?= rupiah($totalPembelian) ?></td>
-        <td class="center td-bold"><?= rupiah($totalOperasional - $totalPembelian) ?></td>
+        <td class="td-bold center"><?= rupiah($totalOperasional); ?></td>
+        <td class="td-bold center"><?= rupiah('-' . $totalPembelian); ?></td>
+        <td class="td-bold center"><?= rupiah($totalOperasional - $totalPembelian); ?></td>
     </tr>
 </table>
 

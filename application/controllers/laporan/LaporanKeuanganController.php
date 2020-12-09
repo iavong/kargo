@@ -69,6 +69,16 @@ class LaporanKeuanganController extends CI_Controller
         $data['title'] = 'Laporan Keuangan';
         $data['datapembelian'] = $this->Pembelian->getPembelianByPeriode($tglAwal, $tglAkhir);
         $data['datapenjualan'] = $this->Penjualan->getPenjualanByPeriode($tglAwal, $tglAkhir);
+        // $keuangan = [
+        //     'datapembelian' => $this->Pembelian->getPembelianByPeriode($tglAwal, $tglAkhir),
+        //     'datapenjualan' => $this->Penjualan->getPenjualanByPeriode($tglAwal, $tglAkhir)
+        // ];
+        // $data['dataKeuangan'] = $keuangan;
+
+        // var_dump($data['dataKeuangan']);
+        // die;
+
+
         $data['tgl_awal'] = $tglAwal;
         $data['tgl_akhir'] = $tglAkhir;
 

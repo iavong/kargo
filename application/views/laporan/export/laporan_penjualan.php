@@ -38,6 +38,8 @@
         <td class="center td-bold">NO.</td>
         <td class="center td-bold">NO. KWT.</td>
         <td class="center td-bold">TANGGAL</td>
+        <td class="center td-bold">NO. SMU</td>
+        <td class="center td-bold">NO. FLIGHT</td>
         <td class="center td-bold">PENGIRIM</td>
         <td class="center td-bold">PENERIMA</td>
         <td class="center td-bold">RUTE</td>
@@ -57,6 +59,8 @@
             <td style="text-align: center;"><?= ++$no; ?></td>
             <td><?= $row->no_kwitansi; ?></td>
             <td><?= tgl_indo(date('Y-m-d', strtotime($row->created_at))); ?></td>
+            <td><?= $deleted ? $row->no_smu : '-'; ?></td>
+            <td><?= $deleted ? $row->no_penerbangan : '-'; ?></td>
             <td><?= $deleted ? $row->pengirim : '-'; ?></td>
             <td><?= $deleted ? $row->penerima : '-'; ?></td>
             <td><?= $deleted ? $row->kota_tujuan : '-'; ?></td>
@@ -73,7 +77,7 @@
             ?>
     <?php endforeach; ?>
     <tr style="text-transform: uppercase;font-size:12px;">
-        <td colspan="10" class="td-bold">TOTAL</td>
+        <td colspan="12" class="td-bold">TOTAL</td>
         <td class="td-bold center"><?= rupiah($totalOperasional); ?></td>
         <td class="td-bold center"><?= rupiah($total); ?></td>
     </tr>
