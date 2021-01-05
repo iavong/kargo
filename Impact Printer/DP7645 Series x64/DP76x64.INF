@@ -1,0 +1,67 @@
+;
+;	Printer Installation File
+;
+;	 List of supported printers, manufacturers
+;
+
+[Version]
+Signature="$Windows NT$"
+Provider=%DP%
+ClassGUID={4D36E979-E325-11CE-BFC1-08002BE10318}
+Class=Printer
+
+;
+; Manufacturer section.
+;
+; This section lists all of the manufacturers
+; that we will display in the Dialog box
+;
+
+[Manufacturer]
+"DP"=DP, NTamd64
+
+;
+; Model Specifications Section
+;
+
+[DP]
+"DP7645III"        = DP7645III.GPD
+"DP7645IIIR"     = DP7645IIIR.GPD
+
+[DP.NTamd64]
+"DP7645III"        = DP7645III.GPD
+"DP7645IIIR"     = DP7645IIIR.GPD
+
+;
+; Installer section(s) referenced above.
+;
+
+[DP7645III.GPD]
+CopyFiles=@D76.DLL,@DP7645III.GPD
+DataSection=UNIDRV_DATA
+DataFile=DP7645III.GPD
+Include=NTPRINT.INF
+Needs=UNIDRV.OEM
+
+[DP7645IIIR.GPD]
+CopyFiles=@D76.DLL,@DP7645IIIR.GPD
+DataSection=UNIDRV_DATA
+DataFile=DP7645IIIR.GPD
+Include=NTPRINT.INF
+Needs=UNIDRV.OEM
+
+[DestinationDirs]
+DefaultDestDir=66000
+
+[SourceDisksNames.amd64]
+1 = %disk1%,,,
+
+[SourceDisksFiles]
+D76.DLL         = 1
+DP7645III.GPD    = 1
+DP7645IIIR.GPD   = 1
+
+
+[Strings]
+PrinterClassName="Printers"
+disk1="DP Printer Driver Setup Disk"

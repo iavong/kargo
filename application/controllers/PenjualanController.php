@@ -437,7 +437,7 @@ class PenjualanController extends CI_Controller
 
     /**
      * 
-     * @method Cetak Nota 
+     * @method Cetak Nota PDF
      */
     public function cetakNota()
     {
@@ -459,5 +459,132 @@ class PenjualanController extends CI_Controller
         $this->dompdf->render();
         ob_end_clean();
         $this->dompdf->stream("nota_transaksi.pdf", array('Attachment' => 0));
+    }
+
+
+    // cetak melalui printer thermal
+    public function cetakNota2()
+    {
+        // me-load library escpos
+        $this->load->library('escpos');
+
+        // membuat connector printer ke shared printer bernama "printer_a" (yang telah disetting sebelumnya)
+        $connector = new Escpos\PrintConnectors\WindowsPrintConnector("printer_a");
+
+        // membuat objek $printer agar dapat di lakukan fungsinya
+        $printer = new Escpos\Printer($connector);
+
+        // DATA PENJUALAN
+        $id = $this->input->post('id');
+        $penjualan = $this->Penjualan->cetakNotaPenjualan($id)->row();
+
+        $tanggal = date('d-m-Y', strtotime($penjualan->created_at));
+        var_dump($tanggal);
+
+        // die;
+
+        // membuat fungsi untuk membuat 1 baris tabel, agar dapat dipanggil berkali-kali dgn mudah
+        function buatBaris4Kolom($kolom1, $kolom2)
+        {
+            // Mengatur lebar setiap kolom (dalam satuan karakter)
+            $lebar_kolom_1 = 20;
+            $lebar_kolom_2 = 20;
+            // $lebar_kolom_3 = 8;
+            // $lebar_kolom_4 = 9;
+
+            // Melakukan wordwrap(), jadi jika karakter teks melebihi lebar kolom, ditambahkan \n 
+            $kolom1 = wordwrap($kolom1, $lebar_kolom_1, "\n", true);
+            $kolom2 = wordwrap($kolom2, $lebar_kolom_2, "\n", true);
+            // $kolom3 = wordwrap($kolom3, $lebar_kolom_3, "\n", true);
+            // $kolom4 = wordwrap($kolom4, $lebar_kolom_4, "\n", true);
+
+            // Merubah hasil wordwrap menjadi array, kolom yang memiliki 2 index array berarti memiliki 2 baris (kena wordwrap)
+            $kolom1Array = explode("\n", $kolom1);
+            $kolom2Array = explode("\n", $kolom2);
+            // $kolom3Array = explode("\n", $kolom3);
+            // $kolom4Array = explode("\n", $kolom4);
+
+            // Mengambil jumlah baris terbanyak dari kolom-kolom untuk dijadikan titik akhir perulangan
+            $jmlBarisTerbanyak = max(count($kolom1Array), count($kolom2Array));
+
+            // Mendeklarasikan variabel untuk menampung kolom yang sudah di edit
+            $hasilBaris = array();
+
+            // Melakukan perulangan setiap baris (yang dibentuk wordwrap), untuk menggabungkan setiap kolom menjadi 1 baris 
+            for ($i = 0; $i < $jmlBarisTerbanyak; $i++) {
+
+                // memberikan spasi di setiap cell berdasarkan lebar kolom yang ditentukan, 
+                $hasilKolom1 = str_pad((isset($kolom1Array[$i]) ? $kolom1Array[$i] : ""), $lebar_kolom_1, " ");
+                $hasilKolom2 = str_pad((isset($kolom2Array[$i]) ? $kolom2Array[$i] : ""), $lebar_kolom_2, " ", STR_PAD_LEFT);
+
+                // memberikan rata kanan pada kolom 3 dan 4 karena akan kita gunakan untuk harga dan total harga
+                // $hasilKolom3 = str_pad((isset($kolom3Array[$i]) ? $kolom3Array[$i] : ""), $lebar_kolom_3, " ", STR_PAD_LEFT);
+                // $hasilKolom4 = str_pad((isset($kolom4Array[$i]) ? $kolom4Array[$i] : ""), $lebar_kolom_4, " ", STR_PAD_LEFT);
+
+                // Menggabungkan kolom tersebut menjadi 1 baris dan ditampung ke variabel hasil (ada 1 spasi disetiap kolom)
+                $hasilBaris[] = $hasilKolom1 . " " . $hasilKolom2 . " ";
+            }
+
+            // Hasil yang berupa array, disatukan kembali menjadi string dan tambahkan \n disetiap barisnya.
+            return implode($hasilBaris) . "\n";
+        }
+
+        // Membuat Logo
+        $img =  Escpos\EscposImage::load("assets/images/logo/logo-print.png", true);
+        $printer->setJustification(Escpos\Printer::JUSTIFY_CENTER); // Setting teks menjadi rata tengah
+        $printer->bitImage($img, Escpos\Printer::IMG_DOUBLE_WIDTH | Escpos\Printer::IMG_DOUBLE_HEIGHT);
+
+        // Membuat judul
+        $printer->initialize();
+        $printer->setFont(Escpos\Printer::FONT_B);
+        $printer->setJustification(Escpos\Printer::JUSTIFY_CENTER); // Setting teks menjadi rata tengah
+        $printer->text("CV. KALBAR KARGO MANDIRI\n");
+
+        // Alamat
+        $printer->initialize();
+        $printer->setFont(Escpos\Printer::FONT_C);
+        $printer->setJustification(Escpos\Printer::JUSTIFY_CENTER); // Setting teks menjadi rata tengah
+        $printer->text("Jl. Arteri Supadio, \nKomplek Adi Griya Karya No. K-17 \nKalimantan Barat\n");
+        $printer->text("Telp/Hp. 085787578464\n");
+        $printer->text("Email : kalbarkargomandiri@gmail.com\n");
+        $printer->text("\n");
+
+
+        // Data transaksi
+        $printer->initialize();
+        $printer->setFont(Escpos\Printer::FONT_B);
+        $printer->text("----------------------------------------\n");
+        $printer->text("Kasir : " . $this->session->userdata('nama'));
+        $printer->text("\n");
+        $printer->text("Tanggal : " . $tanggal);
+        $printer->text("\n");
+
+        // Membuat tabel
+        $printer->initialize(); // Reset bentuk/jenis teks
+        $printer->setFont(Escpos\Printer::FONT_B);
+        // $printer->text(buatBaris4Kolom("Barang", "Subtotal"));
+        $printer->text("----------------------------------------\n");
+        $printer->text(buatBaris4Kolom("Pengirim", strtoupper($penjualan->pengirim)));
+        $printer->text(buatBaris4Kolom("Penerima", strtoupper($penjualan->penerima)));
+        $printer->text(buatBaris4Kolom("Airlines", strtoupper($penjualan->airlines)));
+        $printer->text(buatBaris4Kolom("Rute", "Pontianak-$penjualan->kota_tujuan"));
+        $printer->text(buatBaris4Kolom("No.SMU", $penjualan->no_smu));
+        $printer->text(buatBaris4Kolom("Berat", "$penjualan->berat Kg"));
+        $printer->text(buatBaris4Kolom("Koli", $penjualan->koli));
+        $printer->text(buatBaris4Kolom("By.Pengiriman", rupiah($penjualan->biaya_smu + $penjualan->total_operasional)));
+        $printer->text(buatBaris4Kolom("Jasa Gudang", rupiah($penjualan->total_biaya_gudang)));
+        $printer->text(buatBaris4Kolom("Jenis Pembayaran", strtoupper($penjualan->jenis_pembayaran)));
+        $printer->text("----------------------------------------\n");
+        $printer->text(buatBaris4Kolom("", "Total " . rupiah($penjualan->biaya_total)));
+        $printer->text("----------------------------------------\n");
+        $printer->text("\n");
+
+        // Pesan penutup
+        $printer->initialize();
+        $printer->setJustification(Escpos\Printer::JUSTIFY_CENTER);
+        $printer->text("Terima kasih\n");
+
+        $printer->feed(5); // mencetak 5 baris kosong agar terangkat (pemotong kertas saya memiliki jarak 5 baris dari toner)
+        $printer->close();
     }
 }

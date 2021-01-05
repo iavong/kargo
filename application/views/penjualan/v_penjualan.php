@@ -218,7 +218,7 @@
                     <?php
                     $attributes = array('class' => 'd-inline-block', 'target' => '_blank', 'style' => 'vertical-align: middle;', 'title' => 'Cetak Nota');
                     $hidden = array('id' => $penjualan->id);
-                    echo form_open('penjualan/cetak-nota', $attributes, $hidden);
+                    echo form_open('penjualan/cetak-nota2', $attributes, $hidden);
                     ?>
                     <!-- <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-print"></i></button> -->
                     <button type="submit" class="btn btn-primary"><i class="fa fa-print"></i> Cetak Nota</button>
