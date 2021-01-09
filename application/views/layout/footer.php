@@ -22,6 +22,8 @@
 <script src="src/plugins/highcharts-6.0.7/code/highcharts-more.js"></script> -->
 
 <!-- <script src="<?= base_url('assets/vendors/scripts/datatable-setting.js'); ?>"></script> -->
+<script src="<?= base_url('assets/vendors/moment/moment.js'); ?>"></script>
+<script src="<?= base_url('assets/vendors/moment/moment-with-locales.js'); ?>"></script>
 <script>
     var base_url = '<?php echo base_url() ?>';
 </script>
@@ -34,7 +36,6 @@
         $('#dataTable').DataTable({
             "ordering": false
         });
-
 
         // alert leaves page
         formmodified = 0;
@@ -67,6 +68,9 @@
         });
     });
 </script>
+
+
+<script type="text/javascript" src="<?= base_url('assets/js/recta-script.js'); ?>"></script>
 
 </body>
 

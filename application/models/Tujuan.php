@@ -14,11 +14,11 @@ class Tujuan extends CI_Model
         return $query;
     }
 
-    public function getTujuanById($id) // ambil berdasar id
+    public function getTujuanById($id = null, $tujuanID = null) // ambil berdasar id
     {
         $query = $this->db->select('*')
             ->from($this->_table)
-            ->where('id', $id)
+            ->where('id', ($id != null) ? $id : $tujuanID)
             ->get();
         return $query;
     }

@@ -587,4 +587,21 @@ class PenjualanController extends CI_Controller
         $printer->feed(5); // mencetak 5 baris kosong agar terangkat (pemotong kertas saya memiliki jarak 5 baris dari toner)
         $printer->close();
     }
+
+
+    //
+    public function printNota()
+    {
+        $id = $this->input->post('id');
+        $tujuanID = $this->input->post('tujuanID');
+
+        $data['data_penjualan'] = $this->Penjualan->cetakNotaPenjualan($id)->row();
+
+        $kotaTujuan = $this->Tujuan->getTujuanById($tujuanID)->row();
+        $data['kota_tujuan'] = $kotaTujuan->kota_tujuan;
+
+        echo json_encode($data);
+
+        // $this->load->view('penjualan/export/cetak_nota3', $data);
+    }
 }
