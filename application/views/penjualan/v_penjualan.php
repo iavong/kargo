@@ -215,7 +215,6 @@
                 <input hidden id="kasir" value="<?= $this->session->userdata('nama'); ?>">
 
 
-
                 <small>*Jika kertas printer tidak keluar harap periksa App Key dan Port pada Recta. </small><br>
                 <small>App Key : 3889156889, Port : 1811</small>
             </div>

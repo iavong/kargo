@@ -11,6 +11,16 @@ const rupiah2 = new Intl.NumberFormat(['ban', 'id']);
 $('.handleView').on('click', function () {
 
     $('input[type="text"],texatrea', this).val('');
+    // $('#pengirim').val('').html('');
+    // $('#penerima').val('').html('');
+    // $('#tujuan').val('').html('');
+    // $('#airlines').val('').html('');
+    // $('#no_penerbangan').val('').html('');
+    // $('#no_smu').val('').html('');
+    // $('#berat').val('').html('');
+    // $('#koli').val('').html('');
+    // // hidden
+    // $('#jenis_pembayaran').val('');
 
     const id = $(this).data('id');
     const tujuanID = $(this).data('tujuan');
@@ -54,7 +64,7 @@ $('.handleView').on('click', function () {
             $('#tanggal').val(created_at);
 
             // print
-            $('#btnPrint').on('click', function () {
+            $('#btnPrint').one('click', function () {
                 handlePrint(biaya_tambahan, biayaPengiriman, jasaGudang, total);
             })
         }
@@ -64,6 +74,7 @@ $('.handleView').on('click', function () {
 
 // RECTA 
 function handlePrint(biaya_tambahan, biayaPengiriman, jasaGudang, total) {
+
     const printer = new Recta('3889156889', '1811')
 
     const kasir = $('#kasir').val()
