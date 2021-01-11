@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 05 Jan 2021 pada 13.50
+-- Waktu pembuatan: 11 Jan 2021 pada 22.18
 -- Versi server: 10.4.17-MariaDB
 -- Versi PHP: 7.4.13
 
@@ -41,10 +41,14 @@ CREATE TABLE `deposit` (
 --
 
 INSERT INTO `deposit` (`id`, `id_pengirim`, `id_penjualan`, `deposit`, `tipe`, `created_at`) VALUES
-(1, 2, NULL, '10000000', 1, '2020-12-21 19:04:26'),
 (2, 1, NULL, '5000000', 1, '2020-12-21 19:04:36'),
-(5, 1, 3, '2196675', 0, '2020-12-22 19:05:51'),
-(10, 2, 5, '248950', 0, '2020-12-23 02:57:12');
+(5, 1, 3, '198175', 0, '2020-12-22 19:05:51'),
+(10, 2, 5, '248950', 0, '2020-12-23 02:57:12'),
+(11, 4, 7, '443950', 0, '2021-01-12 00:09:16'),
+(12, 1, 8, '190950', 0, '2021-01-12 00:20:11'),
+(14, 1, NULL, '10000', 1, '2021-01-12 00:23:52'),
+(15, 3, 11, '243950', 0, '2021-01-12 00:36:41'),
+(17, 2, 29, '289383', 0, '2021-01-12 02:01:46');
 
 -- --------------------------------------------------------
 
@@ -111,10 +115,10 @@ CREATE TABLE `pengirim` (
 --
 
 INSERT INTO `pengirim` (`id`, `nama`, `no_hp`, `alamat`, `deposit`, `tipe`, `created_at`) VALUES
-(1, 'iavong', '0834141', 'pontianak', '2803325', 0, '2020-12-21 19:02:43'),
-(2, 'atan', '0821', 'kubu', '9751050', 0, '2020-12-21 19:02:54'),
-(3, 'kamal', '08142', 'media', '0', 1, '2020-12-21 19:03:08'),
-(4, 'fikri', '08555', 'jawai', '0', 1, '2020-12-21 19:03:21');
+(1, 'iavong', '0834141', 'pontianak', '4620875', 0, '2020-12-21 19:02:43'),
+(2, 'atan', '0821', 'kubu', '-538333', 0, '2020-12-21 19:02:54'),
+(3, 'kamal', '08142', 'media', '-243950', 1, '2020-12-21 19:03:08'),
+(4, 'fikri', '08555', 'jawai', '-443950', 1, '2020-12-21 19:03:21');
 
 -- --------------------------------------------------------
 
@@ -160,9 +164,31 @@ CREATE TABLE `penjualan` (
 INSERT INTO `penjualan` (`id`, `no_kwitansi`, `airlines`, `no_penerbangan`, `no_smu`, `berat`, `koli`, `custom_harga`, `harga_smu`, `biaya_smu`, `biaya_admin_smu`, `biaya_operasional`, `total_operasional`, `harga_gudang`, `harga_admin_gudang`, `total_biaya_gudang`, `biaya_tambahan`, `biaya_total`, `isi`, `catatan`, `id_pengirim`, `pengirim`, `penerima`, `tujuan_id`, `jenis_pembayaran`, `deleted`, `created_at`, `status`) VALUES
 (1, 10001, 'lion', 'jt-312', '321-21312', '20', 2, '30000', '30000', '615000', '15000', '1000', '20000', '1045', '3500', '24400', '5000', '664400', 'skate', 'board', 2, 'atan', 'bang jo', 1, 'deposit', 1, '2020-12-21 19:05:37', NULL),
 (2, 10002, 'namair', 'nm-311', '312-312321', '15', 5, '10000', '10000', '170000', '20000', '1000', '15000', '1045', '3500', '19175', '5000', '209175', 'batu', 'akik', 1, 'iavong', 'toko', 2, 'deposit', 1, '2020-12-21 19:07:42', NULL),
-(3, 10003, 'lion', 'jt-553', '313-321', '15', 2, '', '10000', '2150000', '2000000', '1500', '22500', '1045', '3500', '19175', '5000', '2196675', 'batu', 'akik', 1, 'iavong', 'toko', 1, 'deposit', 0, '2020-12-22 19:05:51', 'Edited'),
+(3, 10003, 'lion', 'jt-553', '313-321', '15', 2, '', '10000', '151500', '1500', '1500', '22500', '1045', '3500', '19175', '5000', '198175', 'batu', 'akik', 1, 'iavong', 'toko', 1, 'deposit', 0, '2020-12-22 19:05:51', 'Edited'),
 (4, 10004, 'sriwijaya', 'sj-323', '312-31231', '15', 2, '', '20000', '313000', '13000', '1200', '18000', '1045', '3500', '19175', '5000', '355175', 'batu', 'akik', 3, 'kamal', 'udin', 3, 'deposit', 1, '2020-12-23 00:38:40', 'Edited'),
-(5, 10005, 'sriwijaya', 'sj-321', '321-213', '10', 2, '', '20000', '220000', '20000', '1500', '15000', '1045', '3500', '13950', '', '248950', 'batu', 'akik', 2, 'atan', 'tintin', 3, 'deposit', 0, '2020-12-23 02:56:27', 'Edited');
+(5, 10005, 'sriwijaya', 'sj-321', '321-213', '10', 2, '', '20000', '220000', '20000', '1500', '15000', '1045', '3500', '13950', '', '248950', 'batu', 'akik', 2, 'atan', 'tintin', 3, 'deposit', 0, '2020-12-23 02:56:27', 'Edited'),
+(6, 10006, 'lion', '123', '123jsjs', '0', 0, '', '20000', '200000', 'Jsjsjjsjjs', 'Jsjjaa', '0', '1045', '3500', '13950', '', '213950', '', '', 4, 'fikri', 'Mur', 3, 'cash', 1, '2021-01-11 21:43:37', NULL),
+(7, 10007, 'lion', '123455', '123-945', '10', 4, '', '20000', '230000', '30000', '5000', '50000', '1045', '3500', '13950', '150000', '443950', '', '', 4, 'fikri', 'Mur', 3, 'deposit', 0, '2021-01-11 22:37:30', 'Edited'),
+(8, 10008, 'lion', 'adsfasd', 'adsf', '10', 5, '15000', '15000', '160000', '10000', '1000', '10000', '1045', '3500', '13950', '7000', '190950', '', '', 1, 'iavong', 'hasilusaha', 1, 'deposit', 0, '2021-01-12 00:20:11', 'Edited'),
+(9, 10009, 'namair', 'adsfasd', 'adsf', '15', 3, '1000', '1000', '27000', '12000', '5000', '75000', '1045', '3500', '19175', '', '121175', '', '', 1, 'iavong', 'toko', 3, 'deposit', 1, '2021-01-12 00:21:08', 'Edited'),
+(10, 10010, 'lion', 'Hhhh', 'Bbhh', '10', 2, '', '10000', '120000', '20000', '5000', '50000', '1045', '3500', '13950', '', '183950', '', '', 4, 'fikri', 'Dodi', 1, 'cash', 0, '2021-01-12 00:36:41', NULL),
+(11, 10011, 'sriwijaya', 'adsfasd', 'adsf', '10', 4, '', '20000', '210000', '10000', '1000', '10000', '1045', '3500', '13950', '10000', '243950', '', '', 3, 'kamal', 'toko', 3, 'deposit', 0, '2021-01-12 00:36:42', NULL),
+(12, 10012, 'namair', 'Hhhh', '123jsjs', '10', 2, '', '10000', '100077', '77', '5000', '50000', '1045', '3500', '13950', '', '164027', '', '', 3, 'kamal', 'Dodi', 1, 'cash', 0, '2021-01-12 00:51:32', NULL),
+(13, 10013, 'lion', 'adsfasd', 'adsf', '10', 4, '', '20000', '200123', '123', '1000', '10000', '1045', '3500', '13950', '', '224073', '', '', 3, 'kamal', 'asdf', 3, 'cash', 0, '2021-01-12 00:51:32', NULL),
+(14, 10014, 'namair', '123', '123jsjs', '10', 2, '', '10000', '100006', '6', '5000', '50000', '1045', '3500', '13950', '', '163956', '', '', 3, 'kamal', 'Mur', 1, 'cash', 0, '2021-01-12 00:55:50', NULL),
+(15, 10015, 'sriwijaya', 'adsfasd', 'adsf', '10', 4, '', '20000', '434234', '234234', '34343', '343430', '1045', '3500', '13950', '', '791614', '', '', 3, 'kamal', 'asdf', 3, 'cash', 0, '2021-01-12 00:55:50', NULL),
+(16, 10016, 'namair', '123', '123jsjs', '10', 2, '', '15000', '150006', '6', '5000', '50000', '1045', '3500', '13950', '', '213956', '', '', 3, 'kamal', 'Dodi', 2, 'cash', 0, '2021-01-12 01:04:10', NULL),
+(18, 10017, 'namair', 'Thh', '123jsjs', '10', 2, '', '10000', '134632', '34632', '5000', '50000', '1045', '3500', '13950', '', '198582', '', '', 2, 'atan', 'Dodi', 1, 'deposit', 1, '2021-01-12 01:08:27', 'Edited'),
+(22, 10018, 'sriwijaya', 'adsfasd', 'adsf', '10', 3, '', '20000', '210000', '10000', '1000', '10000', '1045', '3500', '13950', '5000', '238950', '', '', 3, 'kamal', 'toko', 3, 'cash', 0, '2021-01-12 01:18:58', 'Edited'),
+(26, 10019, 'lion', 'adsfasd', 'adsf', '10', 4, '', '20000', '200123', '123', '1000', '10000', '1045', '3500', '13950', '', '224073', '', '', 3, 'kamal', 'asdf', 3, 'cash', 0, '2021-01-12 01:29:02', NULL),
+(29, 10021, 'namair', 'Thh', '123jsjs', '10', 2, '', '15000', '225433', '75433', '5000', '50000', '1045', '3500', '13950', '', '289383', '', '', 2, 'atan', 'Mur', 2, 'deposit', 0, '2021-01-12 01:41:51', 'Edited'),
+(31, 10022, 'lion', 'adsfasd', 'adsf', '10', 4, '', '20000', '210000', '10000', '1000', '10000', '1045', '3500', '13950', '', '233950', '', '', 3, 'kamal', 'asdf', 3, 'cash', 0, '2021-01-12 01:41:51', NULL),
+(33, 10023, 'lion', 'adsfasd', 'adsf', '10', 4, '', '20000', '210000', '10000', '1000', '10000', '1045', '3500', '13950', '', '233950', '', '', 3, 'kamal', 'asdf', 3, 'cash', 0, '2021-01-12 01:42:58', NULL),
+(34, 10024, 'lion', 'adsfasd', 'adsf', '10', 4, '', '20000', '210000', '10000', '1000', '10000', '1045', '3500', '13950', '', '233950', '', '', 3, 'kamal', 'asdf', 3, 'cash', 0, '2021-01-12 01:42:58', NULL),
+(35, 10025, 'namair', 'Gh', '123jsjs', '10', 2, '', '15000', '170000', '20000', '5000', '50000', '1045', '3500', '13950', '', '233950', '', '', 3, 'kamal', 'Yh', 2, 'cash', 0, '2021-01-12 01:45:25', NULL),
+(36, 10026, 'lion', 'adsfasd', 'adsf', '10', 4, '', '20000', '200123', '123', '1000', '10000', '1045', '3500', '13950', '', '224073', '', '', 3, 'kamal', 'asdf', 3, 'cash', 0, '2021-01-12 01:45:25', NULL),
+(37, 10027, 'sriwijaya', 'adsfasd', 'adsf', '10', 4, '', '20000', '200123', '123', '1000', '10000', '1045', '3500', '13950', '', '224073', '', '', 3, 'kamal', 'asdf', 3, 'cash', 0, '2021-01-12 01:47:02', 'Edited'),
+(38, 10028, 'namair', 'Thh', 'Bbhh', '10', 2, '20000', '20000', '205000', '5000', '5000', '50000', '1045', '3500', '13950', '10000', '278950', '', '', 3, 'kamal', 'Prakoso', 3, 'cash', 0, '2021-01-12 01:47:02', 'Edited');
 
 -- --------------------------------------------------------
 
@@ -205,10 +231,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `nama`, `username`, `password`, `role`) VALUES
-(1, 'Administrator', 'master', '$2y$10$SMmgGW7yn/aVqf0ZsQm36.oDRyXHV9GFZASmhHLADrPiANk5dfQOm', 1),
+(1, 'Administrator', 'master', '$2y$10$9yFRRRoTGSwoBIdo3.ogneYD64MqLggbqbMrwtsgAXa9lHn/lcEAG', 1),
 (3, 'Atan', 'staff', '$2y$10$95nNst0hXjWRmyyo4Zq0a.A5N5jDneYsgrsvu.cTcXl/OojvGSC5a', 2),
-(4, 'master dua', 'master2', '$2y$10$wSeSgBzHIT2sbfM5uAITz.ZXNhSgzt52C6JyT1ip.MgdgGH8.Gs1.', 1),
-(5, 'Hap', 'lapangan', '$2y$10$17mlhhYKYHTn1gLSXZIM0u4PSzLhrXxkN6jILQsZsp1xnUIskYLB6', 3);
+(6, 'Iskandar Avong', 'iavong', '$2y$10$hjCrZQeEbjNpi6NyTZDJNeGDJ7/0hrx2YQ/dBNS3DeG7LQ0n.lV9y', 1);
 
 --
 -- Indexes for dumped tables
@@ -264,7 +289,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `deposit`
 --
 ALTER TABLE `deposit`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT untuk tabel `gaji`
@@ -288,7 +313,7 @@ ALTER TABLE `pengirim`
 -- AUTO_INCREMENT untuk tabel `penjualan`
 --
 ALTER TABLE `penjualan`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT untuk tabel `tujuan`
@@ -300,7 +325,7 @@ ALTER TABLE `tujuan`
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
