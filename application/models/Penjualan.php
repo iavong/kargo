@@ -123,15 +123,16 @@ class Penjualan extends CI_Model
         ];
         if ($this->db->insert($this->_table, $data)) {
             return true;
+        } else {
+            return false;
         }
     }
 
 
     // simpan data penjualan
-    public function updatePenjualan($idPenjualan, $noKwitansi, $penerima, $kotaTujuan, $airlines, $noPenerbangan, $noSMU, $berat, $koli, $customHarga = null, $biaya, $biayaSMU, $adminSMU, $biayaOperasional, $totalOperasional, $isi, $catatan, $hargaGudang, $adminGudang, $biayaGudang, $biayaTambahan, $biayaTotal, $jenisPembayaran, $status = 'Edited' )
+    public function updatePenjualan($idPenjualan, $penerima, $kotaTujuan, $airlines, $noPenerbangan, $noSMU, $berat, $koli, $customHarga = null, $biaya, $biayaSMU, $adminSMU, $biayaOperasional, $totalOperasional, $isi, $catatan, $hargaGudang, $adminGudang, $biayaGudang, $biayaTambahan, $biayaTotal, $jenisPembayaran, $status = 'Edited')
     {
         $data = [
-            'no_kwitansi' => $noKwitansi,
             'airlines' => $airlines,
             'no_penerbangan' => $noPenerbangan,
             'no_smu' => $noSMU,

@@ -57,7 +57,7 @@ $(document).ready(function () {
               <div class="form-group row">
                   <label class="col-sm-12 col-md-2 col-form-label">Custom Harga<span class="text-danger">*</span></label>
                   <div class="col-sm-12 col-md-10">
-                      <input class="form-control" name="custom_harga" placeholder="Custom harga .." type="text" value="" id="cusHarga">
+                      <input class="form-control int" name="custom_harga" placeholder="Custom harga .." type="text" value="" id="cusHarga" oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
                   </div>
               </div>
           `);

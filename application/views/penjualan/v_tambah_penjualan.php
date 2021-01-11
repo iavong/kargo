@@ -33,7 +33,7 @@ $langganan = $this->uri->segment(2) == 'tambah';
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Pengirim<span class="text-danger">*</span></label>
                         <div class="col-sm-12 col-md-10">
-                            <select class="custom-select2 form-control <?= (form_error('pengirim') ? 'form-control-danger' : null) ?>" id="pengirim" name="pengirim">
+                            <select class="custom-select2 form-control <?= (form_error('pengirim') ? 'form-control-danger' : null) ?>" id="pengirim" name="pengirim" style="width: 100%;">
                                 <option style="text-transform: uppercase;">Pilih pengirim..</option>
                                 <?php foreach ($dataPengirim->result() as $pengirim) : ?>
                                     <option value="<?= $pengirim->id . '-' . $pengirim->nama; ?>"> <?= $pengirim->nama; ?></option>
@@ -78,7 +78,7 @@ $langganan = $this->uri->segment(2) == 'tambah';
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Biaya Admin SMU<span class="text-danger">*</span></label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control <?= (form_error('admin_smu') ? 'form-control-danger' : null) ?>" name="admin_smu" type="text" placeholder="Biaya Admin SMU .." value="<?= set_value('admin_smu') ?>" id="adminSMU">
+                            <input class="form-control int <?= (form_error('admin_smu') ? 'form-control-danger' : null) ?>" name="admin_smu" type="text" placeholder="Biaya Admin SMU .." value="<?= set_value('admin_smu') ?>" id="adminSMU">
                             <?php echo form_error('admin_smu', '<small class="text-danger">', '</small>'); ?>
                         </div>
                     </div>
@@ -87,7 +87,7 @@ $langganan = $this->uri->segment(2) == 'tambah';
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Biaya Handling /KG<span class="text-danger">*</span></label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control <?= (form_error('biaya_operasional') ? 'form-control-danger' : null) ?>" name="biaya_operasional" type="text" placeholder="Biaya Operasional .." id="biaya_operasional" value="<?= set_value('biaya_operasional') ?>">
+                            <input class="form-control int <?= (form_error('biaya_operasional') ? 'form-control-danger' : null) ?>" name="biaya_operasional" type="text" placeholder="Biaya Operasional .." id="biaya_operasional" value="<?= set_value('biaya_operasional') ?>">
                             <?php echo form_error('biaya_operasional', '<small class="text-danger">', '</small>'); ?>
                         </div>
                     </div>
@@ -132,7 +132,7 @@ $langganan = $this->uri->segment(2) == 'tambah';
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Berat<span class="text-danger">*</span></label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control <?= (form_error('berat') ? 'form-control-danger' : null) ?>" name="berat" placeholder="Berat .." id="berat" type="text" value="<?= set_value('berat') ?>">
+                            <input class="form-control int <?= (form_error('berat') ? 'form-control-danger' : null) ?>" name="berat" placeholder="Berat .." id="berat" type="text" value="<?= set_value('berat') ?>">
                             <?php echo form_error('berat', '<small class="text-danger">', '</small>'); ?>
                         </div>
                     </div>
@@ -140,7 +140,7 @@ $langganan = $this->uri->segment(2) == 'tambah';
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Jumlah Koli<span class="text-danger">*</span></label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control <?= (form_error('koli') ? 'form-control-danger' : null) ?>" name="koli" placeholder="Koli .." type="text" value="<?= set_value('koli') ?>">
+                            <input class="form-control int <?= (form_error('koli') ? 'form-control-danger' : null) ?>" name="koli" placeholder="Koli .." type="text" value="<?= set_value('koli') ?>">
                             <?php echo form_error('koli', '<small class="text-danger">', '</small>'); ?>
                         </div>
                     </div>
@@ -169,7 +169,7 @@ $langganan = $this->uri->segment(2) == 'tambah';
                             <div class="form-group row">
                                 <label class="col-sm-6 col-md-4 col-form-label">Biaya Gudang<span class="text-danger">*</span></label>
                                 <div class="col-sm-6 col-md-8">
-                                    <input class="form-control <?= (form_error('biaya_gudang') ? 'form-control-danger' : null) ?>" name="biaya_gudang" placeholder="Biaya gudang .." type="text" value="1045" id="bGudang">
+                                    <input class="form-control int <?= (form_error('biaya_gudang') ? 'form-control-danger' : null) ?>" name="biaya_gudang" placeholder="Biaya gudang .." type="text" value="1045" id="bGudang">
                                     <?php echo form_error('biaya_gudang', '<small class="text-danger">', '</small>'); ?>
                                 </div>
                             </div>
@@ -178,7 +178,7 @@ $langganan = $this->uri->segment(2) == 'tambah';
                             <div class="form-group row">
                                 <label class="col-sm-6 col-md-4 col-form-label">Biaya Admin<span class="text-danger">*</span></label>
                                 <div class="col-sm-6 col-md-8">
-                                    <input class="form-control <?= (form_error('admin_gudang') ? 'form-control-danger' : null) ?>" name="admin_gudang" placeholder="Biaya gudang .." type="text" value="3500" id="adminGudang">
+                                    <input class="form-control int <?= (form_error('admin_gudang') ? 'form-control-danger' : null) ?>" name="admin_gudang" placeholder="Biaya gudang .." type="text" value="3500" id="adminGudang">
                                     <?php echo form_error('admin_gudang', '<small class="text-danger">', '</small>'); ?>
                                 </div>
                             </div>
@@ -192,7 +192,7 @@ $langganan = $this->uri->segment(2) == 'tambah';
                             </div>
                         </label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control biayaTambahan <?= (form_error('biaya_tambahan') ? 'form-control-danger' : null) ?>" name="biaya_tambahan" placeholder="Biaya tambahan .." type="text" value="<?= set_value('biaya_tambahan') ?>" id="biayaTambahan" readonly>
+                            <input class="form-control biayaTambahan int <?= (form_error('biaya_tambahan') ? 'form-control-danger' : null) ?>" name="biaya_tambahan" placeholder="Biaya tambahan .." type="text" value="<?= set_value('biaya_tambahan') ?>" id="biayaTambahan" readonly>
                             <?php echo form_error('biaya_tambahan', '<small class="text-danger">', '</small>'); ?>
                         </div>
                     </div>

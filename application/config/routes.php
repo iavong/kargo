@@ -69,8 +69,7 @@ $route['penjualan/delete'] = 'PenjualanController/delete';
 $route['penjualan/getHarga'] = 'PenjualanController/getHarga';
 $route['penjualan/cekHarga'] = 'PenjualanController/cekHarga';
 $route['penjualan/cekTipePengirim'] = 'PenjualanController/cekTipePengirim';
-$route['penjualan/cetak-nota'] = 'PenjualanController/cetakNota';
-$route['penjualan/cetak-nota2'] = 'PenjualanController/cetakNota2';
+// $route['penjualan/cetak-nota'] = 'PenjualanController/cetakNota';
 $route['penjualan/print-nota'] = 'PenjualanController/printNota';
 $route['penjualan/cekCustomHarga'] = 'PenjualanController/cekCustomHarga';
 

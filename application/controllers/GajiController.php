@@ -10,6 +10,9 @@ class GajiController extends CI_Controller
         if (empty($this->session->userdata('username'))) {
             redirect('login');
         }
+        if ($this->session->userdata('role') != 1) {
+            redirect('beranda');
+        }
         // panggil model harga
         $this->load->model('Gaji');
     }

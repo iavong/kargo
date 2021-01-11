@@ -24,7 +24,6 @@ $('.handleView').on('click', function () {
         method: 'post',
         dataType: 'json',
         success: function (data) {
-            console.log(data);
 
             const { no_kwitansi, pengirim, penerima, airlines, no_penerbangan, no_smu, berat, koli, isi, catatan, biaya_smu, total_operasional, total_biaya_gudang, biaya_tambahan, biaya_total } = data.data_penjualan;
 
@@ -56,7 +55,7 @@ $('.handleView').on('click', function () {
 
             // print
             $('#btnPrint').on('click', function () {
-                handlePrint(biayaPengiriman, jasaGudang, total);
+                handlePrint(biaya_tambahan, biayaPengiriman, jasaGudang, total);
             })
         }
     });
@@ -64,8 +63,8 @@ $('.handleView').on('click', function () {
 
 
 // RECTA 
-function handlePrint(biayaPengiriman, jasaGudang, total) {
-    const printer = new Recta('5715013519', '1811')
+function handlePrint(biaya_tambahan, biayaPengiriman, jasaGudang, total) {
+    const printer = new Recta('3889156889', '1811')
 
     const kasir = $('#kasir').val()
     const rawTanggal = $('#tanggal').val()
@@ -78,18 +77,15 @@ function handlePrint(biayaPengiriman, jasaGudang, total) {
     const berat = $('#berat').val()
     const koli = $('#koli').val()
     const jenisPembayaran = $('#jenis_pembayaran').val()
-    // const biayaPengiriman = $('#biaya_pengiriman').val()
-    // const jasaGudang = $('#biaya_gudang').val()
-    // const total = $('#total').val()
 
 
     printer.open().then(function () {
-        printer.font('B')
+        printer.font('A')
             .align('CENTER')
             .bold(true)
-            .text('KALBAR KARGO MANDIRI')
-            .bold(false)
             .text('CV.KALBAR KARGO MANDIRI')
+            .bold(false)
+            .font('B')
             .text('Jl. Arteri Supadio')
             .text('Komplek Adi Griya Karya No. K-17')
             .text('Kalimantan Barat')
@@ -113,6 +109,7 @@ function handlePrint(biayaPengiriman, jasaGudang, total) {
             .text(`Koli \t ${koli}`)
             .text(`By.Pengiriman \t Rp. ${rupiah2.format(biayaPengiriman)}`)
             .text(`Jasa Gudang \t Rp. ${rupiah2.format(jasaGudang)}`)
+            .text(`Biaya Tambahan \t Rp. ${rupiah2.format(biaya_tambahan)}`)
             .text(`Jenis Pembayaran \t ${jenisPembayaran.toUpperCase()}`)
             /** */
             .text('------------------------------------------')

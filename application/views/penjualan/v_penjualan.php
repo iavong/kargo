@@ -216,16 +216,11 @@
 
 
 
+                <small>*Jika kertas printer tidak keluar harap periksa App Key dan Port pada Recta. </small><br>
+                <small>App Key : 3889156889, Port : 1811</small>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-
-                <!-- $attributes = array('class' => 'd-inline-block', 'target' => '_blank', 'style' => 'vertical-align: middle;', 'title' => 'Cetak Nota');
-                $hidden = array('id' => $penjualan->id);
-                echo form_open('penjualan/print-nota', $attributes, $hidden); -->
-
-                <!-- <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-print"></i></button> -->
-                <!-- <button type="submit" class="btn btn-primary"><i class="fa fa-print"></i> Cetak Nota</button> -->
                 <button class="btn btn-primary" id="btnPrint" data-dismiss="modal"><i class="fa fa-print"></i> CETAK</button>
             </div>
         </div>

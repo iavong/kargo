@@ -72,7 +72,7 @@
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Biaya Admin SMU<span class="text-danger">*</span></label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control <?= (form_error('admin_smu') ? 'form-control-danger' : null) ?>" name="admin_smu" type="text" placeholder="Biaya Admin SMU .." value="<?= $penjualan->biaya_admin_smu; ?>" id="adminSMU">
+                            <input class="form-control int <?= (form_error('admin_smu') ? 'form-control-danger' : null) ?>" name="admin_smu" type="text" placeholder="Biaya Admin SMU .." value="<?= $penjualan->biaya_admin_smu; ?>" id="adminSMU">
                             <?php echo form_error('admin_smu', '<small class="text-danger">', '</small>'); ?>
                         </div>
                     </div>
@@ -80,7 +80,7 @@
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Biaya Operasional<span class="text-danger">*</span></label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control <?= (form_error('biaya_operasional') ? 'form-control-danger' : null) ?>" name="biaya_operasional" type="text" placeholder="Biaya Operasional .." id="biaya_operasional_edit" value="<?= $penjualan->biaya_operasional ?>">
+                            <input class="form-control int <?= (form_error('biaya_operasional') ? 'form-control-danger' : null) ?>" name="biaya_operasional" type="text" placeholder="Biaya Operasional .." id="biaya_operasional_edit" value="<?= $penjualan->biaya_operasional ?>">
                             <?php echo form_error('biaya_operasional', '<small class="text-danger">', '</small>'); ?>
                         </div>
                     </div>
@@ -124,7 +124,7 @@
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Berat<span class="text-danger">*</span></label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control <?= (form_error('berat') ? 'form-control-danger' : null) ?>" name="berat" placeholder="Berat .." id="berat" type="text" value="<?= $penjualan->berat; ?>">
+                            <input class="form-control int <?= (form_error('berat') ? 'form-control-danger' : null) ?>" name="berat" placeholder="Berat .." id="berat" type="text" value="<?= $penjualan->berat; ?>">
                             <?php echo form_error('berat', '<small class="text-danger">', '</small>'); ?>
                         </div>
                     </div>
@@ -132,7 +132,7 @@
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Jumlah Koli<span class="text-danger">*</span></label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control <?= (form_error('koli') ? 'form-control-danger' : null) ?>" name="koli" placeholder="Koli .." type="text" value="<?= $penjualan->koli; ?>">
+                            <input class="form-control int <?= (form_error('koli') ? 'form-control-danger' : null) ?>" name="koli" placeholder="Koli .." type="text" value="<?= $penjualan->koli; ?>">
                             <?php echo form_error('koli', '<small class="text-danger">', '</small>'); ?>
                         </div>
                     </div>
@@ -161,7 +161,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-6 col-md-4 col-form-label">Biaya Gudang<span class="text-danger">*</span></label>
                                 <div class="col-sm-6 col-md-8">
-                                    <input class="form-control <?= (form_error('biaya_gudang') ? 'form-control-danger' : null) ?>" name="biaya_gudang" placeholder="Biaya gudang .." type="text" value="1045" id="bGudang">
+                                    <input class="form-control int <?= (form_error('biaya_gudang') ? 'form-control-danger' : null) ?>" name="biaya_gudang" placeholder="Biaya gudang .." type="text" value="1045" id="bGudang">
                                     <?php echo form_error('biaya_gudang', '<small class="text-danger">', '</small>'); ?>
                                 </div>
                             </div>
@@ -170,7 +170,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-6 col-md-4 col-form-label">Biaya Admin<span class="text-danger">*</span></label>
                                 <div class="col-sm-6 col-md-8">
-                                    <input class="form-control <?= (form_error('admin_gudang') ? 'form-control-danger' : null) ?>" name="admin_gudang" placeholder="Biaya gudang .." type="text" value="3500" id="adminGudang">
+                                    <input class="form-control int <?= (form_error('admin_gudang') ? 'form-control-danger' : null) ?>" name="admin_gudang" placeholder="Biaya gudang .." type="text" value="3500" id="adminGudang">
                                     <?php echo form_error('admin_gudang', '<small class="text-danger">', '</small>'); ?>
                                 </div>
                             </div>
@@ -184,7 +184,7 @@
                             </div>
                         </label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control biayaTambahanEdit <?= (form_error('biaya_tambahan') ? 'form-control-danger' : null) ?>" name="biaya_tambahan" placeholder="Biaya tambahan .." type="text" value="<?= $penjualan->biaya_tambahan; ?>" id="biayaTambahanEdit" readonly>
+                            <input class="form-control int biayaTambahanEdit <?= (form_error('biaya_tambahan') ? 'form-control-danger' : null) ?>" name="biaya_tambahan" placeholder="Biaya tambahan .." type="text" value="<?= $penjualan->biaya_tambahan; ?>" id="biayaTambahanEdit" readonly>
                             <?php echo form_error('biaya_tambahan', '<small class="text-danger">', '</small>'); ?>
                         </div>
                     </div>

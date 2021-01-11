@@ -18,6 +18,7 @@ class Beranda extends CI_Model
         $this->db->select('*');
         $this->db->from($this->_penjualan);
         $this->db->where('DATE(created_at)', $curr_date); //use date function
+        $this->db->where('deleted', 0); //use date function
         $query = $this->db->get();
         return $query;
     }
@@ -30,6 +31,7 @@ class Beranda extends CI_Model
         $this->db->select('*');
         $this->db->from($this->_penjualan);
         $this->db->where('MONTH(created_at)', $curr_date); //use date function
+        $this->db->where('deleted', 0); //use date function
         $query = $this->db->get();
         return $query;
     }

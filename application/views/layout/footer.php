@@ -69,7 +69,8 @@
     });
 </script>
 
-
+<!-- <script src="https://cdn.jsdelivr.net/npm/recta/dist/recta.js"></script> -->
+<script type="text/javascript" src="<?= base_url('assets/js/recta-host.js'); ?>"></script>
 <script type="text/javascript" src="<?= base_url('assets/js/recta-script.js'); ?>"></script>
 
 </body>

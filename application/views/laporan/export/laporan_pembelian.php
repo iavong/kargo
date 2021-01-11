@@ -34,7 +34,7 @@
 <?php endif; ?>
 <hr style="height: 2px; color: #000; margin: 10px 0 20px 0;">
 <table cellpadding="2" cellspacing="0" style="width:100%;">
-    <tr>
+    <tr style="font-size:11px;">
         <td class="center td-bold">NO.</td>
         <td class="center td-bold">TANGGAL</td>
         <td class="center td-bold">KETERANGAN</td>
@@ -44,19 +44,19 @@
     <?php
     $no = 0;
     foreach ($datapembelian->result() as $row) : ?>
-        <tr>
-            <td style="text-align: center;"><?= ++$no; ?></td>
+        <tr style="text-transform: uppercase;font-size:11px;text-align: center;">
+            <td><?= ++$no; ?></td>
             <td><?= tgl_indo(date('Y-m-d', strtotime($row->created_at))); ?></td>
             <td><?= (!empty($row->keterangan) ? $row->keterangan : '-'); ?></td>
             <td><?= rupiah($row->harga); ?></td>
         </tr>
         <?php
-            $total += $row->harga;
-            ?>
+        $total += $row->harga;
+        ?>
     <?php endforeach; ?>
-    <tr>
+    <tr style="font-size:11px;">
         <td colspan="3" class="td-bold">TOTAL</td>
-        <td class="td-bold"><?= rupiah($total); ?></td>
+        <td class="td-bold center"><?= rupiah($total); ?></td>
     </tr>
 </table>
 

@@ -37,11 +37,13 @@
                 </li>
 
                 <!-- Gaji -->
-                <li>
-                    <a href="<?= base_url('gaji'); ?>" class="dropdown-toggle no-arrow <?= ($this->router->fetch_class() == 'GajiController') ? 'active' : '' ?>">
-                        <span class="micon dw dw-books"></span><span class="mtext">Gaji</span>
-                    </a>
-                </li>
+                <?php if ($this->session->userdata('role') == 1) { ?>
+                    <li>
+                        <a href="<?= base_url('gaji'); ?>" class="dropdown-toggle no-arrow <?= ($this->router->fetch_class() == 'GajiController') ? 'active' : '' ?>">
+                            <span class="micon dw dw-books"></span><span class="mtext">Gaji</span>
+                        </a>
+                    </li>
+                <?php }; ?>
 
 
                 <!-- Tujuan -->
@@ -71,8 +73,12 @@
                     <ul class="submenu">
                         <li><a href="<?= base_url('laporan-penjualan'); ?>" class="<?= ($this->router->fetch_class() == 'LaporanPenjualanController') ? 'active' : '' ?>">Laporan Penjualan</a></li>
                         <li><a href="<?= base_url('laporan-pembelian'); ?>" class="<?= ($this->router->fetch_class() == 'LaporanPembelianController') ? 'active' : '' ?>">Laporan Pembelian</a></li>
-                        <li><a href="<?= base_url('laporan-gaji'); ?>" class="<?= ($this->router->fetch_class() == 'LaporanGajiController') ? 'active' : '' ?>">Laporan Gaji</a></li>
-                        <li><a href="<?= base_url('laporan-keuangan'); ?>" class="<?= ($this->router->fetch_class() == 'LaporanKeuanganController') ? 'active' : '' ?>">Laporan Keuangan</a></li>
+
+                        <!-- hanya master, role=1 -->
+                        <?php if ($this->session->userdata('role') == 1) : ?>
+                            <li><a href="<?= base_url('laporan-gaji'); ?>" class="<?= ($this->router->fetch_class() == 'LaporanGajiController') ? 'active' : '' ?>">Laporan Gaji</a></li>
+                            <li><a href="<?= base_url('laporan-keuangan'); ?>" class="<?= ($this->router->fetch_class() == 'LaporanKeuanganController') ? 'active' : '' ?>">Laporan Keuangan</a></li>
+                        <?php endif; ?>
                     </ul>
                 </li>
 

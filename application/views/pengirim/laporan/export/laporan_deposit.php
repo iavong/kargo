@@ -58,9 +58,9 @@
             </tr>
         <?php endif; ?>
         <?php
-            $totalDeposit += $isDeposit ? $row->deposit : null;
-            $totalDp = $totalDeposit;
-            ?>
+        $totalDeposit += $isDeposit ? $row->deposit : null;
+        $totalDp = $totalDeposit;
+        ?>
     <?php endforeach; ?>
     <tr style="font-size:11px;">
         <td colspan="2" class="td-bold">TOTAL</td>
@@ -70,7 +70,7 @@
 
 <!-- || History -->
 <div class="center">
-    <strong>HISTORY</strong>
+    <strong>HISTORY ORDER</strong>
 </div>
 <table cellpadding="2" cellspacing="0" style="width:100%; margin: 10px 0px 15px 0px;">
     <tr style="font-size:11px;">
@@ -83,7 +83,7 @@
     $no = 0;
     foreach ($datadeposit->result() as $row) :
         $isHistory = $row->tipe == 0;
-        ?>
+    ?>
         <?php if ($isHistory) : ?>
             <tr style="text-transform: uppercase;font-size:11px;text-align: center;">
                 <td style="text-align: center;"><?= $isHistory ? ++$no : null; ?></td>
@@ -92,9 +92,9 @@
             </tr>
         <?php endif; ?>
         <?php
-            $totalHistory += $isHistory ? $row->deposit : null;
-            $totalHis = $totalHistory;
-            ?>
+        $totalHistory += $isHistory ? $row->deposit : null;
+        $totalHis = $totalHistory;
+        ?>
     <?php endforeach; ?>
     <tr style="font-size:11px;">
         <td colspan="2" class="td-bold">TOTAL</td>
@@ -105,7 +105,7 @@
 
 <!-- || DEPOSIT DAN HISTORY -->
 <div class="center">
-    <strong>DEPOSIT & HISTORY</strong>
+    <strong>DEPOSIT & HISTORY ORDER</strong>
 </div>
 
 <!-- <table cellpadding="2" cellspacing="0" style="width:100%; margin: 10px 0px 15px 0px;">
@@ -126,9 +126,9 @@
             <td><?= $row->tipe == 0 ? rupiah($row->deposit) : '-'; ?></td>
         </tr>
         <?php
-            $totalDeposit += $row->tipe == 1 ? $row->deposit : null;
-            $totalHistory += $row->tipe == 0 ? $row->deposit : null;
-            ?>
+        $totalDeposit += $row->tipe == 1 ? $row->deposit : null;
+        $totalHistory += $row->tipe == 0 ? $row->deposit : null;
+        ?>
     <?php endforeach; ?>
     <tr>
         <td colspan="2" class="td-bold">TOTAL</td>
@@ -140,7 +140,7 @@
     <tr style="text-transform: uppercase;font-size:11px;text-align: center;">
         <th>DEPOSIT</th>
         <th>HISTORY</th>
-        <th>SISA DEPOSIT</th>
+        <th>AKUMULASI DEPOSIT</th>
     </tr>
     <tr style="text-transform: uppercase;font-size:11px;text-align: center;">
         <td class="center"><?= rupiah($totalDp) ?></td>

@@ -10,6 +10,9 @@ class LaporanKeuanganController extends CI_Controller
         if (empty($this->session->userdata('username'))) {
             redirect('login');
         }
+        if ($this->session->userdata('role') != 1) {
+            redirect('beranda');
+        }
         $this->load->model('Pembelian');
         $this->load->model('Penjualan');
         $this->load->model('Gaji');

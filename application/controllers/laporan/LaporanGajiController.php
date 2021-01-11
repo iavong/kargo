@@ -11,6 +11,9 @@ class LaporanGajiController extends CI_Controller
         if (empty($this->session->userdata('username'))) {
             redirect('login');
         }
+        if ($this->session->userdata('role') != 1) {
+            redirect('beranda');
+        }
         $this->load->library('dompdf_gen');
         $this->load->model('Gaji');
     }
