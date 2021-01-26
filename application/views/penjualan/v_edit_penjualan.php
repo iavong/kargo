@@ -31,7 +31,7 @@
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Pengirim<span class="text-danger">*</span></label>
                         <div class="col-sm-12 col-md-10">
-                            <input type="text" name="pengirim" class="form-control" value="<?= $penjualan->pengirim; ?>" readonly>
+                            <input type="text" name="pengirim" class="form-control text-uppercase" value="<?= $penjualan->pengirim; ?>" readonly>
                             <input type="hidden" name="id_pengirim" value="<?= (!empty($penjualan->id_pengirim) ? $penjualan->id_pengirim : null) ?>" hidden>
                         </div>
                     </div>
@@ -161,7 +161,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-6 col-md-4 col-form-label">Biaya Gudang<span class="text-danger">*</span></label>
                                 <div class="col-sm-6 col-md-8">
-                                    <input class="form-control int <?= (form_error('biaya_gudang') ? 'form-control-danger' : null) ?>" name="biaya_gudang" placeholder="Biaya gudang .." type="text" value="1045" id="bGudang">
+                                    <input class="form-control int <?= (form_error('biaya_gudang') ? 'form-control-danger' : null) ?>" name="biaya_gudang" placeholder="Biaya gudang .." type="text" value="<?= $penjualan->harga_gudang; ?>" id="bGudang">
                                     <?php echo form_error('biaya_gudang', '<small class="text-danger">', '</small>'); ?>
                                 </div>
                             </div>
@@ -170,7 +170,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-6 col-md-4 col-form-label">Biaya Admin<span class="text-danger">*</span></label>
                                 <div class="col-sm-6 col-md-8">
-                                    <input class="form-control int <?= (form_error('admin_gudang') ? 'form-control-danger' : null) ?>" name="admin_gudang" placeholder="Biaya gudang .." type="text" value="3500" id="adminGudang">
+                                    <input class="form-control int <?= (form_error('admin_gudang') ? 'form-control-danger' : null) ?>" name="admin_gudang" placeholder="Biaya gudang .." type="text" value="<?= $penjualan->harga_admin_gudang; ?>" id="adminGudang">
                                     <?php echo form_error('admin_gudang', '<small class="text-danger">', '</small>'); ?>
                                 </div>
                             </div>

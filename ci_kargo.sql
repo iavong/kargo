@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 11 Jan 2021 pada 22.18
--- Versi server: 10.4.17-MariaDB
--- Versi PHP: 7.4.13
+-- Waktu pembuatan: 26 Jan 2021 pada 10.43
+-- Versi server: 10.4.14-MariaDB
+-- Versi PHP: 7.4.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -188,7 +188,27 @@ INSERT INTO `penjualan` (`id`, `no_kwitansi`, `airlines`, `no_penerbangan`, `no_
 (35, 10025, 'namair', 'Gh', '123jsjs', '10', 2, '', '15000', '170000', '20000', '5000', '50000', '1045', '3500', '13950', '', '233950', '', '', 3, 'kamal', 'Yh', 2, 'cash', 0, '2021-01-12 01:45:25', NULL),
 (36, 10026, 'lion', 'adsfasd', 'adsf', '10', 4, '', '20000', '200123', '123', '1000', '10000', '1045', '3500', '13950', '', '224073', '', '', 3, 'kamal', 'asdf', 3, 'cash', 0, '2021-01-12 01:45:25', NULL),
 (37, 10027, 'sriwijaya', 'adsfasd', 'adsf', '10', 4, '', '20000', '200123', '123', '1000', '10000', '1045', '3500', '13950', '', '224073', '', '', 3, 'kamal', 'asdf', 3, 'cash', 0, '2021-01-12 01:47:02', 'Edited'),
-(38, 10028, 'namair', 'Thh', 'Bbhh', '10', 2, '20000', '20000', '205000', '5000', '5000', '50000', '1045', '3500', '13950', '10000', '278950', '', '', 3, 'kamal', 'Prakoso', 3, 'cash', 0, '2021-01-12 01:47:02', 'Edited');
+(38, 10028, 'namair', 'Thh', 'Bbhh', '10', 2, '20000', '20000', '205000', '5000', '5000', '50000', '1045', '3500', '13950', '10000', '278950', '', '', 3, 'kamal', 'Prakoso', 3, 'cash', 0, '2021-01-12 01:47:02', 'Edited'),
+(39, 10029, 'namair', '123', '123jsjs', '10', 2, '', '20000', '220000', '20000', '5000', '50000', '5000', '2000', '52000', '', '322000', '', '', 2, 'atan', 'Dodi', 3, 'cash', 0, '2021-01-26 16:35:44', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `setharga`
+--
+
+CREATE TABLE `setharga` (
+  `id` int(11) NOT NULL,
+  `biaya_gudang` varchar(100) NOT NULL,
+  `biaya_admin_gudang` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `setharga`
+--
+
+INSERT INTO `setharga` (`id`, `biaya_gudang`, `biaya_admin_gudang`) VALUES
+(1, '1045', '3500');
 
 -- --------------------------------------------------------
 
@@ -270,6 +290,12 @@ ALTER TABLE `penjualan`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indeks untuk tabel `setharga`
+--
+ALTER TABLE `setharga`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeks untuk tabel `tujuan`
 --
 ALTER TABLE `tujuan`
@@ -313,7 +339,13 @@ ALTER TABLE `pengirim`
 -- AUTO_INCREMENT untuk tabel `penjualan`
 --
 ALTER TABLE `penjualan`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+
+--
+-- AUTO_INCREMENT untuk tabel `setharga`
+--
+ALTER TABLE `setharga`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `tujuan`

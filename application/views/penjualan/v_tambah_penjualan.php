@@ -34,9 +34,9 @@ $langganan = $this->uri->segment(2) == 'tambah';
                         <label class="col-sm-12 col-md-2 col-form-label">Pengirim<span class="text-danger">*</span></label>
                         <div class="col-sm-12 col-md-10">
                             <select class="custom-select2 form-control <?= (form_error('pengirim') ? 'form-control-danger' : null) ?>" id="pengirim" name="pengirim" style="width: 100%;">
-                                <option style="text-transform: uppercase;">Pilih pengirim..</option>
+                                <option>Pilih pengirim..</option>
                                 <?php foreach ($dataPengirim->result() as $pengirim) : ?>
-                                    <option value="<?= $pengirim->id . '-' . $pengirim->nama; ?>"> <?= $pengirim->nama; ?></option>
+                                    <option value="<?= $pengirim->id . '-' . $pengirim->nama; ?>"> <?= strtoupper($pengirim->nama); ?></option>
                                 <?php endforeach; ?>
                                 <option value="0">Lainya..</option>
                             </select>
@@ -169,7 +169,7 @@ $langganan = $this->uri->segment(2) == 'tambah';
                             <div class="form-group row">
                                 <label class="col-sm-6 col-md-4 col-form-label">Biaya Gudang<span class="text-danger">*</span></label>
                                 <div class="col-sm-6 col-md-8">
-                                    <input class="form-control int <?= (form_error('biaya_gudang') ? 'form-control-danger' : null) ?>" name="biaya_gudang" placeholder="Biaya gudang .." type="text" value="1045" id="bGudang">
+                                    <input class="form-control int <?= (form_error('biaya_gudang') ? 'form-control-danger' : null) ?>" name="biaya_gudang" placeholder="Biaya gudang .." type="text" value="<?= $setHarga->biaya_gudang; ?>" id="bGudang">
                                     <?php echo form_error('biaya_gudang', '<small class="text-danger">', '</small>'); ?>
                                 </div>
                             </div>
@@ -178,7 +178,7 @@ $langganan = $this->uri->segment(2) == 'tambah';
                             <div class="form-group row">
                                 <label class="col-sm-6 col-md-4 col-form-label">Biaya Admin<span class="text-danger">*</span></label>
                                 <div class="col-sm-6 col-md-8">
-                                    <input class="form-control int <?= (form_error('admin_gudang') ? 'form-control-danger' : null) ?>" name="admin_gudang" placeholder="Biaya gudang .." type="text" value="3500" id="adminGudang">
+                                    <input class="form-control int <?= (form_error('admin_gudang') ? 'form-control-danger' : null) ?>" name="admin_gudang" placeholder="Biaya gudang .." type="text" value="<?= $setHarga->biaya_admin_gudang; ?>" id="adminGudang">
                                     <?php echo form_error('admin_gudang', '<small class="text-danger">', '</small>'); ?>
                                 </div>
                             </div>

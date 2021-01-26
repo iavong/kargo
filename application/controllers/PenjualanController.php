@@ -15,6 +15,7 @@ class PenjualanController extends CI_Controller
         $this->load->model('Tujuan');
         $this->load->model('Pengirim');
         $this->load->model('Deposit');
+        $this->load->model('SetHarga');
         $this->load->library('dompdf_gen');
         error_reporting(0);
     }
@@ -57,6 +58,7 @@ class PenjualanController extends CI_Controller
                 'no_kwitansi' => $this->getNoKwitansi(),
                 'kotatujuan' => $this->Tujuan->getTujuan(),
                 'dataPengirim' => $this->Pengirim->getPengirim($key),
+                'setHarga' => $this->SetHarga->getSetHarga()->row(),
                 'title' => 'Buat Data Penjualan',
                 'content' => 'penjualan/v_tambah_penjualan'
             ];

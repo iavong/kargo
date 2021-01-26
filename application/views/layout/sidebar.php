@@ -53,6 +53,13 @@
                     </a>
                 </li>
 
+                <!-- Set Harga -->
+                <li>
+                    <a href="<?= base_url('setharga'); ?>" class="dropdown-toggle no-arrow <?= ($this->router->fetch_class() == 'SetHargaController') ? 'active' : '' ?>">
+                        <span class="micon dw dw-money-2"></span><span class="mtext">Set Harga</span>
+                    </a>
+                </li>
+
                 <!-- Pelanggan -->
                 <li class="dropdown">
                     <a href="javascript:;" class="dropdown-toggle">

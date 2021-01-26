@@ -92,6 +92,10 @@ $route['tujuan/tambah'] = 'TujuanController/tambah';
 $route['tujuan/edit/(:num)'] = 'TujuanController/edit/$1';
 $route['tujuan/delete'] = 'TujuanController/delete';
 
+// Set Harga
+$route['setharga'] = 'SetHargaController';
+$route['setharga/tambah'] = 'SetHargaController/tambah';
+
 // Pengirim
 $route['pengirim'] = 'PengirimController';
 $route['pengirim/tambah'] = 'PengirimController/tambah';
