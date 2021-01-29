@@ -70,10 +70,32 @@ $langganan = $this->uri->segment(2) == 'tambah';
                         </div>
                     </div>
 
-                    <div class="form-group" id="tipe">
+                    <!-- ajax -->
+                    <div class="form-group d-none" id="tipe">
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label"></label>
+                            <div class="col-sm-12 col-md-10">
+                                <div class="custom-control custom-radio mb-5">
+                                    <input type="radio" id="custom1" name="tipe" class="custom-control-input" checked required>
+                                    <label class="custom-control-label" id="labelOfficialHarga" for="custom1"></label>
+                                </div>
+                                <div class="custom-control custom-radio mb-5">
+                                    <input type="radio" id="custom2" name="tipe" class="custom-control-input" required>
+                                    <label class="custom-control-label" for="custom2">Custom Harga</label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group" id="customHarga">
+
+                    <div class="form-group d-none" id="customHarga">
+                        <div class="form-group row custom__harga">
+                            <label class="col-sm-12 col-md-2 col-form-label">Custom Harga<span class="text-danger">*</span></label>
+                            <div class="col-sm-12 col-md-10">
+                                <input class="form-control int" name="custom_harga" placeholder="Custom harga .." type="text" value="" id="cusHarga">
+                            </div>
+                        </div>
                     </div>
+                    <!-- ajax -->
 
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Biaya Admin SMU<span class="text-danger">*</span></label>

@@ -7,9 +7,10 @@
     <title>Login</title>
 
     <!-- Site favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="<?= base_url(); ?>assets/vendors/images/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="<?= base_url(); ?>assets/vendors/images/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url(); ?>assets/vendors/images/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="<?= base_url(); ?>assets/images/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="<?= base_url(); ?>assets/images/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url(); ?>assets/images/favicon.ico">
+
 
     <!-- Mobile Specific Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -69,13 +70,13 @@
                         <?php $this->load->view('partials/_flash.php'); ?>
 
                         <div class="input-group custom">
-                            <input type="text" name="username" class="form-control form-control-lg" placeholder="Username">
+                            <input type="text" name="username" class="form-control form-control-lg" placeholder="Username" required>
                             <div class="input-group-append custom">
                                 <span class="input-group-text"><i class="icon-copy dw dw-user1"></i></span>
                             </div>
                         </div>
                         <div class="input-group custom">
-                            <input type="password" name="password" class="form-control form-control-lg" placeholder="**********">
+                            <input type="password" name="password" class="form-control form-control-lg" placeholder="**********" required>
                             <div class="input-group-append custom">
                                 <span class="input-group-text"><i class="dw dw-padlock1"></i></span>
                             </div>
@@ -94,14 +95,8 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="input-group mb-0">
-                                    <!--
-											use code for form submit
-											<input class="btn btn-primary btn-lg btn-block" type="submit" value="Sign In">
-										-->
                                     <button type="submit" class="btn btn-primary btn-lg btn-block">Sign In</button>
                                 </div>
-
-
                             </div>
                         </div>
                         <?php echo form_close(); ?>
@@ -114,10 +109,10 @@
         </div>
     </div>
     <!-- js -->
-    <script src="vendors/scripts/core.js"></script>
-    <script src="vendors/scripts/script.min.js"></script>
-    <script src="vendors/scripts/process.js"></script>
-    <script src="vendors/scripts/layout-settings.js"></script>
+    <script src="<?= base_url('assets/vendors/scripts/core.js') ?>"></script>
+    <script src="<?= base_url('assets/vendors/scripts/script.min.js') ?>"></script>
+    <script src="<?= base_url('assets/vendors/scripts/process.js') ?>"></script>
+    <script src="<?= base_url('assets/vendors/scripts/layout-settings.js') ?>"></script>
 </body>
 
 </html>

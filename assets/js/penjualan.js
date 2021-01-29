@@ -1,22 +1,32 @@
 $(document).ready(function () {
-  const formatter = new Intl.NumberFormat("id-ID", {
+  const rupiah = new Intl.NumberFormat("id-ID", {
     style: "currency",
     currency: "IDR",
     minimumFractionDigits: 2,
   });
+
+
 
   /**
    * ketika memilih kota
    * Pilih harga official / Custom
    */
   $("#kota").on("change", function () {
-    $("#tipe").val("").html("");
     $("#custom2").val("").html("");
-    $("#customHarga").val("").html("");
+    $("#custom1").prop("checked", true);
+    $("#customHarga").addClass('d-none');
 
     const id = $(this).children("option:selected").val();
-    // console.log(id);
+    if (id !== '') {
+      $("#tipe").removeClass('d-none');
+      customHarga(id)
+    } else {
+      $("#tipe").addClass('d-none');
+      $("#labelOfficialHarga").html('');
+    }
+  });
 
+  function customHarga(id) {
     $.ajax({
       url: base_url + "penjualan/getHarga",
       data: {
@@ -25,55 +35,23 @@ $(document).ready(function () {
       method: "POST",
       dataType: "JSON",
       success: function (data) {
-        // console.log(id);
-        $("#tipe").append(
-          `<div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label"></label>
-                <div class="col-sm-12 col-md-10">
-                    <div class="custom-control custom-radio mb-5">
-                        <input type="radio" id="custom1" name="tipe" class="custom-control-input" checked required>
-                        <label class="custom-control-label" for="custom1">Harga Official (` +
-          formatter.format(data.biaya) +
-          `)</label>
-                    </div>
-                    <div class="custom-control custom-radio mb-5">
-                        <input type="radio" id="custom2" name="tipe" class="custom-control-input" required>
-                        <label class="custom-control-label" for="custom2">Custom Harga</label>
-                    </div>
-                </div>
-            </div>`
-        );
+        $('#labelOfficialHarga').html(`Harga Official (${rupiah.format(data.biaya)})`);
 
         $("#custom1").on("click", function () {
-          $("#customHarga").val("").html("");
+          $("#cusHarga").val("");
+          $("#customHarga").addClass('d-none');
         });
-        //
         $("#custom2").on("click", function () {
-          $("#customHarga").val("").html("");
-
-          //   var kota = $(this).children("option:selected").val();
-          //   console.log("ok");
-          $("#customHarga").append(`
-              <div class="form-group row">
-                  <label class="col-sm-12 col-md-2 col-form-label">Custom Harga<span class="text-danger">*</span></label>
-                  <div class="col-sm-12 col-md-10">
-                      <input class="form-control int" name="custom_harga" placeholder="Custom harga .." type="text" value="" id="cusHarga" oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
-                  </div>
-              </div>
-          `);
-          //
+          $("#customHarga").removeClass('d-none');
         });
       },
       error: function (XMLHttpRequest, textStatus, errorThrown) {
-        alert("Status: " + textStatus);
-        alert("Error: " + errorThrown);
+        alert(`Status: ${textStatus}, Error: ${errorThrown}`);
       },
     });
+  }
 
-    //
-  });
 
-  //
 
   /**
    * Tombol Cek TOtal Harga
@@ -82,14 +60,14 @@ $(document).ready(function () {
     // $(this).prop("disabled", true);
     $("#result").html("");
 
-    var tujuan = $("#kota").val();
-    var cusHarga = $("#cusHarga").val();
-    var berat = $("#berat").val();
-    var hargaGudang = $("#bGudang").val();
-    var adminSMU = $("#adminSMU").val();
-    var biayaOperasional = $("#biaya_operasional").val();
-    var adminGudang = $("#adminGudang").val();
-    var biayaTambahan = $("#biayaTambahan").val();
+    let tujuan = $("#kota").val();
+    let cusHarga = $("#cusHarga").val();
+    let berat = $("#berat").val();
+    let hargaGudang = $("#bGudang").val();
+    let adminSMU = $("#adminSMU").val();
+    let biayaOperasional = $("#biaya_operasional").val();
+    let adminGudang = $("#adminGudang").val();
+    let biayaTambahan = $("#biayaTambahan").val();
 
     const data = {
       tujuan: tujuan,
@@ -116,10 +94,10 @@ $(document).ready(function () {
                 <label class="col-sm-12 col-md-2 col-form-label">Total Harga</label>
                 <div class="col-sm-12 col-md-10">
                 <span class="text-danger">*</span><small>Simpan untuk melanjutkan, refresh halaman ini jika melakukan perubahan data.</small><br/>
-                <small>(` + formatter.format(data.biaya) + ` x ` + data.berat + `) + ` + formatter.format(data.adminSMU) + ` = ` + formatter.format(data.biayaSMU) + `</small><br/>
-                <small>(` + formatter.format(data.hargaGudang) + ` x ` + data.berat + `) + ` + formatter.format(data.adminGudang) + ` = ` + formatter.format(data.biayaGudang) + `</small><br/>
-                <small>`+ formatter.format(data.biayaOperasional) + ` X ` + data.berat + ` = ` + formatter.format(data.totalOperasional) + `</small><br>
-                <small>` + formatter.format(data.biayaSMU) + ` + ` + formatter.format(data.biayaGudang) + ` + ` + formatter.format(data.biayaTambahan) + ` + ` + formatter.format(data.totalOperasional) + ` = ` + formatter.format(data.biayaTotal) + `</small><h5 class="font-weight-bold harga">` + formatter.format(data.biayaTotal) +
+                <small>(` + rupiah.format(data.biaya) + ` x ` + data.berat + `) + ` + rupiah.format(data.adminSMU) + ` = ` + rupiah.format(data.biayaSMU) + `</small><br/>
+                <small>(` + rupiah.format(data.hargaGudang) + ` x ` + data.berat + `) + ` + rupiah.format(data.adminGudang) + ` = ` + rupiah.format(data.biayaGudang) + `</small><br/>
+                <small>`+ rupiah.format(data.biayaOperasional) + ` X ` + data.berat + ` = ` + rupiah.format(data.totalOperasional) + `</small><br>
+                <small>` + rupiah.format(data.biayaSMU) + ` + ` + rupiah.format(data.biayaGudang) + ` + ` + rupiah.format(data.biayaTambahan) + ` + ` + rupiah.format(data.totalOperasional) + ` = ` + rupiah.format(data.biayaTotal) + `</small><h5 class="font-weight-bold harga">` + rupiah.format(data.biayaTotal) +
           `</h5>
                 </div>
             </div>
@@ -132,12 +110,14 @@ $(document).ready(function () {
     });
   });
 
+
+
+  // Biaya tambahan
   $(document).on("click", ".form-check-tambah", function () {
     if ($("input.check").prop("checked", true)) {
       $(".biayaTambahan").attr("readonly", false);
     }
   });
-
   $(document).on("dblclick", ".form-check-tambah", function () {
     if (this.checked) {
       $(this).prop("checked", false);
@@ -145,6 +125,8 @@ $(document).ready(function () {
       $(".biayaTambahan").val("").html("");
     }
   });
+
+
 
   /**
    * ketika pengirim diklik
