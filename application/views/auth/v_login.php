@@ -41,7 +41,7 @@
         <div class="container-fluid d-flex justify-content-between align-items-center">
             <div class="brand-logo">
                 <a href="<?= base_url('login'); ?>">
-                    <img src="<?= base_url('assets/images/logo/logo2.PNG'); ?>" width="150">
+                    <img src="<?= base_url('assets/images/logo/logo2.ico'); ?>" width="150">
                 </a>
             </div>
             <div class="login-menu">
@@ -55,7 +55,7 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6 col-lg-7">
-                    <img src="<?= base_url(); ?>assets/images/logo/logo2.PNG" alt="">
+                    <img src="<?= base_url(); ?>assets/images/logo/logo2.png" alt="LOGO" class="col-12">
                 </div>
                 <div class="col-md-6 col-lg-5">
                     <div class="login-box bg-white box-shadow border-radius-10">

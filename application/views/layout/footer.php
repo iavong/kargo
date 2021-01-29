@@ -28,11 +28,14 @@
 <script>
     var base_url = '<?php echo base_url() ?>';
 </script>
-<!-- <script src="<?= base_url('assets/vendors/scripts/dashboard.js'); ?>"></script> -->
+
 <?php if ($this->router->fetch_class() == 'PenjualanController') : ?>
     <script src="<?= base_url('assets/js/penjualan.js'); ?>"></script>
-    <!-- <script src="<?= base_url('assets/js/penjualan-edit.js'); ?>"></script> -->
+    <?php if ($this->uri->segment(2) == 'edit') : ?>
+        <script src="<?= base_url('assets/js/penjualan-edit.js'); ?>"></script>
+    <?php endif; ?>
 <?php endif; ?>
+
 <!-- test -->
 <script>
     $(document).ready(function() {
