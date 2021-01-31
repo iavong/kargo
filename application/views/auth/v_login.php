@@ -113,6 +113,16 @@
     <script src="<?= base_url('assets/vendors/scripts/script.min.js') ?>"></script>
     <script src="<?= base_url('assets/vendors/scripts/process.js') ?>"></script>
     <script src="<?= base_url('assets/vendors/scripts/layout-settings.js') ?>"></script>
+    <script>
+        $('input:text').focus(
+            function() {
+                $(this).val('');
+            });
+        $('input:password').focus(
+            function() {
+                $(this).val('');
+            });
+    </script>
 </body>
 
 </html>
