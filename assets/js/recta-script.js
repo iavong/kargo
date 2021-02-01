@@ -78,6 +78,7 @@ function handlePrint(biaya_tambahan, biayaPengiriman, jasaGudang, total) {
     const printer = new Recta('3889156889', '1811')
 
     const kasir = $('#kasir').val()
+    const noKwitansi = $('#no_kwitansi').val()
     const rawTanggal = $('#tanggal').val()
     const tanggal = moment(rawTanggal).format('MM-DD-YYYY');
     const pengirim = $('#pengirim').val()
@@ -107,6 +108,7 @@ function handlePrint(biaya_tambahan, biayaPengiriman, jasaGudang, total) {
             .align('LEFT')
             .text(`Kasir \t: ${kasir}`)
             .text(`Tanggal \t: ${tanggal}`)
+            .text(`No Kwitansi \t: ${noKwitansi}`)
             .align('center')
             .text('------------------------------------------')
             /** */
