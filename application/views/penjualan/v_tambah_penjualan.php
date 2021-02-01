@@ -122,14 +122,14 @@ $langganan = $this->uri->segment(2) == 'tambah';
 
                             <select class="custom-select2 form-control <?= (form_error('airlines') ? 'form-control-danger' : null) ?>" name="airlines" value="<?= set_value('airlines') ?>" style="width: 100%; height: 60px;">
                                 <option value="">Pilih airlines..</option>
-                                <option value="lion">Lion Air</option>
-                                <option value="sriwijaya">Sriwijaya Air</option>
-                                <option value="namair">Namair</option>
-                                <option value="namair">Garuda Indonesia</option>
-                                <option value="namair">Citilink</option>
-                                <option value="namair">Batik Air</option>
-                                <option value="namair">Wings Air</option>
-                                <option value="namair">Air Asia</option>
+                                <option value="Lion Air">Lion Air</option>
+                                <option value="Sriwijaya Air">Sriwijaya Air</option>
+                                <option value="Nam Air">Namair</option>
+                                <option value="Garuda Indonesia">Garuda Indonesia</option>
+                                <option value="Citilink">Citilink</option>
+                                <option value="Batik Air">Batik Air</option>
+                                <option value="Wings Air">Wings Air</option>
+                                <option value="Air Asia">Air Asia</option>
                             </select>
                             <?php echo form_error('airlines', '<small class="text-danger">', '</small>'); ?>
                         </div>
