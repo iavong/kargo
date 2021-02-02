@@ -6,21 +6,10 @@ const rupiah = new Intl.NumberFormat("id-ID", {
 
 const rupiah2 = new Intl.NumberFormat(['ban', 'id']);
 
-
 // modal view penjualan
 $('.handleView').on('click', function () {
 
     $('input[type="text"],texatrea', this).val('');
-    // $('#pengirim').val('').html('');
-    // $('#penerima').val('').html('');
-    // $('#tujuan').val('').html('');
-    // $('#airlines').val('').html('');
-    // $('#no_penerbangan').val('').html('');
-    // $('#no_smu').val('').html('');
-    // $('#berat').val('').html('');
-    // $('#koli').val('').html('');
-    // // hidden
-    // $('#jenis_pembayaran').val('');
 
     const id = $(this).data('id');
     const tujuanID = $(this).data('tujuan');
@@ -65,7 +54,7 @@ $('.handleView').on('click', function () {
 
             // print
             $('#btnPrint').one('click', function () {
-                handlePrint(biaya_tambahan, biayaPengiriman, jasaGudang, total);
+                handlePrint(no_kwitansi, biaya_tambahan, biayaPengiriman, jasaGudang, total);
             })
         }
     });
@@ -73,12 +62,11 @@ $('.handleView').on('click', function () {
 
 
 // RECTA 
-function handlePrint(biaya_tambahan, biayaPengiriman, jasaGudang, total) {
+function handlePrint(no_kwitansi, biaya_tambahan, biayaPengiriman, jasaGudang, total) {
 
     const printer = new Recta('3889156889', '1811')
 
     const kasir = $('#kasir').val()
-    const noKwitansi = $('#no_kwitansi').val()
     const rawTanggal = $('#tanggal').val()
     const tanggal = moment(rawTanggal).format('MM-DD-YYYY');
     const pengirim = $('#pengirim').val()
@@ -90,6 +78,7 @@ function handlePrint(biaya_tambahan, biayaPengiriman, jasaGudang, total) {
     const koli = $('#koli').val()
     const jenisPembayaran = $('#jenis_pembayaran').val()
 
+    console.log(`No Kwitansi : ${no_kwitansi}`);
 
     printer.open().then(function () {
         printer.font('A')
@@ -108,7 +97,7 @@ function handlePrint(biaya_tambahan, biayaPengiriman, jasaGudang, total) {
             .align('LEFT')
             .text(`Kasir \t: ${kasir}`)
             .text(`Tanggal \t: ${tanggal}`)
-            .text(`No Kwitansi \t: ${noKwitansi}`)
+            .text(`No Kwitansi \t: ${no_kwitansi}`)
             .align('center')
             .text('------------------------------------------')
             /** */

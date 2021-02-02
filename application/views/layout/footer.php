@@ -19,10 +19,6 @@
 <!-- <script src="<?= base_url(); ?>assets/plugins/datatables/js/pdfmake.min.js"></script> -->
 <script src="<?= base_url(); ?>assets/plugins/datatables/js/vfs_fonts.js"></script>
 
-<!-- <script src="src/plugins/highcharts-6.0.7/code/highcharts.js"></script>
-<script src="src/plugins/highcharts-6.0.7/code/highcharts-more.js"></script> -->
-
-<!-- <script src="<?= base_url('assets/vendors/scripts/datatable-setting.js'); ?>"></script> -->
 <script src="<?= base_url('assets/vendors/moment/moment.js'); ?>"></script>
 <script src="<?= base_url('assets/vendors/moment/moment-with-locales.js'); ?>"></script>
 <script>
@@ -75,7 +71,6 @@
     });
 </script>
 
-<!-- <script src="https://cdn.jsdelivr.net/npm/recta/dist/recta.js"></script> -->
 <script type="text/javascript" src="<?= base_url('assets/js/recta-host.js'); ?>"></script>
 <script type="text/javascript" src="<?= base_url('assets/js/recta-script.js'); ?>"></script>
 
